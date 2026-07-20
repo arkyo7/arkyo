@@ -193,7 +193,9 @@ export function Contact() {
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Checkbox
                     checked={values.consent === true}
-                    onCheckedChange={(v) => setValue("consent", v === true as unknown as true, { shouldValidate: true })}
+                    onCheckedChange={(v) =>
+                      setValue("consent", (v === true) as true, { shouldValidate: true })
+                    }
                     aria-invalid={!!errors.consent}
                     className="mt-0.5"
                   />
