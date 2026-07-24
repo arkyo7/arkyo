@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
@@ -9,6 +9,9 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -16,6 +19,48 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Lock body scroll + Esc close + focus management while menu is open
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+
+    // Move focus into the panel
+    const t = window.setTimeout(() => closeBtnRef.current?.focus(), 20);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("keydown", onKey);
+      window.clearTimeout(t);
+      // Restore focus to the trigger
+      triggerRef.current?.focus();
+    };
+  }, [open]);
 
   return (
     <header
@@ -54,9 +99,12 @@ export function Header() {
         <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
           <button
+            ref={triggerRef}
             onClick={() => setOpen(true)}
             className="rounded-md p-2 text-foreground"
-            aria-label="Abrir menu"
+            aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -65,43 +113,68 @@ export function Header() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background md:hidden"
-          >
-            <div className="container-nexo flex h-16 items-center justify-between">
-              <Logo />
-              <button
-                onClick={() => setOpen(false)}
-                className="rounded-md p-2"
-                aria-label="Fechar menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <nav className="container-nexo mt-6 flex flex-col gap-1" aria-label="Mobile">
-              {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
+          <div className="md:hidden">
+            {/* Backdrop */}
+            <motion.button
+              type="button"
+              aria-label="Fechar menu"
+              tabIndex={-1}
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+            />
+            {/* Panel */}
+            <motion.div
+              id="mobile-nav"
+              ref={panelRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navegação"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-x-0 top-0 z-[70] bg-background shadow-elevated"
+            >
+              <div className="container-nexo flex h-16 items-center justify-between">
+                <Logo />
+                <button
+                  ref={closeBtnRef}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3 text-lg font-medium text-foreground hover:bg-muted"
+                  className="rounded-md p-2"
+                  aria-label="Fechar menu"
                 >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href="#contato"
-                onClick={() => setOpen(false)}
-                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background"
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <nav
+                className="container-nexo mt-2 flex flex-col gap-1 pb-8"
+                aria-label="Mobile"
               >
-                Solicitar orçamento
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </nav>
-          </motion.div>
+                {nav.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-3 py-3 text-lg font-medium text-foreground hover:bg-muted"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a
+                  href="#contato"
+                  onClick={() => setOpen(false)}
+                  className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background"
+                >
+                  Solicitar orçamento
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </nav>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </header>

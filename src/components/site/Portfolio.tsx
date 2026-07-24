@@ -64,9 +64,12 @@ export function Portfolio() {
                     <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
                       Desafios
                     </p>
-                    <ul className="mt-2 space-y-1.5">
+                    <ul className="mt-2 space-y-2">
                       {p.challenges.map((c) => (
-                        <li key={c} className="text-xs text-muted-foreground">— {c}</li>
+                        <li key={c} className="flex items-start gap-2 text-xs text-muted-foreground">
+                          <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                          <span>{c}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -74,9 +77,12 @@ export function Portfolio() {
                     <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
                       Soluções
                     </p>
-                    <ul className="mt-2 space-y-1.5">
+                    <ul className="mt-2 space-y-2">
                       {p.solutions.map((c) => (
-                        <li key={c} className="text-xs text-muted-foreground">— {c}</li>
+                        <li key={c} className="flex items-start gap-2 text-xs text-muted-foreground">
+                          <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                          <span>{c}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>

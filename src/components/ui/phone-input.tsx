@@ -1,12 +1,12 @@
-import { forwardRef } from "react";
-import PhoneInputWithCountry from "react-phone-number-input";
+import { forwardRef, useState } from "react";
+import PhoneInputWithCountry, { type Country } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { cn } from "@/lib/utils";
 
 type PhoneInputProps = {
   value?: string;
   onChange: (value: string | undefined) => void;
-  defaultCountry?: string;
+  defaultCountry?: Country;
   placeholder?: string;
   className?: string;
   id?: string;
@@ -18,13 +18,19 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
   { value, onChange, defaultCountry = "BE", placeholder, className, ...rest },
   ref,
 ) {
+  // Control country state internally so the flag + calling code always
+  // stay in sync with what the user selects in the dropdown, even when
+  // the `value` is empty and cannot derive a country on its own.
+  const [country, setCountry] = useState<Country | undefined>(defaultCountry);
+
   return (
     <PhoneInputWithCountry
       international
       countryCallingCodeEditable={false}
-      defaultCountry={defaultCountry as never}
+      country={country}
+      onCountryChange={(c) => setCountry(c ?? defaultCountry)}
       value={value}
-      onChange={onChange}
+      onChange={(v) => onChange(v)}
       placeholder={placeholder}
       numberInputProps={{
         ref: ref as never,
