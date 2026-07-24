@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 export const projectTypes = [
   "Landing Page",
@@ -27,7 +28,10 @@ export const deadlineOptions = [
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Informe seu nome").max(80),
   company: z.string().trim().max(80).optional().or(z.literal("")),
-  phone: z.string().trim().min(6, "Informe um telefone válido").max(30),
+  phone: z
+    .string({ message: "Informe um telefone válido" })
+    .min(1, "Informe um telefone válido")
+    .refine((v) => isValidPhoneNumber(v), "Informe um telefone válido"),
   email: z.string().trim().email("Email inválido").max(120),
   instagram: z.string().trim().max(60).optional().or(z.literal("")),
   message: z.string().trim().min(10, "Descreva um pouco seu projeto").max(1000),

@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { contact } from "@/data/company";
 import {
   contactSchema,
@@ -29,7 +30,7 @@ export function Contact() {
     reset,
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { consent: false as unknown as true },
+    defaultValues: { consent: false as unknown as true, phone: "" },
   });
 
   const onSubmit = async (data: ContactInput) => {
@@ -142,7 +143,12 @@ export function Contact() {
                 <Input {...register("company")} placeholder="Nome do seu negócio" />
               </Field>
               <Field label="Telefone" error={errors.phone?.message}>
-                <Input {...register("phone")} placeholder="+32 470 00 00 00" />
+                <PhoneInput
+                  value={values.phone}
+                  onChange={(v) => setValue("phone", v ?? "", { shouldValidate: true })}
+                  placeholder="470 12 34 56"
+                  aria-invalid={!!errors.phone}
+                />
               </Field>
               <Field label="Email" error={errors.email?.message}>
                 <Input type="email" {...register("email")} placeholder="voce@email.com" />
