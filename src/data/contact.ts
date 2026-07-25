@@ -1,44 +1,44 @@
 import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import type { TFunction } from "i18next";
 
-export const projectTypes = [
-  "Landing Page",
-  "Site Institucional",
-  "Site com Agendamento",
-  "Portfólio",
-  "Página de Vendas",
-  "Projeto Personalizado",
-] as const;
+export function makeContactSchema(t: TFunction) {
+  const projectTypes = t("contact.projectTypes", { returnObjects: true }) as string[];
+  const budgets = t("contact.budgets", { returnObjects: true }) as string[];
+  const deadlines = t("contact.deadlines", { returnObjects: true }) as string[];
 
-export const budgetRanges = [
-  "Até €300",
-  "€300 – €600",
-  "€600 – €1000",
-  "Acima de €1000",
-  "Ainda não sei",
-] as const;
+  return z.object({
+    name: z.string().trim().min(2, t("contact.errors.name")).max(80),
+    company: z.string().trim().max(80).optional().or(z.literal("")),
+    phone: z
+      .string({ message: t("contact.errors.phone") })
+      .min(1, t("contact.errors.phone"))
+      .refine((v) => isValidPhoneNumber(v), t("contact.errors.phone")),
+    email: z.string().trim().email(t("contact.errors.email")).max(120),
+    instagram: z.string().trim().max(60).optional().or(z.literal("")),
+    message: z.string().trim().min(10, t("contact.errors.message")).max(1000),
+    projectType: z.enum(projectTypes as [string, ...string[]], {
+      message: t("contact.errors.projectType"),
+    }),
+    budget: z.enum(budgets as [string, ...string[]], {
+      message: t("contact.errors.budget"),
+    }),
+    deadline: z.enum(deadlines as [string, ...string[]], {
+      message: t("contact.errors.deadline"),
+    }),
+    consent: z.literal(true, { message: t("contact.errors.consent") }),
+  });
+}
 
-export const deadlineOptions = [
-  "O quanto antes",
-  "Em 2 a 4 semanas",
-  "Em 1 a 2 meses",
-  "Sem urgência",
-] as const;
-
-export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Informe seu nome").max(80),
-  company: z.string().trim().max(80).optional().or(z.literal("")),
-  phone: z
-    .string({ message: "Informe um telefone válido" })
-    .min(1, "Informe um telefone válido")
-    .refine((v) => isValidPhoneNumber(v), "Informe um telefone válido"),
-  email: z.string().trim().email("Email inválido").max(120),
-  instagram: z.string().trim().max(60).optional().or(z.literal("")),
-  message: z.string().trim().min(10, "Descreva um pouco seu projeto").max(1000),
-  projectType: z.enum(projectTypes, { message: "Selecione o tipo de projeto" }),
-  budget: z.enum(budgetRanges, { message: "Selecione uma faixa de orçamento" }),
-  deadline: z.enum(deadlineOptions, { message: "Selecione um prazo" }),
-  consent: z.literal(true, { message: "É necessário aceitar a Política de Privacidade" }),
-});
-
-export type ContactInput = z.infer<typeof contactSchema>;
+export type ContactInput = {
+  name: string;
+  company?: string;
+  phone: string;
+  email: string;
+  instagram?: string;
+  message: string;
+  projectType: string;
+  budget: string;
+  deadline: string;
+  consent: true;
+};

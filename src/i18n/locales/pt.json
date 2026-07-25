@@ -1,0 +1,358 @@
+{
+  "nav": {
+    "services": "Serviços",
+    "process": "Processo",
+    "portfolio": "Portfólio",
+    "plans": "Planos",
+    "faq": "FAQ",
+    "contact": "Contato",
+    "requestQuote": "Solicitar orçamento",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu",
+    "primary": "Principal",
+    "mobile": "Mobile",
+    "arkyoStart": "Arkyo — início"
+  },
+  "theme": {
+    "toLight": "Alternar para modo claro",
+    "toDark": "Alternar para modo escuro",
+    "change": "Alterar tema"
+  },
+  "lang": {
+    "change": "Alterar idioma"
+  },
+  "hero": {
+    "badge": "Estúdio digital sob medida — Bélgica",
+    "titleA": "Sites que simplificam",
+    "titleB": "negócios reais.",
+    "subtitle": "Identificamos o que trava a comunicação, o atendimento e a presença digital do seu negócio — e resolvemos com design, tecnologia e clareza.",
+    "viewServices": "Ver serviços",
+    "mockScheduling": "Agendamentos hoje",
+    "mockLeads": "Leads no site",
+    "mockTime": "Tempo médio página",
+    "mockRange": "Últimos 30 dias",
+    "mockSessions": "Sessões"
+  },
+  "valueProp": {
+    "eyebrow": "Nossa proposta",
+    "title": "A Arkyo não vende apenas sites.",
+    "body": "Escutamos os problemas reais do seu dia a dia — mensagens desorganizadas, agendamentos perdidos, presença digital fraca — e desenhamos soluções simples que devolvem tempo, organização e confiança ao seu negócio."
+  },
+  "problems": {
+    "eyebrow": "Problemas reais",
+    "title": "Se algo aqui soa familiar, podemos ajudar.",
+    "items": [
+      { "title": "WhatsApp sobrecarregado", "desc": "Perde clientes porque não consegue responder todas as mensagens a tempo." },
+      { "title": "Agendamentos confusos", "desc": "Marca, remarca e às vezes esquece — sem um sistema que organize sua agenda." },
+      { "title": "Informação espalhada", "desc": "Cardápio no Instagram, preços no PDF, contato na bio. Cliente se perde." },
+      { "title": "Imagem que não representa", "desc": "Seu trabalho é excelente, mas a apresentação digital não transmite isso." }
+    ]
+  },
+  "services": {
+    "eyebrow": "Serviços",
+    "title": "Soluções desenhadas para o seu momento.",
+    "note": "Preços a partir de. Todo projeto começa com um briefing gratuito para entender seu contexto.",
+    "custom": "Sob orçamento",
+    "requestFor": "Solicitar orçamento para {{name}}",
+    "items": {
+      "landing-page": {
+        "name": "Landing Page",
+        "description": "Página única focada em conversão para um serviço, evento ou lançamento.",
+        "features": ["Design sob medida", "Formulário integrado", "Otimizada para SEO"]
+      },
+      "site-institucional": {
+        "name": "Site Institucional",
+        "description": "Presença profissional completa para consolidar a imagem do seu negócio.",
+        "features": ["Até 5 páginas", "Blog opcional", "Painel de contato"]
+      },
+      "site-agendamento": {
+        "name": "Site com Agendamento",
+        "description": "Sistema próprio de reservas online — sem depender de plataformas externas.",
+        "features": ["Agenda integrada", "Confirmações automáticas", "Painel administrativo"]
+      },
+      "portfolio": {
+        "name": "Portfólio",
+        "description": "Vitrine visual para fotógrafos, designers, arquitetos e criativos.",
+        "features": ["Galerias otimizadas", "Cases detalhados", "Contato direto"]
+      },
+      "pagina-vendas": {
+        "name": "Página de Vendas",
+        "description": "Estrutura de copywriting persuasiva para infoprodutos e ofertas.",
+        "features": ["Copy orientada a conversão", "Checkout integrado", "Pixel & Analytics"]
+      },
+      "personalizado": {
+        "name": "Projeto Personalizado",
+        "description": "Soluções específicas que fogem do padrão — desenvolvidas sob medida.",
+        "features": ["Escopo customizado", "Consultoria dedicada", "Suporte contínuo"]
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "Processo",
+    "title": "Um caminho claro do briefing ao lançamento.",
+    "steps": [
+      { "title": "Análise", "desc": "Entendemos seu negócio, público e os gargalos atuais." },
+      { "title": "Planejamento", "desc": "Definimos escopo, funcionalidades, cronograma e investimento." },
+      { "title": "Design", "desc": "Criamos identidade visual e protótipos navegáveis." },
+      { "title": "Desenvolvimento", "desc": "Codificamos com foco em performance, SEO e acessibilidade." },
+      { "title": "Entrega", "desc": "Publicamos, treinamos você e transferimos o controle total." },
+      { "title": "Suporte", "desc": "Acompanhamos, otimizamos e evoluímos o projeto ao longo do tempo." }
+    ]
+  },
+  "portfolio": {
+    "eyebrow": "Portfólio",
+    "title": "Projetos que resolveram problemas reais.",
+    "challenges": "Desafios",
+    "solutions": "Soluções",
+    "cta": "Começar agora",
+    "openSlot": {
+      "title": "Seu projeto aqui.",
+      "desc": "Estamos abertos para novos desafios. Conte o que você precisa."
+    },
+    "items": {
+      "clinica-massoterapia": {
+        "title": "Sistema para clínica de massoterapia",
+        "category": "Site com Agendamento",
+        "summary": "Plataforma que substituiu o agendamento manual por WhatsApp por um sistema próprio de reservas online, com confirmação automática e painel administrativo.",
+        "challenges": [
+          "Agenda desorganizada via mensagens",
+          "Falta de confirmação de horários",
+          "Sem visibilidade sobre a ocupação da clínica"
+        ],
+        "solutions": [
+          "Sistema de agendamento próprio",
+          "Painel administrativo com controle de horários",
+          "Notificações automáticas para cliente e profissional"
+        ],
+        "tags": ["Saúde & Bem-estar", "Agendamento", "Institucional"]
+      }
+    }
+  },
+  "differentials": {
+    "eyebrow": "Diferenciais",
+    "title": "O que fazemos com atenção redobrada.",
+    "items": [
+      { "title": "Design profissional", "desc": "Sem templates. Cada projeto é único." },
+      { "title": "Atendimento personalizado", "desc": "Você fala direto com quem executa." },
+      { "title": "Performance", "desc": "Core Web Vitals otimizados desde o primeiro commit." },
+      { "title": "SEO técnico", "desc": "Estrutura pronta para o Google entender e ranquear." },
+      { "title": "Sites rápidos", "desc": "Carregamento em menos de 2 segundos." },
+      { "title": "Código limpo", "desc": "Legível, escalável, entregue com acesso total." }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Planos de manutenção",
+    "title": "Seu site sempre no ar — sem dor de cabeça.",
+    "subtitle": "Planos mensais opcionais para hospedagem, backups e evolução contínua.",
+    "recommended": "Recomendado",
+    "cta": "Contratar plano",
+    "perMonth": "/mês",
+    "plans": {
+      "essencial": {
+        "name": "Essencial",
+        "description": "Manutenção básica para manter seu site sempre no ar.",
+        "features": [
+          "Hospedagem e domínio",
+          "Certificado SSL",
+          "Backup mensal",
+          "Suporte por email",
+          "Pequenos ajustes de conteúdo"
+        ]
+      },
+      "profissional": {
+        "name": "Profissional",
+        "description": "Suporte completo com evolução contínua do seu site.",
+        "features": [
+          "Tudo do Essencial",
+          "Backup semanal",
+          "Atualizações prioritárias",
+          "Suporte WhatsApp",
+          "Relatório mensal de performance",
+          "Otimizações de SEO"
+        ]
+      }
+    }
+  },
+  "faq": {
+    "eyebrow": "Perguntas frequentes",
+    "title": "Tudo o que você precisa saber antes de começar.",
+    "subtitle": "Não encontrou sua dúvida? Fale conosco pelo WhatsApp — respondemos em minutos no horário comercial.",
+    "items": [
+      { "q": "Quanto tempo leva para desenvolver o meu site?", "a": "Depende do escopo. Uma landing page fica pronta em cerca de 5 a 10 dias úteis. Um site institucional leva de 2 a 4 semanas. Sites com agendamento ou funcionalidades personalizadas exigem 4 a 6 semanas. Você recebe um cronograma claro logo após o briefing." },
+      { "q": "Preciso já ter um domínio e hospedagem?", "a": "Não. Cuidamos de tudo: registro de domínio, hospedagem, certificado SSL e emails profissionais. Se você já possui, integramos ao seu serviço atual." },
+      { "q": "Como funciona o pagamento?", "a": "Trabalhamos com 50% no início do projeto e 50% na entrega. Para planos mensais de manutenção, o pagamento é recorrente." },
+      { "q": "Vocês entregam o código-fonte?", "a": "Sim. O código é seu. Entregamos acesso completo ao repositório, hospedagem e domínio." },
+      { "q": "O site será rápido e otimizado para o Google?", "a": "Sim. Todos os nossos projetos seguem boas práticas de performance (Core Web Vitals) e SEO técnico. Buscamos Lighthouse acima de 95." },
+      { "q": "Consigo editar textos e imagens sozinho depois?", "a": "Sim, quando faz sentido. Podemos integrar um painel simples para você editar conteúdo. Para ajustes maiores, os planos de manutenção cobrem edições contínuas." },
+      { "q": "Vocês trabalham com clientes fora da Bélgica?", "a": "Sim. Atendemos remotamente clientes em toda a Europa e países de língua portuguesa." },
+      { "q": "E se eu precisar de algo que não está listado?", "a": "Todo projeto pode ser personalizado. Descreva sua necessidade no formulário e enviamos um orçamento sob medida." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Vamos conversar sobre o seu projeto.",
+    "subtitle": "Preencha o formulário ou entre em contato pelo canal que preferir. Respondemos em até 24 horas úteis.",
+    "channels": { "whatsapp": "WhatsApp", "email": "Email", "instagram": "Instagram" },
+    "fields": {
+      "name": "Nome",
+      "namePh": "Seu nome completo",
+      "company": "Empresa (opcional)",
+      "companyPh": "Nome do seu negócio",
+      "phone": "Telefone",
+      "email": "Email",
+      "emailPh": "voce@email.com",
+      "instagram": "Instagram (opcional)",
+      "instagramPh": "@seunegocio",
+      "projectType": "Tipo de projeto",
+      "budget": "Orçamento",
+      "deadline": "Prazo",
+      "message": "Mensagem",
+      "messagePh": "Conte sobre seu negócio e o que você precisa.",
+      "select": "Selecione",
+      "consent": "Li e concordo com a",
+      "privacy": "Política de Privacidade"
+    },
+    "submit": "Enviar mensagem",
+    "sending": "Enviando...",
+    "successTitle": "Mensagem enviada",
+    "successBody": "Obrigado pelo contato. Entraremos em contato em até 24 horas úteis.",
+    "sendAnother": "Enviar outra mensagem",
+    "toast": "Recebemos sua mensagem — respondemos em breve.",
+    "projectTypes": [
+      "Landing Page",
+      "Site Institucional",
+      "Site com Agendamento",
+      "Portfólio",
+      "Página de Vendas",
+      "Projeto Personalizado"
+    ],
+    "budgets": [
+      "Até €300",
+      "€300 – €600",
+      "€600 – €1000",
+      "Acima de €1000",
+      "Ainda não sei"
+    ],
+    "deadlines": [
+      "O quanto antes",
+      "Em 2 a 4 semanas",
+      "Em 1 a 2 meses",
+      "Sem urgência"
+    ],
+    "errors": {
+      "name": "Informe seu nome",
+      "phone": "Informe um telefone válido",
+      "email": "Email inválido",
+      "message": "Descreva um pouco seu projeto",
+      "projectType": "Selecione o tipo de projeto",
+      "budget": "Selecione uma faixa de orçamento",
+      "deadline": "Selecione um prazo",
+      "consent": "É necessário aceitar a Política de Privacidade"
+    }
+  },
+  "footer": {
+    "description": "Desenvolvemos sites e soluções digitais para pequenos negócios, profissionais autônomos e empresas em crescimento.",
+    "nav": "Navegação",
+    "contact": "Contato",
+    "country": "Bélgica",
+    "rights": "Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso"
+  },
+  "cookies": {
+    "text": "Utilizamos cookies para melhorar sua experiência e analisar o uso do site. Consulte nossa",
+    "privacy": "Política de Privacidade",
+    "reject": "Rejeitar",
+    "accept": "Aceitar",
+    "aria": "Consentimento de cookies"
+  },
+  "errorPage": {
+    "notFound": "Página não encontrada",
+    "notFoundBody": "A página que você está procurando não existe ou foi movida.",
+    "goHome": "Voltar ao início",
+    "loadFail": "Esta página não carregou",
+    "loadFailBody": "Algo deu errado do nosso lado. Tente atualizar ou volte ao início.",
+    "tryAgain": "Tentar novamente"
+  },
+  "legal": {
+    "back": "Voltar",
+    "lastUpdate": "Última atualização:",
+    "privacy": {
+      "title": "Política de Privacidade",
+      "sections": {
+        "who": {
+          "title": "1. Quem somos",
+          "body": "{{company}} é um estúdio digital com sede na {{country}}. Você pode nos contactar pelo email {{email}}."
+        },
+        "data": {
+          "title": "2. Dados que coletamos",
+          "items": [
+            "Dados fornecidos no formulário de contato: nome, empresa, telefone, email, Instagram, mensagem, tipo de projeto, orçamento e prazo.",
+            "Dados técnicos e de navegação (endereço IP, tipo de dispositivo, páginas visitadas), coletados por ferramentas analíticas mediante consentimento."
+          ]
+        },
+        "purpose": {
+          "title": "3. Finalidade do tratamento",
+          "intro": "Utilizamos seus dados exclusivamente para:",
+          "items": [
+            "Responder às suas solicitações de orçamento e contato.",
+            "Executar contratos e prestar os serviços contratados.",
+            "Melhorar a experiência do site (analytics agregado)."
+          ]
+        },
+        "legal": {
+          "title": "4. Base legal (GDPR)",
+          "body": "O tratamento é baseado no seu consentimento (art. 6.º, n.º 1, alínea a do RGPD) ao enviar o formulário e aceitar cookies, e na execução de contrato (art. 6.º, n.º 1, alínea b) quando aplicável."
+        },
+        "share": {
+          "title": "5. Compartilhamento",
+          "body": "Não vendemos seus dados. Podemos compartilhar dados com processadores estritamente necessários (hospedagem, envio de emails) que atuam sob acordos de proteção de dados."
+        },
+        "retention": {
+          "title": "6. Retenção",
+          "body": "Mantemos os dados apenas pelo tempo necessário à finalidade para a qual foram coletados, ou conforme exigido por lei."
+        },
+        "rights": {
+          "title": "7. Seus direitos",
+          "body": "Você tem direito de acesso, retificação, apagamento, oposição, portabilidade e limitação. Para exercê-los, contate {{email}}."
+        },
+        "cookies": {
+          "title": "8. Cookies",
+          "body": "Utilizamos cookies essenciais e, mediante consentimento, cookies analíticos. Você pode alterar sua preferência a qualquer momento limpando os dados do site."
+        },
+        "contact": {
+          "title": "9. Contato",
+          "body": "Dúvidas sobre esta política? Escreva para {{email}}."
+        }
+      }
+    },
+    "terms": {
+      "title": "Termos de Uso",
+      "sections": {
+        "accept": { "title": "1. Aceitação", "body": "Ao acessar ou utilizar o site da {{company}}, você concorda com estes Termos." },
+        "services": { "title": "2. Serviços", "body": "Oferecemos desenvolvimento de sites, landing pages, sistemas de agendamento e soluções digitais sob medida, mediante contrato específico." },
+        "ip": { "title": "3. Propriedade intelectual", "body": "O conteúdo do site (marca, textos, layout) pertence à {{company}}. Projetos entregues seguem os termos definidos em contrato." },
+        "liability": { "title": "4. Limitação de responsabilidade", "body": "O site é fornecido \"como está\". A {{company}} não se responsabiliza por indisponibilidades pontuais ou por decisões tomadas com base em conteúdos deste site." },
+        "changes": { "title": "5. Alterações", "body": "Podemos atualizar estes Termos a qualquer momento. Alterações relevantes serão comunicadas no site." },
+        "law": { "title": "6. Lei aplicável", "body": "Estes Termos são regidos pela legislação da {{country}}. Contato: {{email}}." }
+      }
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Arkyo — Sites que simplificam negócios",
+      "description": "Desenvolvimento de sites, landing pages e sistemas de agendamento para pequenos negócios. Design profissional, performance e SEO técnico. Bélgica.",
+      "ogDescription": "Estúdio digital sob medida para pequenos negócios. Sites, agendamento e soluções que funcionam."
+    },
+    "privacy": {
+      "title": "Política de Privacidade — Arkyo",
+      "description": "Como a Arkyo coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR.",
+      "ogDescription": "Como tratamos seus dados em conformidade com o GDPR."
+    },
+    "terms": {
+      "title": "Termos de Uso — Arkyo",
+      "description": "Termos e condições de uso dos serviços da Arkyo.",
+      "ogDescription": "Termos e condições de uso dos serviços."
+    }
+  }
+}
