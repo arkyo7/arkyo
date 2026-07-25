@@ -50,7 +50,7 @@ export const Route = createFileRoute("/")({
           url: "/",
           areaServed: "BE",
           address: { "@type": "PostalAddress", addressCountry: "BE" },
-          email: "nexoweb30@arkyo.be",
+          email: "hello@arkyo.com",
           telephone: "+32470743258",
           sameAs: ["https://instagram.com/arkyo"],
         }),

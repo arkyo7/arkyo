@@ -12,8 +12,8 @@ export const contact = {
   whatsappUrl: "https://wa.me/32470743258",
   instagram: "@arkyo",
   instagramUrl: "https://instagram.com/arkyo",
-  email: "nexoweb30@arkyo.be",
-  emailUrl: "mailto:nexoweb30@arkyo.be",
+  email: "hello@arkyo.com",
+  emailUrl: "mailto:hello@arkyo.com",
 };
 
 export const nav = [
