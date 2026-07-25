@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const STORAGE_KEY = "arkyo-cookie-consent-v1";
 
 export function CookieBanner() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       try {
         if (!localStorage.getItem(STORAGE_KEY)) setVisible(true);
       } catch {
         /* ignore */
       }
     }, 600);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, []);
 
   const decide = (value: "accepted" | "rejected") => {
@@ -33,14 +35,13 @@ export function CookieBanner() {
           className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-2xl rounded-2xl border border-border bg-card p-5 shadow-elevated md:inset-x-6 md:bottom-6"
           role="dialog"
           aria-live="polite"
-          aria-label="Consentimento de cookies"
+          aria-label={t("cookies.aria")}
         >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p className="text-sm text-muted-foreground md:pr-6">
-              Utilizamos cookies para melhorar sua experiência e analisar o uso do site. Consulte
-              nossa{" "}
+              {t("cookies.text")}{" "}
               <a href="/privacidade" className="text-foreground underline underline-offset-4">
-                Política de Privacidade
+                {t("cookies.privacy")}
               </a>.
             </p>
             <div className="flex shrink-0 gap-2">
@@ -48,13 +49,13 @@ export function CookieBanner() {
                 onClick={() => decide("rejected")}
                 className="rounded-lg border border-border bg-background px-3 py-2 text-sm font-medium hover:bg-muted"
               >
-                Rejeitar
+                {t("cookies.reject")}
               </button>
               <button
                 onClick={() => decide("accepted")}
                 className="rounded-lg bg-foreground px-3 py-2 text-sm font-medium text-background"
               >
-                Aceitar
+                {t("cookies.accept")}
               </button>
             </div>
           </div>

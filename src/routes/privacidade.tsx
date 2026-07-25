@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -8,10 +9,7 @@ export const Route = createFileRoute("/privacidade")({
   head: () => ({
     meta: [
       { title: "Política de Privacidade — Arkyo" },
-      {
-        name: "description",
-        content: "Como a Arkyo coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR.",
-      },
+      { name: "description", content: "Como a Arkyo coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR." },
       { property: "og:title", content: "Política de Privacidade — Arkyo" },
       { property: "og:description", content: "Como tratamos seus dados em conformidade com o GDPR." },
       { property: "og:url", content: "/privacidade" },
@@ -22,75 +20,80 @@ export const Route = createFileRoute("/privacidade")({
 });
 
 function Privacidade() {
+  const { t, i18n } = useTranslation();
+  const country = t("footer.country");
+  const email = <a href={contact.emailUrl} className="underline">{contact.email}</a>;
+
+  const section = (key: string) => t(`legal.privacy.sections.${key}`, { returnObjects: true }) as {
+    title: string;
+    body?: string;
+    intro?: string;
+    items?: string[];
+  };
+
+  const who = section("who");
+  const data = section("data");
+  const purpose = section("purpose");
+  const legal = section("legal");
+  const share = section("share");
+  const retention = section("retention");
+  const rights = section("rights");
+  const cookies = section("cookies");
+  const contactSec = section("contact");
+
+  const whoBody = who.body!
+    .replace("{{company}}", company.name)
+    .replace("{{country}}", country);
+
+  const rightsBody = rights.body!.replace("{{email}}", contact.email);
+  const contactBody = contactSec.body!.replace("{{email}}", contact.email);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-32 pb-24">
         <div className="container-arkyo max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Voltar
+            <ArrowLeft className="h-4 w-4" /> {t("legal.back")}
           </Link>
           <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-5xl">
-            Política de Privacidade
+            {t("legal.privacy.title")}
           </h1>
-          <p className="mt-4 text-sm text-muted-foreground">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
+          <p className="mt-4 text-sm text-muted-foreground">
+            {t("legal.lastUpdate")} {new Date().toLocaleDateString(i18n.resolvedLanguage || "pt-BR")}
+          </p>
 
-          <div className="prose prose-neutral mt-10 max-w-none space-y-8 text-[15px] leading-relaxed text-foreground">
-            <Section title="1. Quem somos">
-              <p>
-                {company.name} é um estúdio digital com sede na {company.country}. Você pode nos
-                contactar pelo email <a href={contact.emailUrl} className="underline">{contact.email}</a>.
+          <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground">
+            <Section title={who.title}>
+              <p className="text-muted-foreground">
+                {whoBody.split(contact.email)[0]}
+                {email}
+                {whoBody.split(contact.email)[1] ?? "."}
               </p>
             </Section>
-            <Section title="2. Dados que coletamos">
+            <Section title={data.title}>
               <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>Dados fornecidos no formulário de contato: nome, empresa, telefone, email, Instagram, mensagem, tipo de projeto, orçamento e prazo.</li>
-                <li>Dados técnicos e de navegação (endereço IP, tipo de dispositivo, páginas visitadas), coletados por ferramentas analíticas mediante consentimento.</li>
+                {data.items!.map((li) => <li key={li}>{li}</li>)}
               </ul>
             </Section>
-            <Section title="3. Finalidade do tratamento">
-              <p className="text-muted-foreground">Utilizamos seus dados exclusivamente para:</p>
+            <Section title={purpose.title}>
+              <p className="text-muted-foreground">{purpose.intro}</p>
               <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>Responder às suas solicitações de orçamento e contato.</li>
-                <li>Executar contratos e prestar os serviços contratados.</li>
-                <li>Melhorar a experiência do site (analytics agregado).</li>
+                {purpose.items!.map((li) => <li key={li}>{li}</li>)}
               </ul>
             </Section>
-            <Section title="4. Base legal (GDPR)">
+            <Section title={legal.title}><p className="text-muted-foreground">{legal.body}</p></Section>
+            <Section title={share.title}><p className="text-muted-foreground">{share.body}</p></Section>
+            <Section title={retention.title}><p className="text-muted-foreground">{retention.body}</p></Section>
+            <Section title={rights.title}>
               <p className="text-muted-foreground">
-                O tratamento é baseado no seu consentimento (art. 6.º, n.º 1, alínea a do RGPD) ao
-                enviar o formulário e aceitar cookies, e na execução de contrato (art. 6.º, n.º 1,
-                alínea b) quando aplicável.
+                {rightsBody.split(contact.email)[0]}{email}{rightsBody.split(contact.email)[1] ?? "."}
               </p>
             </Section>
-            <Section title="5. Compartilhamento">
+            <Section title={cookies.title}><p className="text-muted-foreground">{cookies.body}</p></Section>
+            <Section title={contactSec.title}>
               <p className="text-muted-foreground">
-                Não vendemos seus dados. Podemos compartilhar dados com processadores estritamente
-                necessários (hospedagem, envio de emails) que atuam sob acordos de proteção de dados.
-              </p>
-            </Section>
-            <Section title="6. Retenção">
-              <p className="text-muted-foreground">
-                Mantemos os dados apenas pelo tempo necessário à finalidade para a qual foram
-                coletados, ou conforme exigido por lei.
-              </p>
-            </Section>
-            <Section title="7. Seus direitos">
-              <p className="text-muted-foreground">
-                Você tem direito de acesso, retificação, apagamento, oposição, portabilidade e
-                limitação. Para exercê-los, contate <a href={contact.emailUrl} className="underline">{contact.email}</a>.
-              </p>
-            </Section>
-            <Section title="8. Cookies">
-              <p className="text-muted-foreground">
-                Utilizamos cookies essenciais e, mediante consentimento, cookies analíticos. Você
-                pode alterar sua preferência a qualquer momento limpando os dados do site.
-              </p>
-            </Section>
-            <Section title="9. Contato">
-              <p className="text-muted-foreground">
-                Dúvidas sobre esta política? Escreva para{" "}
-                <a href={contact.emailUrl} className="underline">{contact.email}</a>.
+                {contactBody.split(contact.email)[0]}{email}{contactBody.split(contact.email)[1] ?? "."}
               </p>
             </Section>
           </div>
