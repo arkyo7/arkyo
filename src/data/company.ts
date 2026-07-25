@@ -7,6 +7,7 @@ export const company = {
   founded: 2024,
 };
 
+// TODO: confirmar domínio final (placeholder arkyo.com em uso).
 export const contact = {
   whatsapp: "+32 470 74 32 58",
   whatsappUrl: "https://wa.me/32470743258",
