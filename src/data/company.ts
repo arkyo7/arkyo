@@ -1,5 +1,5 @@
 export const company = {
-  name: "Nexo Web",
+  name: "Arkyo",
   tagline: "Sites que simplificam negócios.",
   description:
     "Desenvolvemos sites e soluções digitais para pequenos negócios, profissionais autônomos e empresas em crescimento.",
@@ -7,13 +7,14 @@ export const company = {
   founded: 2024,
 };
 
+// TODO: confirmar domínio final (placeholder arkyo.com em uso).
 export const contact = {
   whatsapp: "+32 470 74 32 58",
   whatsappUrl: "https://wa.me/32470743258",
-  instagram: "@nexoweb",
-  instagramUrl: "https://instagram.com/nexoweb",
-  email: "nexoweb30@nexoweb.be",
-  emailUrl: "mailto:nexoweb30@nexoweb.be",
+  instagram: "@arkyo",
+  instagramUrl: "https://instagram.com/arkyo",
+  email: "hello@arkyo.com",
+  emailUrl: "mailto:hello@arkyo.com",
 };
 
 export const nav = [

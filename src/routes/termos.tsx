@@ -7,9 +7,9 @@ import { company, contact } from "@/data/company";
 export const Route = createFileRoute("/termos")({
   head: () => ({
     meta: [
-      { title: "Termos de Uso — Nexo Web" },
-      { name: "description", content: "Termos e condições de uso dos serviços da Nexo Web." },
-      { property: "og:title", content: "Termos de Uso — Nexo Web" },
+      { title: "Termos de Uso — Arkyo" },
+      { name: "description", content: "Termos e condições de uso dos serviços da Arkyo." },
+      { property: "og:title", content: "Termos de Uso — Arkyo" },
       { property: "og:description", content: "Termos e condições de uso dos serviços." },
       { property: "og:url", content: "/termos" },
     ],
@@ -23,7 +23,7 @@ function Termos() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-32 pb-24">
-        <div className="container-nexo max-w-3xl">
+        <div className="container-arkyo max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Voltar
           </Link>

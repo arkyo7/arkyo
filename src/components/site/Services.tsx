@@ -5,7 +5,7 @@ import { services } from "@/data/services";
 export function Services() {
   return (
     <section id="servicos" className="border-y border-border bg-surface py-24 md:py-32">
-      <div className="container-nexo">
+      <div className="container-arkyo">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">

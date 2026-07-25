@@ -39,7 +39,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
         ...rest,
       }}
       className={cn(
-        "nexo-phone-input flex h-10 w-full items-center gap-2 rounded-md border border-input bg-background px-3 text-sm shadow-xs transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
+        "arkyo-phone-input flex h-10 w-full items-center gap-2 rounded-md border border-input bg-background px-3 text-sm shadow-xs transition-colors focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
         className,
       )}
     />

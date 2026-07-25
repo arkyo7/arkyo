@@ -7,12 +7,12 @@ import { contact, company } from "@/data/company";
 export const Route = createFileRoute("/privacidade")({
   head: () => ({
     meta: [
-      { title: "Política de Privacidade — Nexo Web" },
+      { title: "Política de Privacidade — Arkyo" },
       {
         name: "description",
-        content: "Como a Nexo Web coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR.",
+        content: "Como a Arkyo coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR.",
       },
-      { property: "og:title", content: "Política de Privacidade — Nexo Web" },
+      { property: "og:title", content: "Política de Privacidade — Arkyo" },
       { property: "og:description", content: "Como tratamos seus dados em conformidade com o GDPR." },
       { property: "og:url", content: "/privacidade" },
     ],
@@ -26,7 +26,7 @@ function Privacidade() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-32 pb-24">
-        <div className="container-nexo max-w-3xl">
+        <div className="container-arkyo max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Voltar
           </Link>

@@ -37,7 +37,7 @@ export function Contact() {
     // Estrutura pronta para envio ao Supabase (leads).
     // Enquanto o backend não está ativo, apenas simulamos a submissão.
     await new Promise((r) => setTimeout(r, 700));
-    console.info("[nexo-web] lead:", data);
+    console.info("[arkyo] lead:", data);
     toast.success("Recebemos sua mensagem — respondemos em breve.");
     setSent(true);
     reset();
@@ -47,7 +47,7 @@ export function Contact() {
 
   return (
     <section id="contato" className="border-y border-border bg-surface py-24 md:py-32">
-      <div className="container-nexo grid gap-12 lg:grid-cols-[1fr_1.5fr]">
+      <div className="container-arkyo grid gap-12 lg:grid-cols-[1fr_1.5fr]">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}

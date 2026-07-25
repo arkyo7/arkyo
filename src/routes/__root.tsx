@@ -78,22 +78,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nexo Web — Sites que simplificam negócios" },
+      { title: "Arkyo — Sites que simplificam negócios" },
       {
         name: "description",
         content:
           "Estúdio digital que desenvolve sites, landing pages e sistemas de agendamento para pequenos negócios. Bélgica.",
       },
-      { name: "author", content: "Nexo Web" },
+      { name: "author", content: "Arkyo" },
       { name: "theme-color", content: "#090909" },
-      { property: "og:site_name", content: "Nexo Web" },
+      { property: "og:site_name", content: "Arkyo" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@nexoweb" },
+      { name: "twitter:site", content: "@arkyo" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
