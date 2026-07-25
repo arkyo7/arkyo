@@ -4,7 +4,7 @@ import { faq } from "@/data/faq";
 export function FAQ() {
   return (
     <section id="faq" className="py-24 md:py-32">
-      <div className="container-nexo grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+      <div className="container-arkyo grid gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="max-w-md">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Perguntas frequentes

@@ -71,8 +71,8 @@ export function Header() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="container-nexo flex h-16 items-center justify-between">
-        <a href="#top" aria-label="Nexo Web — início" className="shrink-0">
+      <div className="container-arkyo flex h-16 items-center justify-between">
+        <a href="#top" aria-label="Arkyo — início" className="shrink-0">
           <Logo />
         </a>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
@@ -139,7 +139,7 @@ export function Header() {
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               className="fixed inset-x-0 top-0 z-[70] bg-background shadow-elevated"
             >
-              <div className="container-nexo flex h-16 items-center justify-between">
+              <div className="container-arkyo flex h-16 items-center justify-between">
                 <Logo />
                 <button
                   ref={closeBtnRef}
@@ -151,7 +151,7 @@ export function Header() {
                 </button>
               </div>
               <nav
-                className="container-nexo mt-2 flex flex-col gap-1 pb-8"
+                className="container-arkyo mt-2 flex flex-col gap-1 pb-8"
                 aria-label="Mobile"
               >
                 {nav.map((item) => (

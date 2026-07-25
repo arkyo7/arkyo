@@ -42,7 +42,7 @@
 
 :root {
   color-scheme: light;
-  /* Nexo Web — Light */
+  /* Arkyo — Light */
   --background: #FAFAFA;
   --foreground: #171717;
   --surface: #F5F5F5;
@@ -69,7 +69,7 @@
 
 .dark {
   color-scheme: dark;
-  /* Nexo Web — Dark */
+  /* Arkyo — Dark */
   --background: #090909;
   --foreground: #F5F5F5;
   --surface: #111111;
@@ -128,7 +128,7 @@
   }
 }
 
-@utility container-nexo {
+@utility container-arkyo {
   width: 100%;
   margin-inline: auto;
   max-width: 1280px;
@@ -149,24 +149,24 @@
 }
 
 /* react-phone-number-input theming */
-.nexo-phone-input .PhoneInputCountry {
+.arkyo-phone-input .PhoneInputCountry {
   display: flex;
   align-items: center;
   gap: 0.375rem;
   margin-right: 0.5rem;
 }
-.nexo-phone-input .PhoneInputCountrySelect {
+.arkyo-phone-input .PhoneInputCountrySelect {
   color: var(--color-foreground);
   background: transparent;
 }
-.nexo-phone-input .PhoneInputCountryIcon {
+.arkyo-phone-input .PhoneInputCountryIcon {
   box-shadow: none;
   background: transparent;
 }
-.nexo-phone-input input {
+.arkyo-phone-input input {
   color: var(--color-foreground);
   background: transparent;
 }
-.nexo-phone-input input::placeholder {
+.arkyo-phone-input input::placeholder {
   color: var(--color-muted-foreground);
 }

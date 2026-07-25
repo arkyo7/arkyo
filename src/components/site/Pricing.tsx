@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 export function Pricing() {
   return (
     <section id="planos" className="border-y border-border bg-surface py-24 md:py-32">
-      <div className="container-nexo">
+      <div className="container-arkyo">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Planos de manutenção

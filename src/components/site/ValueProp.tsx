@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export function ValueProp() {
   return (
     <section className="border-y border-border bg-surface py-24 md:py-32">
-      <div className="container-nexo">
+      <div className="container-arkyo">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -15,7 +15,7 @@ export function ValueProp() {
             Nossa proposta
           </p>
           <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-4xl lg:text-[2.5rem]">
-            A Nexo Web não vende apenas sites.
+            A Arkyo não vende apenas sites.
           </h2>
           <p className="mt-6 text-balance text-lg leading-relaxed text-muted-foreground">
             Escutamos os problemas reais do seu dia a dia — mensagens desorganizadas, agendamentos

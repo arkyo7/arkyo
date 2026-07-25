@@ -13,7 +13,7 @@ const items = [
 export function Differentials() {
   return (
     <section className="py-24 md:py-32">
-      <div className="container-nexo">
+      <div className="container-arkyo">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Diferenciais

@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 
 export type Theme = "light" | "dark";
 
-const STORAGE_KEY = "nexo-theme";
+const STORAGE_KEY = "arkyo-theme";
 
 type ThemeContextValue = {
   theme: Theme;

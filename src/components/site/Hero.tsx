@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
-      <div className="container-nexo relative">
+      <div className="container-arkyo relative">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
               <div className="mx-auto flex items-center gap-2 rounded-md bg-muted px-3 py-1 text-[11px] text-muted-foreground">
-                nexoweb.be
+                arkyo.com
               </div>
             </div>
             <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STORAGE_KEY = "nexo-cookie-consent-v1";
+const STORAGE_KEY = "arkyo-cookie-consent-v1";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
