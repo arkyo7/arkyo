@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
-import { nav } from "@/data/company";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { navItems } from "@/data/company";
 import { cn } from "@/lib/utils";
 
 export function Header() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -20,12 +23,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll + Esc close + focus management while menu is open
   useEffect(() => {
     if (!open) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
@@ -49,15 +50,11 @@ export function Header() {
       }
     };
     document.addEventListener("keydown", onKey);
-
-    // Move focus into the panel
-    const t = window.setTimeout(() => closeBtnRef.current?.focus(), 20);
-
+    const timer = window.setTimeout(() => closeBtnRef.current?.focus(), 20);
     return () => {
       document.body.style.overflow = prevOverflow;
       document.removeEventListener("keydown", onKey);
-      window.clearTimeout(t);
-      // Restore focus to the trigger
+      window.clearTimeout(timer);
       triggerRef.current?.focus();
     };
   }, [open]);
@@ -72,37 +69,39 @@ export function Header() {
       )}
     >
       <div className="container-arkyo flex h-16 items-center justify-between">
-        <a href="#top" aria-label="Arkyo — início" className="shrink-0">
+        <a href="#top" aria-label={t("nav.arkyoStart")} className="shrink-0">
           <Logo />
         </a>
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
-          {nav.map((item) => (
+        <nav className="hidden items-center gap-1 md:flex" aria-label={t("nav.primary")}>
+          {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {item.label}
+              {t(`nav.${item.key}`)}
             </a>
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
+          <LanguageSwitcher />
           <ThemeToggle />
           <a
             href="#contato"
             className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-px"
           >
-            Solicitar orçamento
+            {t("nav.requestQuote")}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
         <div className="flex items-center gap-1 md:hidden">
+          <LanguageSwitcher />
           <ThemeToggle />
           <button
             ref={triggerRef}
             onClick={() => setOpen(true)}
             className="rounded-md p-2 text-foreground"
-            aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
             aria-expanded={open}
             aria-controls="mobile-nav"
           >
@@ -114,10 +113,9 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <div className="md:hidden">
-            {/* Backdrop */}
             <motion.button
               type="button"
-              aria-label="Fechar menu"
+              aria-label={t("nav.closeMenu")}
               tabIndex={-1}
               onClick={() => setOpen(false)}
               initial={{ opacity: 0 }}
@@ -126,13 +124,12 @@ export function Header() {
               transition={{ duration: 0.25 }}
               className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
             />
-            {/* Panel */}
             <motion.div
               id="mobile-nav"
               ref={panelRef}
               role="dialog"
               aria-modal="true"
-              aria-label="Navegação"
+              aria-label={t("nav.primary")}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -145,23 +142,20 @@ export function Header() {
                   ref={closeBtnRef}
                   onClick={() => setOpen(false)}
                   className="rounded-md p-2"
-                  aria-label="Fechar menu"
+                  aria-label={t("nav.closeMenu")}
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <nav
-                className="container-arkyo mt-2 flex flex-col gap-1 pb-8"
-                aria-label="Mobile"
-              >
-                {nav.map((item) => (
+              <nav className="container-arkyo mt-2 flex flex-col gap-1 pb-8" aria-label={t("nav.mobile")}>
+                {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
                     className="rounded-lg px-3 py-3 text-lg font-medium text-foreground hover:bg-muted"
                   >
-                    {item.label}
+                    {t(`nav.${item.key}`)}
                   </a>
                 ))}
                 <a
@@ -169,7 +163,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background"
                 >
-                  Solicitar orçamento
+                  {t("nav.requestQuote")}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </nav>

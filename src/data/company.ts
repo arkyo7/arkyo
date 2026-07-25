@@ -1,26 +1,23 @@
 export const company = {
   name: "Arkyo",
   tagline: "Sites que simplificam negócios.",
-  description:
-    "Desenvolvemos sites e soluções digitais para pequenos negócios, profissionais autônomos e empresas em crescimento.",
-  country: "Bélgica",
+  countryCode: "BE",
   founded: 2024,
 };
 
-// TODO: confirmar domínio final (placeholder arkyo.com em uso).
 export const contact = {
   whatsapp: "+32 470 74 32 58",
   whatsappUrl: "https://wa.me/32470743258",
-  instagram: "@arkyo",
-  instagramUrl: "https://instagram.com/arkyo",
-  email: "hello@arkyo.com",
-  emailUrl: "mailto:hello@arkyo.com",
+  instagram: "@arkyo.co",
+  instagramUrl: "https://instagram.com/arkyo.co",
+  email: "hello.arkyo@gmail.com",
+  emailUrl: "mailto:hello.arkyo@gmail.com",
 };
 
-export const nav = [
-  { label: "Serviços", href: "#servicos" },
-  { label: "Processo", href: "#processo" },
-  { label: "Portfólio", href: "#portfolio" },
-  { label: "Planos", href: "#planos" },
-  { label: "FAQ", href: "#faq" },
-];
+export const navItems = [
+  { key: "services", href: "#servicos" },
+  { key: "process", href: "#processo" },
+  { key: "portfolio", href: "#portfolio" },
+  { key: "plans", href: "#planos" },
+  { key: "faq", href: "#faq" },
+] as const;

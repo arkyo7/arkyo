@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
 export function Hero() {
+  const { t } = useTranslation();
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
@@ -14,29 +16,28 @@ export function Hero() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
             <Sparkles className="h-3.5 w-3.5" />
-            Estúdio digital sob medida — Bélgica
+            {t("hero.badge")}
           </div>
           <h1 className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-[3.5rem]">
-            Sites que simplificam
-            <br className="hidden sm:block" /> negócios reais.
+            {t("hero.titleA")}
+            <br className="hidden sm:block" /> {t("hero.titleB")}
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-            Identificamos o que trava a comunicação, o atendimento e a presença digital do seu
-            negócio — e resolvemos com design, tecnologia e clareza.
+            {t("hero.subtitle")}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="#contato"
               className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px"
             >
-              Solicitar orçamento
+              {t("nav.requestQuote")}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <a
               href="#servicos"
               className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
-              Ver serviços
+              {t("hero.viewServices")}
             </a>
           </div>
         </motion.div>
@@ -57,16 +58,14 @@ export function Hero() {
               </div>
             </div>
             <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">
-              <MockCard title="Agendamentos hoje" value="24" trend="+8%" />
-              <MockCard title="Leads no site" value="152" trend="+18%" />
-              <MockCard title="Tempo médio página" value="1m 42s" trend="+12%" />
+              <MockCard title={t("hero.mockScheduling")} value="24" trend="+8%" />
+              <MockCard title={t("hero.mockLeads")} value="152" trend="+18%" />
+              <MockCard title={t("hero.mockTime")} value="1m 42s" trend="+12%" />
               <div className="md:col-span-3">
                 <div className="rounded-xl border border-border bg-surface p-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="text-xs font-medium text-muted-foreground">
-                      Últimos 30 dias
-                    </span>
-                    <span className="text-xs text-muted-foreground">Sessões</span>
+                    <span className="text-xs font-medium text-muted-foreground">{t("hero.mockRange")}</span>
+                    <span className="text-xs text-muted-foreground">{t("hero.mockSessions")}</span>
                   </div>
                   <ChartMock />
                 </div>

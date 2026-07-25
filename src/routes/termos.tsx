@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -19,66 +20,42 @@ export const Route = createFileRoute("/termos")({
 });
 
 function Termos() {
+  const { t, i18n } = useTranslation();
+  const country = t("footer.country");
+  const section = (key: string) => t(`legal.terms.sections.${key}`, { returnObjects: true }) as { title: string; body: string };
+  const keys = ["accept", "services", "ip", "liability", "changes", "law"];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-32 pb-24">
         <div className="container-arkyo max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Voltar
+            <ArrowLeft className="h-4 w-4" /> {t("legal.back")}
           </Link>
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-5xl">Termos de Uso</h1>
-          <p className="mt-4 text-sm text-muted-foreground">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-5xl">{t("legal.terms.title")}</h1>
+          <p className="mt-4 text-sm text-muted-foreground">
+            {t("legal.lastUpdate")} {new Date().toLocaleDateString(i18n.resolvedLanguage || "pt-BR")}
+          </p>
 
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground">
-            <Section title="1. Aceitação">
-              <p className="text-muted-foreground">
-                Ao acessar ou utilizar o site da {company.name}, você concorda com estes Termos.
-              </p>
-            </Section>
-            <Section title="2. Serviços">
-              <p className="text-muted-foreground">
-                Oferecemos desenvolvimento de sites, landing pages, sistemas de agendamento e
-                soluções digitais sob medida, mediante contrato específico.
-              </p>
-            </Section>
-            <Section title="3. Propriedade intelectual">
-              <p className="text-muted-foreground">
-                O conteúdo do site (marca, textos, layout) pertence à {company.name}. Projetos
-                entregues seguem os termos definidos em contrato.
-              </p>
-            </Section>
-            <Section title="4. Limitação de responsabilidade">
-              <p className="text-muted-foreground">
-                O site é fornecido "como está". A {company.name} não se responsabiliza por
-                indisponibilidades pontuais ou por decisões tomadas com base em conteúdos deste site.
-              </p>
-            </Section>
-            <Section title="5. Alterações">
-              <p className="text-muted-foreground">
-                Podemos atualizar estes Termos a qualquer momento. Alterações relevantes serão
-                comunicadas no site.
-              </p>
-            </Section>
-            <Section title="6. Lei aplicável">
-              <p className="text-muted-foreground">
-                Estes Termos são regidos pela legislação da {company.country}. Contato:{" "}
-                <a href={contact.emailUrl} className="underline">{contact.email}</a>.
-              </p>
-            </Section>
+            {keys.map((k) => {
+              const s = section(k);
+              const body = s.body
+                .replaceAll("{{company}}", company.name)
+                .replaceAll("{{country}}", country)
+                .replaceAll("{{email}}", contact.email);
+              return (
+                <section key={k}>
+                  <h2 className="text-xl font-semibold tracking-tight">{s.title}</h2>
+                  <p className="mt-3 text-muted-foreground">{body}</p>
+                </section>
+              );
+            })}
           </div>
         </div>
       </main>
       <Footer />
     </div>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section>
-      <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      <div className="mt-3">{children}</div>
-    </section>
   );
 }

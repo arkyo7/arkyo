@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Mail, MessageCircle, Instagram, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
@@ -11,16 +12,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { contact } from "@/data/company";
-import {
-  contactSchema,
-  type ContactInput,
-  projectTypes,
-  budgetRanges,
-  deadlineOptions,
-} from "@/data/contact";
+import { makeContactSchema, type ContactInput } from "@/data/contact";
 
 export function Contact() {
+  const { t } = useTranslation();
   const [sent, setSent] = useState(false);
+
+  const schema = useMemo(() => makeContactSchema(t), [t]);
+  const projectTypes = t("contact.projectTypes", { returnObjects: true }) as string[];
+  const budgets = t("contact.budgets", { returnObjects: true }) as string[];
+  const deadlines = t("contact.deadlines", { returnObjects: true }) as string[];
+
   const {
     register,
     handleSubmit,
@@ -29,16 +31,15 @@ export function Contact() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactInput>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(schema) as never,
     defaultValues: { consent: false as unknown as true, phone: "" },
   });
 
   const onSubmit = async (data: ContactInput) => {
-    // Estrutura pronta para envio ao Supabase (leads).
-    // Enquanto o backend não está ativo, apenas simulamos a submissão.
     await new Promise((r) => setTimeout(r, 700));
-    console.info("[arkyo] lead:", data);
-    toast.success("Recebemos sua mensagem — respondemos em breve.");
+    // TODO: enviar para Lovable Cloud (tabela leads)
+    void data;
+    toast.success(t("contact.toast"));
     setSent(true);
     reset();
   };
@@ -55,15 +56,12 @@ export function Contact() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            Contato
+            {t("contact.eyebrow")}
           </p>
           <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-            Vamos conversar sobre o seu projeto.
+            {t("contact.title")}
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Preencha o formulário ou entre em contato pelo canal que preferir. Respondemos em até
-            24 horas úteis.
-          </p>
+          <p className="mt-4 text-muted-foreground">{t("contact.subtitle")}</p>
           <div className="mt-8 space-y-3">
             <a
               href={contact.whatsappUrl}
@@ -75,7 +73,7 @@ export function Contact() {
                 <MessageCircle className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs text-muted-foreground">WhatsApp</p>
+                <p className="text-xs text-muted-foreground">{t("contact.channels.whatsapp")}</p>
                 <p className="text-sm font-medium">{contact.whatsapp}</p>
               </div>
             </a>
@@ -87,7 +85,7 @@ export function Contact() {
                 <Mail className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs text-muted-foreground">Email</p>
+                <p className="text-xs text-muted-foreground">{t("contact.channels.email")}</p>
                 <p className="text-sm font-medium">{contact.email}</p>
               </div>
             </a>
@@ -101,7 +99,7 @@ export function Contact() {
                 <Instagram className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs text-muted-foreground">Instagram</p>
+                <p className="text-xs text-muted-foreground">{t("contact.channels.instagram")}</p>
                 <p className="text-sm font-medium">{contact.instagram}</p>
               </div>
             </a>
@@ -122,76 +120,73 @@ export function Contact() {
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background">
                 <Check className="h-5 w-5" />
               </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">Mensagem enviada</h3>
-              <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                Obrigado pelo contato. Entraremos em contato em até 24 horas úteis.
-              </p>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight">{t("contact.successTitle")}</h3>
+              <p className="mt-2 max-w-sm text-sm text-muted-foreground">{t("contact.successBody")}</p>
               <button
                 type="button"
                 onClick={() => setSent(false)}
                 className="mt-6 text-sm font-medium underline underline-offset-4"
               >
-                Enviar outra mensagem
+                {t("contact.sendAnother")}
               </button>
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Nome" error={errors.name?.message}>
-                <Input {...register("name")} placeholder="Seu nome completo" />
+              <Field label={t("contact.fields.name")} error={errors.name?.message}>
+                <Input {...register("name")} placeholder={t("contact.fields.namePh")} />
               </Field>
-              <Field label="Empresa (opcional)" error={errors.company?.message}>
-                <Input {...register("company")} placeholder="Nome do seu negócio" />
+              <Field label={t("contact.fields.company")} error={errors.company?.message}>
+                <Input {...register("company")} placeholder={t("contact.fields.companyPh")} />
               </Field>
-              <Field label="Telefone" error={errors.phone?.message}>
+              <Field label={t("contact.fields.phone")} error={errors.phone?.message}>
                 <PhoneInput
                   value={values.phone}
                   onChange={(v) => setValue("phone", v ?? "", { shouldValidate: true })}
-                  placeholder="470 12 34 56"
                   aria-invalid={!!errors.phone}
                 />
               </Field>
-              <Field label="Email" error={errors.email?.message}>
-                <Input type="email" {...register("email")} placeholder="voce@email.com" />
+              <Field label={t("contact.fields.email")} error={errors.email?.message}>
+                <Input type="email" {...register("email")} placeholder={t("contact.fields.emailPh")} />
               </Field>
-              <Field label="Instagram (opcional)" error={errors.instagram?.message}>
-                <Input {...register("instagram")} placeholder="@seunegocio" />
+              <Field label={t("contact.fields.instagram")} error={errors.instagram?.message}>
+                <Input {...register("instagram")} placeholder={t("contact.fields.instagramPh")} />
               </Field>
-              <Field label="Tipo de projeto" error={errors.projectType?.message}>
+              <Field label={t("contact.fields.projectType")} error={errors.projectType?.message}>
                 <Select
                   value={values.projectType}
-                  onValueChange={(v) => setValue("projectType", v as ContactInput["projectType"], { shouldValidate: true })}
+                  onValueChange={(v) => setValue("projectType", v, { shouldValidate: true })}
                 >
-                  <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
                   <SelectContent>
-                    {projectTypes.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                    {projectTypes.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </Field>
-              <Field label="Orçamento" error={errors.budget?.message}>
+              <Field label={t("contact.fields.budget")} error={errors.budget?.message}>
                 <Select
                   value={values.budget}
-                  onValueChange={(v) => setValue("budget", v as ContactInput["budget"], { shouldValidate: true })}
+                  onValueChange={(v) => setValue("budget", v, { shouldValidate: true })}
                 >
-                  <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
                   <SelectContent>
-                    {budgetRanges.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                    {budgets.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </Field>
-              <Field label="Prazo" error={errors.deadline?.message}>
+              <Field label={t("contact.fields.deadline")} error={errors.deadline?.message}>
                 <Select
                   value={values.deadline}
-                  onValueChange={(v) => setValue("deadline", v as ContactInput["deadline"], { shouldValidate: true })}
+                  onValueChange={(v) => setValue("deadline", v, { shouldValidate: true })}
                 >
-                  <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
                   <SelectContent>
-                    {deadlineOptions.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                    {deadlines.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </Field>
               <div className="sm:col-span-2">
-                <Field label="Mensagem" error={errors.message?.message}>
-                  <Textarea rows={5} {...register("message")} placeholder="Conte sobre seu negócio e o que você precisa." />
+                <Field label={t("contact.fields.message")} error={errors.message?.message}>
+                  <Textarea rows={5} {...register("message")} placeholder={t("contact.fields.messagePh")} />
                 </Field>
               </div>
 
@@ -206,9 +201,9 @@ export function Contact() {
                     className="mt-0.5"
                   />
                   <span>
-                    Li e concordo com a{" "}
+                    {t("contact.fields.consent")}{" "}
                     <a href="/privacidade" className="text-foreground underline underline-offset-4">
-                      Política de Privacidade
+                      {t("contact.fields.privacy")}
                     </a>.
                   </span>
                 </label>
@@ -224,7 +219,7 @@ export function Contact() {
                   className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px disabled:opacity-70"
                 >
                   {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-                  {isSubmitting ? "Enviando..." : "Enviar mensagem"}
+                  {isSubmitting ? t("contact.sending") : t("contact.submit")}
                 </button>
               </div>
             </div>

@@ -1,0 +1,356 @@
+{
+  "nav": {
+    "services": "Services",
+    "process": "Process",
+    "portfolio": "Portfolio",
+    "plans": "Plans",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "requestQuote": "Request a quote",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close menu",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "arkyoStart": "Arkyo — home"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "change": "Change theme"
+  },
+  "lang": { "change": "Change language" },
+  "hero": {
+    "badge": "Bespoke digital studio — Belgium",
+    "titleA": "Websites that simplify",
+    "titleB": "real businesses.",
+    "subtitle": "We identify what blocks your communication, customer service and digital presence — and solve it with design, technology and clarity.",
+    "viewServices": "See services",
+    "mockScheduling": "Bookings today",
+    "mockLeads": "Site leads",
+    "mockTime": "Avg. time on page",
+    "mockRange": "Last 30 days",
+    "mockSessions": "Sessions"
+  },
+  "valueProp": {
+    "eyebrow": "Our approach",
+    "title": "Arkyo doesn't just sell websites.",
+    "body": "We listen to the real day-to-day problems — messy inboxes, missed appointments, weak digital presence — and design simple solutions that give back time, structure and trust to your business."
+  },
+  "problems": {
+    "eyebrow": "Real problems",
+    "title": "If any of this sounds familiar, we can help.",
+    "items": [
+      { "title": "Overloaded WhatsApp", "desc": "You lose clients because you can't answer every message in time." },
+      { "title": "Messy scheduling", "desc": "Booking, rebooking and sometimes forgetting — with no system organising your agenda." },
+      { "title": "Scattered information", "desc": "Menu on Instagram, prices in a PDF, contact in a bio. Clients get lost." },
+      { "title": "An image that doesn't match", "desc": "Your work is excellent, but your digital presence doesn't show it." }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "Solutions designed for where you are today.",
+    "note": "Starting prices. Every project begins with a free briefing to understand your context.",
+    "custom": "Custom quote",
+    "requestFor": "Request a quote for {{name}}",
+    "items": {
+      "landing-page": {
+        "name": "Landing Page",
+        "description": "Single page focused on conversion for a service, event or launch.",
+        "features": ["Bespoke design", "Integrated form", "SEO-optimised"]
+      },
+      "site-institucional": {
+        "name": "Company Website",
+        "description": "Full professional presence to consolidate your brand image.",
+        "features": ["Up to 5 pages", "Optional blog", "Contact panel"]
+      },
+      "site-agendamento": {
+        "name": "Website with Booking",
+        "description": "Your own online reservation system — no dependency on third-party platforms.",
+        "features": ["Integrated calendar", "Automatic confirmations", "Admin panel"]
+      },
+      "portfolio": {
+        "name": "Portfolio",
+        "description": "Visual showcase for photographers, designers, architects and creatives.",
+        "features": ["Optimised galleries", "Detailed cases", "Direct contact"]
+      },
+      "pagina-vendas": {
+        "name": "Sales Page",
+        "description": "Persuasive copywriting structure for digital products and offers.",
+        "features": ["Conversion-driven copy", "Integrated checkout", "Pixel & Analytics"]
+      },
+      "personalizado": {
+        "name": "Custom Project",
+        "description": "Specific solutions outside the standard — built to measure.",
+        "features": ["Custom scope", "Dedicated consulting", "Ongoing support"]
+      }
+    }
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "A clear path from briefing to launch.",
+    "steps": [
+      { "title": "Discovery", "desc": "We understand your business, audience and current bottlenecks." },
+      { "title": "Planning", "desc": "We define scope, features, timeline and investment." },
+      { "title": "Design", "desc": "We craft visual identity and interactive prototypes." },
+      { "title": "Development", "desc": "We build with a focus on performance, SEO and accessibility." },
+      { "title": "Delivery", "desc": "We publish, train you and hand over full control." },
+      { "title": "Support", "desc": "We follow, optimise and evolve the project over time." }
+    ]
+  },
+  "portfolio": {
+    "eyebrow": "Portfolio",
+    "title": "Projects that solved real problems.",
+    "challenges": "Challenges",
+    "solutions": "Solutions",
+    "cta": "Start now",
+    "openSlot": {
+      "title": "Your project here.",
+      "desc": "We're open to new challenges. Tell us what you need."
+    },
+    "items": {
+      "clinica-massoterapia": {
+        "title": "System for a massage therapy clinic",
+        "category": "Website with Booking",
+        "summary": "Platform that replaced manual WhatsApp booking with an in-house reservation system, automatic confirmations and an admin dashboard.",
+        "challenges": [
+          "Disorganised bookings over messages",
+          "Missing appointment confirmations",
+          "No visibility over clinic capacity"
+        ],
+        "solutions": [
+          "Custom booking system",
+          "Admin dashboard with time-slot control",
+          "Automatic notifications for client and practitioner"
+        ],
+        "tags": ["Health & Wellness", "Booking", "Corporate"]
+      }
+    }
+  },
+  "differentials": {
+    "eyebrow": "Differentiators",
+    "title": "What we handle with extra care.",
+    "items": [
+      { "title": "Professional design", "desc": "No templates. Every project is unique." },
+      { "title": "Personal service", "desc": "You talk directly to the person who ships it." },
+      { "title": "Performance", "desc": "Core Web Vitals optimised from commit one." },
+      { "title": "Technical SEO", "desc": "Structure ready for Google to understand and rank." },
+      { "title": "Fast sites", "desc": "Loading in under 2 seconds." },
+      { "title": "Clean code", "desc": "Readable, scalable, delivered with full access." }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Maintenance plans",
+    "title": "Your site always online — with no headaches.",
+    "subtitle": "Optional monthly plans for hosting, backups and continuous improvement.",
+    "recommended": "Recommended",
+    "cta": "Choose plan",
+    "perMonth": "/mo",
+    "plans": {
+      "essencial": {
+        "name": "Essential",
+        "description": "Basic maintenance to keep your site always online.",
+        "features": [
+          "Hosting and domain",
+          "SSL certificate",
+          "Monthly backup",
+          "Email support",
+          "Small content edits"
+        ]
+      },
+      "profissional": {
+        "name": "Professional",
+        "description": "Full support with continuous evolution of your site.",
+        "features": [
+          "Everything in Essential",
+          "Weekly backup",
+          "Priority updates",
+          "WhatsApp support",
+          "Monthly performance report",
+          "SEO optimisations"
+        ]
+      }
+    }
+  },
+  "faq": {
+    "eyebrow": "Frequently asked",
+    "title": "Everything you need to know before starting.",
+    "subtitle": "Didn't find your question? Reach us on WhatsApp — we usually reply within minutes during business hours.",
+    "items": [
+      { "q": "How long does it take to build my site?", "a": "It depends on scope. A landing page ships in about 5 to 10 business days. A company site takes 2 to 4 weeks. Sites with booking or custom features take 4 to 6 weeks. You get a clear timeline right after the briefing." },
+      { "q": "Do I need a domain and hosting already?", "a": "No. We handle everything: domain registration, hosting, SSL certificate and professional emails. If you already have them, we integrate with your current provider." },
+      { "q": "How does payment work?", "a": "We take 50% at project start and 50% on delivery. Monthly maintenance plans are billed on a recurring basis." },
+      { "q": "Do you deliver the source code?", "a": "Yes. The code is yours. We hand over full access to the repository, hosting and domain." },
+      { "q": "Will the site be fast and SEO-ready?", "a": "Yes. Every project follows performance best practices (Core Web Vitals) and technical SEO. We target Lighthouse above 95." },
+      { "q": "Can I edit text and images by myself later?", "a": "Yes, when it makes sense. We can integrate a simple panel for content edits. For bigger changes, maintenance plans cover ongoing work." },
+      { "q": "Do you work with clients outside Belgium?", "a": "Yes. We work remotely with clients across Europe and Portuguese-speaking countries." },
+      { "q": "What if I need something not listed here?", "a": "Every project can be customised. Describe your need in the form and we'll send a tailored quote." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project.",
+    "subtitle": "Fill in the form or reach us through the channel you prefer. We reply within 24 business hours.",
+    "channels": { "whatsapp": "WhatsApp", "email": "Email", "instagram": "Instagram" },
+    "fields": {
+      "name": "Name",
+      "namePh": "Your full name",
+      "company": "Company (optional)",
+      "companyPh": "Your business name",
+      "phone": "Phone",
+      "email": "Email",
+      "emailPh": "you@email.com",
+      "instagram": "Instagram (optional)",
+      "instagramPh": "@yourhandle",
+      "projectType": "Project type",
+      "budget": "Budget",
+      "deadline": "Deadline",
+      "message": "Message",
+      "messagePh": "Tell us about your business and what you need.",
+      "select": "Select",
+      "consent": "I have read and agree to the",
+      "privacy": "Privacy Policy"
+    },
+    "submit": "Send message",
+    "sending": "Sending...",
+    "successTitle": "Message sent",
+    "successBody": "Thanks for reaching out. We'll get back to you within 24 business hours.",
+    "sendAnother": "Send another message",
+    "toast": "We got your message — we'll reply shortly.",
+    "projectTypes": [
+      "Landing Page",
+      "Company Website",
+      "Website with Booking",
+      "Portfolio",
+      "Sales Page",
+      "Custom Project"
+    ],
+    "budgets": [
+      "Up to €300",
+      "€300 – €600",
+      "€600 – €1000",
+      "Above €1000",
+      "Not sure yet"
+    ],
+    "deadlines": [
+      "As soon as possible",
+      "In 2 to 4 weeks",
+      "In 1 to 2 months",
+      "No rush"
+    ],
+    "errors": {
+      "name": "Please enter your name",
+      "phone": "Enter a valid phone number",
+      "email": "Invalid email",
+      "message": "Please describe your project briefly",
+      "projectType": "Select a project type",
+      "budget": "Select a budget range",
+      "deadline": "Select a deadline",
+      "consent": "You must accept the Privacy Policy"
+    }
+  },
+  "footer": {
+    "description": "We build websites and digital solutions for small businesses, freelancers and growing companies.",
+    "nav": "Navigation",
+    "contact": "Contact",
+    "country": "Belgium",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "cookies": {
+    "text": "We use cookies to improve your experience and analyse site usage. See our",
+    "privacy": "Privacy Policy",
+    "reject": "Reject",
+    "accept": "Accept",
+    "aria": "Cookie consent"
+  },
+  "errorPage": {
+    "notFound": "Page not found",
+    "notFoundBody": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go home",
+    "loadFail": "This page didn't load",
+    "loadFailBody": "Something went wrong on our end. You can try refreshing or head back home.",
+    "tryAgain": "Try again"
+  },
+  "legal": {
+    "back": "Back",
+    "lastUpdate": "Last updated:",
+    "privacy": {
+      "title": "Privacy Policy",
+      "sections": {
+        "who": {
+          "title": "1. Who we are",
+          "body": "{{company}} is a digital studio based in {{country}}. You can reach us by email at {{email}}."
+        },
+        "data": {
+          "title": "2. Data we collect",
+          "items": [
+            "Data provided in the contact form: name, company, phone, email, Instagram, message, project type, budget and deadline.",
+            "Technical and browsing data (IP address, device type, pages visited) collected by analytics tools with consent."
+          ]
+        },
+        "purpose": {
+          "title": "3. Purpose of processing",
+          "intro": "We use your data exclusively to:",
+          "items": [
+            "Respond to your quote and contact requests.",
+            "Execute contracts and deliver the services agreed.",
+            "Improve the site experience (aggregate analytics)."
+          ]
+        },
+        "legal": {
+          "title": "4. Legal basis (GDPR)",
+          "body": "Processing is based on your consent (Article 6(1)(a) GDPR) when you submit the form and accept cookies, and on contract performance (Article 6(1)(b)) where applicable."
+        },
+        "share": {
+          "title": "5. Sharing",
+          "body": "We do not sell your data. We may share data with strictly necessary processors (hosting, email delivery) operating under data protection agreements."
+        },
+        "retention": {
+          "title": "6. Retention",
+          "body": "We keep data only as long as needed for the purpose it was collected, or as required by law."
+        },
+        "rights": {
+          "title": "7. Your rights",
+          "body": "You have the right to access, rectify, erase, object, portability and limitation. To exercise them, contact {{email}}."
+        },
+        "cookies": {
+          "title": "8. Cookies",
+          "body": "We use essential cookies and, with consent, analytics cookies. You can change your preference anytime by clearing the site data."
+        },
+        "contact": {
+          "title": "9. Contact",
+          "body": "Questions about this policy? Write to {{email}}."
+        }
+      }
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "sections": {
+        "accept": { "title": "1. Acceptance", "body": "By accessing or using the {{company}} website, you agree to these Terms." },
+        "services": { "title": "2. Services", "body": "We offer development of websites, landing pages, booking systems and bespoke digital solutions under specific contract." },
+        "ip": { "title": "3. Intellectual property", "body": "The site content (brand, text, layout) belongs to {{company}}. Delivered projects follow the terms defined in contract." },
+        "liability": { "title": "4. Limitation of liability", "body": "The site is provided \"as is\". {{company}} is not liable for occasional outages or decisions made based on content from this site." },
+        "changes": { "title": "5. Changes", "body": "We may update these Terms at any time. Relevant changes will be announced on the site." },
+        "law": { "title": "6. Applicable law", "body": "These Terms are governed by the laws of {{country}}. Contact: {{email}}." }
+      }
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Arkyo — Websites that simplify business",
+      "description": "Development of websites, landing pages and booking systems for small businesses. Professional design, performance and technical SEO. Belgium.",
+      "ogDescription": "Bespoke digital studio for small businesses. Websites, booking and solutions that work."
+    },
+    "privacy": {
+      "title": "Privacy Policy — Arkyo",
+      "description": "How Arkyo collects, uses and protects your personal data under the GDPR.",
+      "ogDescription": "How we handle your data under the GDPR."
+    },
+    "terms": {
+      "title": "Terms of Use — Arkyo",
+      "description": "Terms and conditions for using Arkyo's services.",
+      "ogDescription": "Terms and conditions for using the services."
+    }
+  }
+}
