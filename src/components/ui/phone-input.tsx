@@ -28,7 +28,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
       onChange={(phone) => onChange(phone || undefined)}
       forceDialCode
       preferredCountries={["be", "fr", "pt", "br", "us", "de", "es", "gb"]}
-      ref={ref}
+      ref={ref as never}
       inputProps={{ ...rest }}
       className={cn("arkyo-phone-input", className)}
     />
