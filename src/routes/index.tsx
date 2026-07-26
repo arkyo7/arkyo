@@ -13,6 +13,8 @@ import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { Toaster } from "@/components/ui/sonner";
+import { SeoLocalized } from "@/components/site/SeoLocalized";
+import { siteUrl } from "@/data/company";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,14 +32,14 @@ export const Route = createFileRoute("/")({
           "Estúdio digital sob medida para pequenos negócios. Sites, agendamento e soluções que funcionam.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: siteUrl("/") },
       { name: "twitter:title", content: "Arkyo — Sites que simplificam negócios" },
       {
         name: "twitter:description",
         content: "Estúdio digital sob medida para pequenos negócios.",
       },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: siteUrl("/") }],
     scripts: [
       {
         type: "application/ld+json",
@@ -47,7 +49,7 @@ export const Route = createFileRoute("/")({
           name: "Arkyo",
           description:
             "Desenvolvimento de sites e soluções digitais para pequenos negócios.",
-          url: "/",
+          url: siteUrl("/"),
           areaServed: "BE",
           address: { "@type": "PostalAddress", addressCountry: "BE" },
           email: "hello.arkyo@gmail.com",
@@ -63,6 +65,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <SeoLocalized page="home" path="/" />
       <Header />
       <main>
         <Hero />
