@@ -35,6 +35,21 @@ export function siteUrl(path = "/") {
  */
 export const LEGAL_UPDATED_AT = "2026-01-15";
 
+const LEGAL_LOCALES: Record<string, string> = { pt: "pt-BR", en: "en-GB", fr: "fr-BE" };
+
+/** Formats the fixed legal revision date for the active language. */
+export function legalUpdatedLabel(language?: string) {
+  const locale = LEGAL_LOCALES[(language ?? "pt").slice(0, 2)] ?? "pt-BR";
+  const [year, month, day] = LEGAL_UPDATED_AT.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString(locale, {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+
 export const navItems = [
   { key: "services", hash: "servicos" },
   { key: "process", hash: "processo" },
