@@ -2,11 +2,63 @@ import { z } from "zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import type { TFunction } from "i18next";
 
-export function makeContactSchema(t: TFunction) {
-  const projectTypes = t("contact.projectTypes", { returnObjects: true }) as string[];
-  const budgets = t("contact.budgets", { returnObjects: true }) as string[];
-  const deadlines = t("contact.deadlines", { returnObjects: true }) as string[];
+export const PROJECT_TYPE_IDS = [
+  "landing",
+  "institutional",
+  "booking",
+  "portfolio",
+  "sales",
+  "custom",
+] as const;
 
+export const BUDGET_IDS = [
+  "upTo300",
+  "r300to600",
+  "r600to1000",
+  "above1000",
+  "unknown",
+] as const;
+
+export const DEADLINE_IDS = ["asap", "weeks2to4", "months1to2", "noRush"] as const;
+
+export const LANGUAGE_IDS = ["pt", "en", "fr"] as const;
+
+export type ProjectTypeId = (typeof PROJECT_TYPE_IDS)[number];
+export type BudgetId = (typeof BUDGET_IDS)[number];
+export type DeadlineId = (typeof DEADLINE_IDS)[number];
+
+/** Minimum time (ms) a real human needs to fill the form. */
+export const MIN_FILL_MS = 2500;
+
+/**
+ * Shared payload contract between the browser form and the server function.
+ * Kept free of translations so it can be validated on the server too.
+ */
+export const leadPayloadSchema = z.object({
+  name: z.string().trim().min(2).max(80),
+  company: z.string().trim().max(80).optional().or(z.literal("")),
+  phone: z
+    .string()
+    .trim()
+    .min(1)
+    .refine((v) => isValidPhoneNumber(v), "invalid_phone"),
+  email: z.string().trim().email().max(120),
+  instagram: z.string().trim().max(60).optional().or(z.literal("")),
+  message: z.string().trim().min(10).max(1000),
+  projectType: z.enum(PROJECT_TYPE_IDS),
+  budget: z.enum(BUDGET_IDS),
+  deadline: z.enum(DEADLINE_IDS),
+  consent: z.literal(true),
+  language: z.enum(LANGUAGE_IDS),
+  // Anti-spam
+  honeypot: z.string().max(0).optional().or(z.literal("")),
+  elapsedMs: z.number().int().nonnegative(),
+});
+
+export type LeadPayload = z.infer<typeof leadPayloadSchema>;
+
+/** Localized schema used by react-hook-form (front-end messages). */
+export function makeContactSchema(t: TFunction) {
   return z.object({
     name: z.string().trim().min(2, t("contact.errors.name")).max(80),
     company: z.string().trim().max(80).optional().or(z.literal("")),
@@ -17,16 +69,11 @@ export function makeContactSchema(t: TFunction) {
     email: z.string().trim().email(t("contact.errors.email")).max(120),
     instagram: z.string().trim().max(60).optional().or(z.literal("")),
     message: z.string().trim().min(10, t("contact.errors.message")).max(1000),
-    projectType: z.enum(projectTypes as [string, ...string[]], {
-      message: t("contact.errors.projectType"),
-    }),
-    budget: z.enum(budgets as [string, ...string[]], {
-      message: t("contact.errors.budget"),
-    }),
-    deadline: z.enum(deadlines as [string, ...string[]], {
-      message: t("contact.errors.deadline"),
-    }),
+    projectType: z.enum(PROJECT_TYPE_IDS, { message: t("contact.errors.projectType") }),
+    budget: z.enum(BUDGET_IDS, { message: t("contact.errors.budget") }),
+    deadline: z.enum(DEADLINE_IDS, { message: t("contact.errors.deadline") }),
     consent: z.literal(true, { message: t("contact.errors.consent") }),
+    honeypot: z.string().max(0).optional().or(z.literal("")),
   });
 }
 
@@ -37,8 +84,9 @@ export type ContactInput = {
   email: string;
   instagram?: string;
   message: string;
-  projectType: string;
-  budget: string;
-  deadline: string;
+  projectType: ProjectTypeId;
+  budget: BudgetId;
+  deadline: DeadlineId;
   consent: true;
+  honeypot?: string;
 };
