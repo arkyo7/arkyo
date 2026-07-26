@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react";
 import { plans } from "@/data/pricing";
 import { cn } from "@/lib/utils";
+import { SectionLink } from "./SectionLink";
 
 export function Pricing() {
   const { t } = useTranslation();
@@ -60,17 +61,16 @@ export function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#contato"
+                <SectionLink hash="contato"
+                  
                   className={cn(
                     "mt-7 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium transition-transform hover:-translate-y-px",
                     p.highlighted
                       ? "bg-background text-foreground"
                       : "border border-foreground text-foreground",
-                  )}
-                >
+                  )}>
                   {t("pricing.cta")}
-                </a>
+                </SectionLink>
               </motion.div>
             );
           })}

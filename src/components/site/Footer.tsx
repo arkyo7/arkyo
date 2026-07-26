@@ -1,6 +1,8 @@
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./Logo";
 import { contact, company, navItems } from "@/data/company";
+import { SectionLink } from "./SectionLink";
 
 export function Footer() {
   const { t } = useTranslation();
@@ -18,16 +20,16 @@ export function Footer() {
             </p>
             <ul className="mt-4 space-y-2">
               {navItems.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="text-sm text-foreground hover:text-muted-foreground">
+                <li key={n.hash}>
+                  <SectionLink hash={n.hash} className="text-sm text-foreground hover:text-muted-foreground">
                     {t(`nav.${n.key}`)}
-                  </a>
+                  </SectionLink>
                 </li>
               ))}
               <li>
-                <a href="#contato" className="text-sm text-foreground hover:text-muted-foreground">
+                <SectionLink hash="contato"  className="text-sm text-foreground hover:text-muted-foreground">
                   {t("nav.contact")}
-                </a>
+                </SectionLink>
               </li>
             </ul>
           </div>
@@ -36,9 +38,9 @@ export function Footer() {
               {t("footer.contact")}
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><a href={contact.whatsappUrl} target="_blank" rel="noreferrer" className="hover:text-muted-foreground">WhatsApp</a></li>
+              <li><a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground">WhatsApp</a></li>
               <li><a href={contact.emailUrl} className="hover:text-muted-foreground">{contact.email}</a></li>
-              <li><a href={contact.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-muted-foreground">{contact.instagram}</a></li>
+              <li><a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground">{contact.instagram}</a></li>
               <li className="text-muted-foreground">{t("footer.country")}</li>
             </ul>
           </div>
@@ -46,8 +48,8 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} {company.name}. {t("footer.rights")}</p>
           <div className="flex gap-6">
-            <a href="/privacidade" className="hover:text-foreground">{t("footer.privacy")}</a>
-            <a href="/termos" className="hover:text-foreground">{t("footer.terms")}</a>
+            <Link to="/privacidade" className="hover:text-foreground">{t("footer.privacy")}</Link>
+            <Link to="/termos" className="hover:text-foreground">{t("footer.terms")}</Link>
           </div>
         </div>
       </div>

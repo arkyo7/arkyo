@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import { SectionLink } from "./SectionLink";
 
 export function Hero() {
   const { t } = useTranslation();
@@ -26,19 +27,17 @@ export function Hero() {
             {t("hero.subtitle")}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href="#contato"
-              className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px"
-            >
+            <SectionLink hash="contato"
+              
+              className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px">
               {t("nav.requestQuote")}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <a
-              href="#servicos"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-            >
+            </SectionLink>
+            <SectionLink hash="servicos"
+              
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted">
               {t("hero.viewServices")}
-            </a>
+            </SectionLink>
           </div>
         </motion.div>
 

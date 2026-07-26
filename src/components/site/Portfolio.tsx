@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import { SectionLink } from "./SectionLink";
 
 export function Portfolio() {
   const { t } = useTranslation();
@@ -106,12 +107,11 @@ export function Portfolio() {
             <div>
               <p className="text-sm font-medium text-foreground">{t("portfolio.openSlot.title")}</p>
               <p className="mt-2 max-w-xs text-sm text-muted-foreground">{t("portfolio.openSlot.desc")}</p>
-              <a
-                href="#contato"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground"
-              >
+              <SectionLink hash="contato"
+                
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground">
                 {t("portfolio.cta")} <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </SectionLink>
             </div>
           </div>
         </div>
