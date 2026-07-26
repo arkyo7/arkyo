@@ -8,7 +8,6 @@
 const NOTIFY_TO = "hello.arkyo@gmail.com";
 
 type LeadRecord = {
-  id: string;
   name: string;
   company: string | null;
   phone: string;
@@ -62,7 +61,7 @@ export async function notifyNewLead(lead: LeadRecord): Promise<{ sent: boolean }
 
   if (!apiKey || !from) {
     console.info(
-      `[leads] notification skipped (email provider not configured) for lead ${lead.id}`,
+      `[leads] notification skipped (email provider not configured) for ${lead.email}`,
     );
     return { sent: false };
   }
