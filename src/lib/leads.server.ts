@@ -53,23 +53,25 @@ export async function saveLead(payload: LeadPayload): Promise<SaveLeadResult> {
     status: "new",
   };
 
-  const { data, error } = await supabase.from("leads").insert(row).select("id, created_at").single();
+  // No .select() here on purpose: anon may INSERT but never read the leads table.
+  const { error } = await supabase.from("leads").insert(row);
 
-  if (error || !data) {
+  if (error) {
     // Log server-side only; never surface database details to the visitor.
-    console.error("[leads] insert failed:", error?.message ?? "unknown error");
+    console.error("[leads] insert failed:", error.message);
     return { ok: false, reason: "error" };
   }
 
   // Notification must never break a successfully stored lead.
   try {
-    await notifyNewLead({ ...row, id: data.id, created_at: data.created_at });
+    await notifyNewLead({ ...row, created_at: new Date().toISOString() });
   } catch (notifyError) {
     console.error(
       "[leads] notification failed:",
       notifyError instanceof Error ? notifyError.message : "unknown error",
     );
   }
+
 
   return { ok: true };
 }
