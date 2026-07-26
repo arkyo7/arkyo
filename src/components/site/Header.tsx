@@ -7,6 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { navItems } from "@/data/company";
 import { cn } from "@/lib/utils";
+import { SectionLink } from "./SectionLink";
 
 export function Header() {
   const { t } = useTranslation();
@@ -69,30 +70,29 @@ export function Header() {
       )}
     >
       <div className="container-arkyo flex h-16 items-center justify-between">
-        <a href="#top" aria-label={t("nav.arkyoStart")} className="shrink-0">
+        <SectionLink hash="top"  aria-label={t("nav.arkyoStart")} className="shrink-0">
           <Logo />
-        </a>
+        </SectionLink>
         <nav className="hidden items-center gap-1 md:flex" aria-label={t("nav.primary")}>
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
+            <SectionLink
+              key={item.hash}
+              hash={item.hash}
               className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               {t(`nav.${item.key}`)}
-            </a>
+            </SectionLink>
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher />
           <ThemeToggle />
-          <a
-            href="#contato"
-            className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-px"
-          >
+          <SectionLink hash="contato"
+            
+            className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-px">
             {t("nav.requestQuote")}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          </SectionLink>
         </div>
         <div className="flex items-center gap-1 md:hidden">
           <LanguageSwitcher />
@@ -149,23 +149,23 @@ export function Header() {
               </div>
               <nav className="container-arkyo mt-2 flex flex-col gap-1 pb-8" aria-label={t("nav.mobile")}>
                 {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
+                  <SectionLink
+                    key={item.hash}
+                    hash={item.hash}
                     onClick={() => setOpen(false)}
                     className="rounded-lg px-3 py-3 text-lg font-medium text-foreground hover:bg-muted"
                   >
                     {t(`nav.${item.key}`)}
-                  </a>
+                  </SectionLink>
                 ))}
-                <a
-                  href="#contato"
+                <SectionLink hash="contato"
+                  
                   onClick={() => setOpen(false)}
                   className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background"
                 >
                   {t("nav.requestQuote")}
                   <ArrowUpRight className="h-4 w-4" />
-                </a>
+                </SectionLink>
               </nav>
             </motion.div>
           </div>

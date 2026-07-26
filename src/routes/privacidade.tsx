@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { contact, company } from "@/data/company";
+import { contact, company, legalUpdatedLabel, siteUrl } from "@/data/company";
+import { SeoLocalized } from "@/components/site/SeoLocalized";
 
 export const Route = createFileRoute("/privacidade")({
   head: () => ({
@@ -12,9 +13,9 @@ export const Route = createFileRoute("/privacidade")({
       { name: "description", content: "Como a Arkyo coleta, utiliza e protege seus dados pessoais em conformidade com o GDPR." },
       { property: "og:title", content: "Política de Privacidade — Arkyo" },
       { property: "og:description", content: "Como tratamos seus dados em conformidade com o GDPR." },
-      { property: "og:url", content: "/privacidade" },
+      { property: "og:url", content: siteUrl("/privacidade") },
     ],
-    links: [{ rel: "canonical", href: "/privacidade" }],
+    links: [{ rel: "canonical", href: siteUrl("/privacidade") }],
   }),
   component: Privacidade,
 });
@@ -50,6 +51,7 @@ function Privacidade() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SeoLocalized page="privacy" path="/privacidade" />
       <Header />
       <main className="pt-32 pb-24">
         <div className="container-arkyo max-w-3xl">
@@ -60,7 +62,7 @@ function Privacidade() {
             {t("legal.privacy.title")}
           </h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            {t("legal.lastUpdate")} {new Date().toLocaleDateString(i18n.resolvedLanguage || "pt-BR")}
+            {t("legal.lastUpdate")} {legalUpdatedLabel(i18n.resolvedLanguage)}
           </p>
 
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground">
