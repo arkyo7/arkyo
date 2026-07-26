@@ -36,19 +36,10 @@ export function siteUrl(path = "/") {
 export const LEGAL_UPDATED_AT = "2026-01-15";
 
 export const navItems = [
-  { key: "services", href: "#servicos" },
-  { key: "process", href: "#processo" },
-  { key: "portfolio", href: "#portfolio" },
-  { key: "plans", href: "#planos" },
-  { key: "faq", href: "#faq" },
+  { key: "services", hash: "servicos" },
+  { key: "process", hash: "processo" },
+  { key: "portfolio", hash: "portfolio" },
+  { key: "plans", hash: "planos" },
+  { key: "faq", hash: "faq" },
 ] as const;
 
-/** Hash targets used by the header/footer navigation (without the "#"). */
-export const sectionHashes = {
-  servicos: "servicos",
-  processo: "processo",
-  portfolio: "portfolio",
-  planos: "planos",
-  faq: "faq",
-  contato: "contato",
-} as const;
