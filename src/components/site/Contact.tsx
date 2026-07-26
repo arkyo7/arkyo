@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Mail, MessageCircle, Instagram, Check, Loader2 } from "lucide-react";
+import { Mail, MessageCircle, Instagram, Check, Loader2, AlertCircle } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,36 +13,93 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { contact } from "@/data/company";
-import { makeContactSchema, type ContactInput } from "@/data/contact";
+import {
+  BUDGET_IDS,
+  DEADLINE_IDS,
+  PROJECT_TYPE_IDS,
+  makeContactSchema,
+  type BudgetId,
+  type ContactInput,
+  type DeadlineId,
+  type ProjectTypeId,
+} from "@/data/contact";
+import { submitLead } from "@/lib/leads.functions";
 
 export function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [sent, setSent] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const startedAt = useRef(Date.now());
+  const send = useServerFn(submitLead);
 
   const schema = useMemo(() => makeContactSchema(t), [t]);
-  const projectTypes = t("contact.projectTypes", { returnObjects: true }) as string[];
-  const budgets = t("contact.budgets", { returnObjects: true }) as string[];
-  const deadlines = t("contact.deadlines", { returnObjects: true }) as string[];
 
   const {
     register,
     handleSubmit,
     setValue,
+    setFocus,
     watch,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactInput>({
     resolver: zodResolver(schema) as never,
-    defaultValues: { consent: false as unknown as true, phone: "" },
+    defaultValues: { consent: false as unknown as true, phone: "", honeypot: "" },
   });
 
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  const lang = (["pt", "en", "fr"] as const).includes(
+    (i18n.resolvedLanguage ?? "pt") as "pt" | "en" | "fr",
+  )
+    ? ((i18n.resolvedLanguage ?? "pt") as "pt" | "en" | "fr")
+    : "pt";
+
   const onSubmit = async (data: ContactInput) => {
-    await new Promise((r) => setTimeout(r, 700));
-    // TODO: enviar para Lovable Cloud (tabela leads)
-    void data;
-    toast.success(t("contact.toast"));
-    setSent(true);
-    reset();
+    setSubmitError(null);
+    try {
+      const result = await send({
+        data: {
+          ...data,
+          consent: true as const,
+          language: lang,
+          elapsedMs: Date.now() - startedAt.current,
+        },
+      });
+
+      if (!result.ok) {
+        setSubmitError(
+          result.reason === "spam" ? t("contact.errors.tooFast") : t("contact.errors.submitFailed"),
+        );
+        return;
+      }
+
+      toast.success(t("contact.toast"));
+      setSent(true);
+      reset({ consent: false as unknown as true, phone: "", honeypot: "" });
+      startedAt.current = Date.now();
+    } catch {
+      setSubmitError(t("contact.errors.submitFailed"));
+    }
+  };
+
+  const onInvalid = () => {
+    setSubmitError(t("contact.errors.fixFields"));
+    const first = (
+      [
+        "name",
+        "phone",
+        "email",
+        "projectType",
+        "budget",
+        "deadline",
+        "message",
+        "consent",
+      ] as const
+    ).find((key) => errors[key]);
+    if (first) setFocus(first as keyof ContactInput);
   };
 
   const values = watch();
@@ -66,7 +124,7 @@ export function Contact() {
             <a
               href={contact.whatsappUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:bg-muted"
             >
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-foreground text-background">
@@ -92,7 +150,7 @@ export function Contact() {
             <a
               href={contact.instagramUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:bg-muted"
             >
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-foreground text-background">
@@ -107,7 +165,7 @@ export function Contact() {
         </motion.div>
 
         <motion.form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, onInvalid)}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -125,68 +183,169 @@ export function Contact() {
               <button
                 type="button"
                 onClick={() => setSent(false)}
-                className="mt-6 text-sm font-medium underline underline-offset-4"
+                className="mt-6 rounded-lg px-2 py-1 text-sm font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 {t("contact.sendAnother")}
               </button>
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label={t("contact.fields.name")} error={errors.name?.message}>
-                <Input {...register("name")} placeholder={t("contact.fields.namePh")} />
-              </Field>
-              <Field label={t("contact.fields.company")} error={errors.company?.message}>
-                <Input {...register("company")} placeholder={t("contact.fields.companyPh")} />
-              </Field>
-              <Field label={t("contact.fields.phone")} error={errors.phone?.message}>
-                <PhoneInput
-                  value={values.phone}
-                  onChange={(v) => setValue("phone", v ?? "", { shouldValidate: true })}
-                  aria-invalid={!!errors.phone}
+              {/* Honeypot: invisible for humans, skipped by keyboard and screen readers */}
+              <div aria-hidden className="absolute h-0 w-0 overflow-hidden opacity-0">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register("honeypot")}
                 />
+              </div>
+
+              <Field id="contact-name" label={t("contact.fields.name")} error={errors.name?.message}>
+                {(a11y) => (
+                  <Input
+                    {...a11y}
+                    autoComplete="name"
+                    {...register("name")}
+                    placeholder={t("contact.fields.namePh")}
+                  />
+                )}
               </Field>
-              <Field label={t("contact.fields.email")} error={errors.email?.message}>
-                <Input type="email" {...register("email")} placeholder={t("contact.fields.emailPh")} />
+              <Field
+                id="contact-company"
+                label={t("contact.fields.company")}
+                error={errors.company?.message}
+              >
+                {(a11y) => (
+                  <Input
+                    {...a11y}
+                    autoComplete="organization"
+                    {...register("company")}
+                    placeholder={t("contact.fields.companyPh")}
+                  />
+                )}
               </Field>
-              <Field label={t("contact.fields.instagram")} error={errors.instagram?.message}>
-                <Input {...register("instagram")} placeholder={t("contact.fields.instagramPh")} />
+              <Field id="contact-phone" label={t("contact.fields.phone")} error={errors.phone?.message}>
+                {(a11y) => (
+                  <PhoneInput
+                    id={a11y.id}
+                    name="phone"
+                    value={values.phone}
+                    onChange={(v) => setValue("phone", v, { shouldValidate: !!errors.phone })}
+                    onBlur={() => setValue("phone", values.phone ?? "", { shouldValidate: true })}
+                    aria-invalid={a11y["aria-invalid"]}
+                    aria-describedby={a11y["aria-describedby"]}
+                  />
+                )}
               </Field>
-              <Field label={t("contact.fields.projectType")} error={errors.projectType?.message}>
-                <Select
-                  value={values.projectType}
-                  onValueChange={(v) => setValue("projectType", v, { shouldValidate: true })}
-                >
-                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
-                  <SelectContent>
-                    {projectTypes.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
-                  </SelectContent>
-                </Select>
+              <Field id="contact-email" label={t("contact.fields.email")} error={errors.email?.message}>
+                {(a11y) => (
+                  <Input
+                    {...a11y}
+                    type="email"
+                    autoComplete="email"
+                    {...register("email")}
+                    placeholder={t("contact.fields.emailPh")}
+                  />
+                )}
               </Field>
-              <Field label={t("contact.fields.budget")} error={errors.budget?.message}>
-                <Select
-                  value={values.budget}
-                  onValueChange={(v) => setValue("budget", v, { shouldValidate: true })}
-                >
-                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
-                  <SelectContent>
-                    {budgets.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
-                  </SelectContent>
-                </Select>
+              <Field
+                id="contact-instagram"
+                label={t("contact.fields.instagram")}
+                error={errors.instagram?.message}
+              >
+                {(a11y) => (
+                  <Input
+                    {...a11y}
+                    autoComplete="off"
+                    {...register("instagram")}
+                    placeholder={t("contact.fields.instagramPh")}
+                  />
+                )}
               </Field>
-              <Field label={t("contact.fields.deadline")} error={errors.deadline?.message}>
-                <Select
-                  value={values.deadline}
-                  onValueChange={(v) => setValue("deadline", v, { shouldValidate: true })}
-                >
-                  <SelectTrigger><SelectValue placeholder={t("contact.fields.select")} /></SelectTrigger>
-                  <SelectContent>
-                    {deadlines.map((x) => <SelectItem key={x} value={x}>{x}</SelectItem>)}
-                  </SelectContent>
-                </Select>
+              <Field
+                id="contact-project-type"
+                label={t("contact.fields.projectType")}
+                error={errors.projectType?.message}
+              >
+                {(a11y) => (
+                  <Select
+                    value={values.projectType}
+                    onValueChange={(v) =>
+                      setValue("projectType", v as ProjectTypeId, { shouldValidate: true })
+                    }
+                  >
+                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                      <SelectValue placeholder={t("contact.fields.select")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {PROJECT_TYPE_IDS.map((x) => (
+                        <SelectItem key={x} value={x}>
+                          {t(`contact.options.projectType.${x}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              </Field>
+              <Field id="contact-budget" label={t("contact.fields.budget")} error={errors.budget?.message}>
+                {(a11y) => (
+                  <Select
+                    value={values.budget}
+                    onValueChange={(v) => setValue("budget", v as BudgetId, { shouldValidate: true })}
+                  >
+                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                      <SelectValue placeholder={t("contact.fields.select")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {BUDGET_IDS.map((x) => (
+                        <SelectItem key={x} value={x}>
+                          {t(`contact.options.budget.${x}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              </Field>
+              <Field
+                id="contact-deadline"
+                label={t("contact.fields.deadline")}
+                error={errors.deadline?.message}
+              >
+                {(a11y) => (
+                  <Select
+                    value={values.deadline}
+                    onValueChange={(v) => setValue("deadline", v as DeadlineId, { shouldValidate: true })}
+                  >
+                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                      <SelectValue placeholder={t("contact.fields.select")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {DEADLINE_IDS.map((x) => (
+                        <SelectItem key={x} value={x}>
+                          {t(`contact.options.deadline.${x}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </Field>
               <div className="sm:col-span-2">
-                <Field label={t("contact.fields.message")} error={errors.message?.message}>
-                  <Textarea rows={5} {...register("message")} placeholder={t("contact.fields.messagePh")} />
+                <Field
+                  id="contact-message"
+                  label={t("contact.fields.message")}
+                  error={errors.message?.message}
+                >
+                  {(a11y) => (
+                    <Textarea
+                      {...a11y}
+                      rows={5}
+                      className="resize-y"
+                      {...register("message")}
+                      placeholder={t("contact.fields.messagePh")}
+                    />
+                  )}
                 </Field>
               </div>
 
@@ -198,27 +357,38 @@ export function Contact() {
                       setValue("consent", (v === true) as true, { shouldValidate: true })
                     }
                     aria-invalid={!!errors.consent}
+                    aria-describedby={errors.consent ? "contact-consent-error" : undefined}
                     className="mt-0.5"
                   />
                   <span>
                     {t("contact.fields.consent")}{" "}
                     <a href="/privacidade" className="text-foreground underline underline-offset-4">
                       {t("contact.fields.privacy")}
-                    </a>.
+                    </a>
+                    .
                   </span>
                 </label>
                 {errors.consent && (
-                  <p className="mt-1 text-xs text-destructive">{errors.consent.message}</p>
+                  <p id="contact-consent-error" className="mt-2 text-xs text-destructive">
+                    {errors.consent.message}
+                  </p>
                 )}
               </div>
 
-              <div className="sm:col-span-2">
+              <div className="sm:col-span-2" aria-live="polite">
+                {submitError && (
+                  <p className="mb-3 flex items-start gap-2 rounded-lg border border-destructive/40 bg-destructive/5 p-3 text-sm text-destructive">
+                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px disabled:opacity-70"
+                  aria-busy={isSubmitting}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
                 >
-                  {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
                   {isSubmitting ? t("contact.sending") : t("contact.submit")}
                 </button>
               </div>
@@ -230,20 +400,31 @@ export function Contact() {
   );
 }
 
+type FieldA11y = { id: string; "aria-invalid": boolean; "aria-describedby": string | undefined };
+
 function Field({
+  id,
   label,
   error,
   children,
 }: {
+  id: string;
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: (a11y: FieldA11y) => React.ReactNode;
 }) {
+  const errorId = `${id}-error`;
   return (
     <div className="space-y-1.5">
-      <Label className="text-xs font-medium text-muted-foreground">{label}</Label>
-      {children}
-      {error && <p className="text-xs text-destructive">{error}</p>}
+      <Label htmlFor={id} className="text-xs font-medium text-muted-foreground">
+        {label}
+      </Label>
+      {children({ id, "aria-invalid": !!error, "aria-describedby": error ? errorId : undefined })}
+      {error && (
+        <p id={errorId} className="pt-0.5 text-xs text-destructive">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
