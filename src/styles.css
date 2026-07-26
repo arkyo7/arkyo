@@ -147,26 +147,3 @@
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
 }
-
-/* react-phone-number-input theming */
-.arkyo-phone-input .PhoneInputCountry {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  margin-right: 0.5rem;
-}
-.arkyo-phone-input .PhoneInputCountrySelect {
-  color: var(--color-foreground);
-  background: transparent;
-}
-.arkyo-phone-input .PhoneInputCountryIcon {
-  box-shadow: none;
-  background: transparent;
-}
-.arkyo-phone-input input {
-  color: var(--color-foreground);
-  background: transparent;
-}
-.arkyo-phone-input input::placeholder {
-  color: var(--color-muted-foreground);
-}

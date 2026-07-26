@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { company, contact } from "@/data/company";
+import { company, contact, legalUpdatedLabel } from "@/data/company";
 
 export const Route = createFileRoute("/termos")({
   head: () => ({
@@ -35,7 +35,7 @@ function Termos() {
           </Link>
           <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-5xl">{t("legal.terms.title")}</h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            {t("legal.lastUpdate")} {new Date().toLocaleDateString(i18n.resolvedLanguage || "pt-BR")}
+            {t("legal.lastUpdate")} {legalUpdatedLabel(i18n.resolvedLanguage)}
           </p>
 
           <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground">
