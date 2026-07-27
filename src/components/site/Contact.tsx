@@ -24,6 +24,7 @@ import {
   type ProjectTypeId,
 } from "@/data/contact";
 import { submitLead } from "@/lib/leads.functions";
+import { onProjectTypeRequest } from "@/lib/prefill";
 
 export function Contact() {
   const { t, i18n } = useTranslation();
@@ -50,6 +51,15 @@ export function Contact() {
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
+
+  useEffect(
+    () =>
+      onProjectTypeRequest((projectType) => {
+        setSent(false);
+        setValue("projectType", projectType, { shouldValidate: false });
+      }),
+    [setValue],
+  );
 
   const lang = (["pt", "en", "fr"] as const).includes(
     (i18n.resolvedLanguage ?? "pt") as "pt" | "en" | "fr",
@@ -116,7 +126,11 @@ export function Contact() {
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             {t("contact.eyebrow")}
           </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+          <h2
+            data-section-focus
+            tabIndex={-1}
+            className="mt-4 text-balance text-3xl font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-surface md:text-4xl"
+          >
             {t("contact.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">{t("contact.subtitle")}</p>

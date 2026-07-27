@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { services } from "@/data/services";
 import { SectionLink } from "./SectionLink";
+import { requestProjectType } from "@/lib/prefill";
 
 export function Services() {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ export function Services() {
                   ))}
                 </ul>
                 <SectionLink hash="contato"
-                  
+                  onClick={() => requestProjectType(s.projectType)}
                   className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-foreground"
                   aria-label={t("services.requestFor", { name })}>
                   {t("nav.requestQuote")}
