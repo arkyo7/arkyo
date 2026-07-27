@@ -25,7 +25,7 @@
     "badge": "Studio digital sur mesure",
     "titleA": "Des sites qui simplifient",
     "titleB": "les vraies entreprises.",
-    "subtitle": "Nous identifions ce qui bloque votre communication, votre service client et votre présence digitale — et nous le résolvons avec design, technologie et clarté.",
+    "subtitle": "Nous identifions ce qui bloque votre communication, votre service client et votre présence digitale. Nous le résolvons ensuite avec design, technologie et clarté.",
     "viewServices": "Voir les services",
     "mockScheduling": "Rendez-vous aujourd'hui",
     "mockLeads": "Leads sur le site",
@@ -38,7 +38,7 @@
   "valueProp": {
     "eyebrow": "Notre approche",
     "title": "Arkyo ne vend pas seulement des sites.",
-    "body": "Nous écoutons vos vrais problèmes du quotidien — messages désordonnés, rendez-vous manqués, présence digitale faible — et concevons des solutions simples qui redonnent temps, structure et confiance à votre entreprise."
+    "body": "Nous écoutons vos vrais problèmes du quotidien : messages désordonnés, rendez-vous manqués et présence digitale faible. À partir de là, nous concevons des solutions simples qui redonnent temps, structure et confiance à votre entreprise."
   },
   "problems": {
     "eyebrow": "Vrais problèmes",
@@ -50,7 +50,7 @@
       },
       {
         "title": "Rendez-vous confus",
-        "desc": "Vous prenez, déplacez et parfois oubliez — sans système pour organiser l'agenda."
+        "desc": "Vous prenez, déplacez et parfois oubliez des rendez-vous. Il manque un système pour organiser l'agenda."
       },
       {
         "title": "Informations dispersées",
@@ -89,7 +89,7 @@
       },
       "site-agendamento": {
         "name": "Site avec réservation",
-        "description": "Votre propre système de réservation en ligne — sans dépendre de plateformes tierces.",
+        "description": "Votre propre système de réservation en ligne, sans dépendre de plateformes tierces.",
         "features": [
           "Agenda intégré",
           "Confirmations automatiques",
@@ -116,7 +116,7 @@
       },
       "personalizado": {
         "name": "Projet personnalisé",
-        "description": "Solutions spécifiques hors standard — développées sur mesure.",
+        "description": "Solutions spécifiques, développées sur mesure pour votre entreprise.",
         "features": [
           "Périmètre sur mesure",
           "Consulting dédié",
@@ -255,7 +255,7 @@
   "faq": {
     "eyebrow": "Questions fréquentes",
     "title": "Tout ce qu'il faut savoir avant de commencer.",
-    "subtitle": "Vous n'avez pas trouvé votre question ? Contactez-nous sur WhatsApp — réponse en quelques minutes aux heures ouvrées.",
+    "subtitle": "Vous n'avez pas trouvé votre question ? Contactez-nous sur WhatsApp. Nous répondons pendant les heures ouvrées.",
     "items": [
       {
         "q": "Combien de temps pour développer mon site ?",
