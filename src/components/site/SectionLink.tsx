@@ -34,7 +34,14 @@ export const SectionLink = forwardRef<HTMLAnchorElement, SectionLinkProps>(funct
   };
 
   return (
-    <Link ref={ref} to="/" hash={hash} className={className} aria-label={ariaLabel} onClick={handleClick}>
+    <Link
+      ref={ref}
+      to="/"
+      hash={hash}
+      className={className}
+      aria-label={ariaLabel}
+      onClick={handleClick}
+    >
       {children}
     </Link>
   );

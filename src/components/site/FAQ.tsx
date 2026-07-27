@@ -1,6 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { whatsappUrl } from "@/data/company";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export function FAQ() {
   const { t } = useTranslation();

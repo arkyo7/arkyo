@@ -26,7 +26,9 @@ export function Services() {
           {services.map((s, i) => {
             const name = t(`services.items.${s.id}.name`);
             const description = t(`services.items.${s.id}.description`);
-            const features = t(`services.items.${s.id}.features`, { returnObjects: true }) as string[];
+            const features = t(`services.items.${s.id}.features`, {
+              returnObjects: true,
+            }) as string[];
             const priceLabel = s.price === "custom" ? t("services.custom") : s.price;
             return (
               <motion.article
@@ -48,15 +50,20 @@ export function Services() {
                 <ul className="mt-5 space-y-2 border-t border-border pt-5">
                   {features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                      <span
+                        aria-hidden
+                        className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground"
+                      />
                       {f}
                     </li>
                   ))}
                 </ul>
-                <SectionLink hash="contato"
+                <SectionLink
+                  hash="contato"
                   onClick={() => requestProjectType(s.projectType)}
                   className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-foreground"
-                  aria-label={t("services.requestFor", { name })}>
+                  aria-label={t("services.requestFor", { name })}
+                >
                   {t("nav.requestQuote")}
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </SectionLink>

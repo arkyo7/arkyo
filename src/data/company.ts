@@ -60,7 +60,6 @@ export function legalUpdatedLabel(language?: string) {
   });
 }
 
-
 export const navItems = [
   { key: "services", hash: "servicos" },
   { key: "process", hash: "processo" },
@@ -68,4 +67,3 @@ export const navItems = [
   { key: "plans", hash: "planos" },
   { key: "faq", hash: "faq" },
 ] as const;
-
