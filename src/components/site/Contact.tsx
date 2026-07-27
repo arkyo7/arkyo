@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { contact } from "@/data/company";
+import { contact, whatsappUrl } from "@/data/company";
 import {
   BUDGET_IDS,
   DEADLINE_IDS,
@@ -122,7 +122,7 @@ export function Contact() {
           <p className="mt-4 text-muted-foreground">{t("contact.subtitle")}</p>
           <div className="mt-8 space-y-3">
             <a
-              href={contact.whatsappUrl}
+              href={whatsappUrl(t("contact.whatsappMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:bg-muted"

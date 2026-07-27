@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { whatsappUrl } from "@/data/company";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export function FAQ() {
@@ -15,6 +16,14 @@ export function FAQ() {
             {t("faq.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">{t("faq.subtitle")}</p>
+          <a
+            href={whatsappUrl(t("contact.whatsappMessage"))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            {t("faq.whatsappCta")}
+          </a>
         </div>
         <Accordion type="single" collapsible className="w-full">
           {items.map((item, i) => (

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { SectionLink } from "./SectionLink";
+import { whatsappUrl } from "@/data/company";
 
 export function Hero() {
   const { t } = useTranslation();
@@ -33,11 +34,14 @@ export function Hero() {
               {t("nav.requestQuote")}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </SectionLink>
-            <SectionLink hash="servicos"
-              
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted">
-              {t("hero.viewServices")}
-            </SectionLink>
+            <a
+              href={whatsappUrl(t("contact.whatsappMessage"))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {t("hero.whatsappCta")}
+            </a>
           </div>
         </motion.div>
 
@@ -47,6 +51,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto mt-16 max-w-5xl"
         >
+          <p className="mb-3 text-center text-xs text-muted-foreground">{t("hero.mockDisclaimer")}</p>
           <div className="rounded-2xl border border-border bg-card shadow-elevated">
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />

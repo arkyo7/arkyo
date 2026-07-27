@@ -37,6 +37,9 @@ export function Portfolio() {
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-foreground">
                   <div aria-hidden className="absolute inset-0 grid-lines opacity-30" />
+                  <span className="absolute left-4 top-4 z-10 rounded-full border border-background/20 bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground">
+                    {t("portfolio.status")}
+                  </span>
                   <div className="absolute inset-0 flex items-center justify-center p-8">
                     <div className="w-full max-w-sm rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur">
                       <div className="flex items-center gap-1.5">
