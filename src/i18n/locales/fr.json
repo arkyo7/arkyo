@@ -22,7 +22,7 @@
     "change": "Changer de langue"
   },
   "hero": {
-    "badge": "Studio digital sur mesure — Belgique",
+    "badge": "Studio digital sur mesure",
     "titleA": "Des sites qui simplifient",
     "titleB": "les vraies entreprises.",
     "subtitle": "Nous identifions ce qui bloque votre communication, votre service client et votre présence digitale — et nous le résolvons avec design, technologie et clarté.",
@@ -31,7 +31,9 @@
     "mockLeads": "Leads sur le site",
     "mockTime": "Temps moyen par page",
     "mockRange": "30 derniers jours",
-    "mockSessions": "Sessions"
+    "mockSessions": "Sessions",
+    "whatsappCta": "Écrire sur WhatsApp",
+    "mockDisclaimer": "Exemple de tableau de bord personnalisé"
   },
   "valueProp": {
     "eyebrow": "Notre approche",
@@ -184,7 +186,8 @@
           "Vitrine"
         ]
       }
-    }
+    },
+    "status": "Projet en cours de développement"
   },
   "differentials": {
     "eyebrow": "Différenciateurs",
@@ -286,7 +289,8 @@
         "q": "Et si j'ai besoin de quelque chose qui n'est pas listé ?",
         "a": "Chaque projet peut être personnalisé. Décrivez votre besoin dans le formulaire et nous envoyons un devis sur mesure."
       }
-    ]
+    ],
+    "whatsappCta": "Écrire sur WhatsApp"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -366,7 +370,8 @@
       "noResults": "Aucun pays trouvé",
       "help": "Choisissez le pays et saisissez votre numéro."
     },
-    "sendingA11y": "Envoi de votre message, veuillez patienter."
+    "sendingA11y": "Envoi de votre message, veuillez patienter.",
+    "whatsappMessage": "Bonjour ! Je souhaite créer un site internet pour mon entreprise et j’aimerais en savoir plus sur les services d’Arkyo."
   },
   "footer": {
     "description": "Nous développons des sites et solutions digitales pour petites entreprises, indépendants et sociétés en croissance.",
@@ -490,5 +495,10 @@
       "description": "Termes et conditions d'utilisation des services Arkyo.",
       "ogDescription": "Termes et conditions d'utilisation des services."
     }
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title": "À propos d’Arkyo",
+    "body": "Arkyo est née pour aider les petites entreprises à construire une présence digitale plus claire, plus professionnelle et plus fonctionnelle. Chaque projet est développé en proximité, de la définition de l’idée jusqu’à la mise en ligne et au suivi."
   }
 }

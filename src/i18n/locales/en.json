@@ -22,7 +22,7 @@
     "change": "Change language"
   },
   "hero": {
-    "badge": "Bespoke digital studio — Belgium",
+    "badge": "Tailor-made digital studio",
     "titleA": "Websites that simplify",
     "titleB": "real businesses.",
     "subtitle": "We identify what blocks your communication, customer service and digital presence — and solve it with design, technology and clarity.",
@@ -31,7 +31,9 @@
     "mockLeads": "Site leads",
     "mockTime": "Avg. time on page",
     "mockRange": "Last 30 days",
-    "mockSessions": "Sessions"
+    "mockSessions": "Sessions",
+    "whatsappCta": "Chat on WhatsApp",
+    "mockDisclaimer": "Example of a custom dashboard"
   },
   "valueProp": {
     "eyebrow": "Our approach",
@@ -184,7 +186,8 @@
           "Corporate"
         ]
       }
-    }
+    },
+    "status": "Project in development"
   },
   "differentials": {
     "eyebrow": "Differentiators",
@@ -286,7 +289,8 @@
         "q": "What if I need something not listed here?",
         "a": "Every project can be customised. Describe your need in the form and we'll send a tailored quote."
       }
-    ]
+    ],
+    "whatsappCta": "Chat on WhatsApp"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -366,7 +370,8 @@
       "noResults": "No country found",
       "help": "Select your country and type your number."
     },
-    "sendingA11y": "Sending your message, please wait."
+    "sendingA11y": "Sending your message, please wait.",
+    "whatsappMessage": "Hello! I’d like to create a website for my business and learn more about Arkyo’s services."
   },
   "footer": {
     "description": "We build websites and digital solutions for small businesses, freelancers and growing companies.",
@@ -490,5 +495,10 @@
       "description": "Terms and conditions for using Arkyo's services.",
       "ogDescription": "Terms and conditions for using the services."
     }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "About Arkyo",
+    "body": "Arkyo was created to help small businesses build a clearer, more professional and more functional digital presence. Every project is developed closely with you, from shaping the idea to publishing and ongoing support."
   }
 }
