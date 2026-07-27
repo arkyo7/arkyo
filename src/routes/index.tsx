@@ -53,7 +53,7 @@ export const Route = createFileRoute("/")({
           areaServed: "BE",
           address: { "@type": "PostalAddress", addressCountry: "BE" },
           email: "hello.arkyo@gmail.com",
-          telephone: "+32470743258",
+          telephone: "+32451036953",
           sameAs: ["https://instagram.com/arkyo.co"],
         }),
       },
