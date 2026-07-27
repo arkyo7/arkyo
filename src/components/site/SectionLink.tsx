@@ -24,12 +24,24 @@ export const SectionLink = forwardRef<HTMLAnchorElement, SectionLinkProps>(funct
     const target = document.getElementById(hash);
     if (!target) return;
     event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    const focusTarget =
+      target.querySelector<HTMLElement>("[data-section-focus]") ??
+      (target instanceof HTMLElement ? target : null);
+    focusTarget?.focus({ preventScroll: true });
     window.history.replaceState(null, "", `#${hash}`);
   };
 
   return (
-    <Link ref={ref} to="/" hash={hash} className={className} aria-label={ariaLabel} onClick={handleClick}>
+    <Link
+      ref={ref}
+      to="/"
+      hash={hash}
+      className={className}
+      aria-label={ariaLabel}
+      onClick={handleClick}
+    >
       {children}
     </Link>
   );

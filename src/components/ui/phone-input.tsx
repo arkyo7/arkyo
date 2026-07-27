@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import {
   FlagImage,
@@ -6,8 +6,6 @@ import {
   parseCountry,
   usePhoneInput,
 } from "react-international-phone";
-import { getExampleNumber, type CountryCode } from "libphonenumber-js";
-import examples from "libphonenumber-js/examples.mobile.json";
 import { useTranslation } from "react-i18next";
 import {
   Command,
@@ -48,18 +46,10 @@ const countries = [...defaultCountries].sort((a, b) => {
   return ca.name.localeCompare(cb.name);
 });
 
-function nationalExample(iso2: string) {
-  try {
-    const example = getExampleNumber(iso2.toUpperCase() as CountryCode, examples);
-    return example ? example.formatNational() : "";
-  } catch {
-    return "";
-  }
-}
-
 /**
  * International phone field: single container matching the other form inputs,
- * searchable country selector, per-country placeholder/mask and E.164 output.
+ * searchable country selector and E.164 output. The dial code lives only in the
+ * selector: the input holds the national number typed by the visitor.
  */
 export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function PhoneInput(
   {
@@ -83,10 +73,9 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
     defaultCountry,
     value: value ?? "",
     countries,
+    disableDialCodeAndPrefix: true,
     onChange: ({ phone }) => onChange(phone),
   });
-
-  const placeholder = useMemo(() => nationalExample(country.iso2), [country.iso2]);
 
   return (
     <div
@@ -157,7 +146,6 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
         value={inputValue}
         onChange={handlePhoneValueChange}
         onBlur={onBlur}
-        placeholder={placeholder}
         aria-invalid={ariaInvalid}
         aria-describedby={ariaDescribedBy}
         className="h-full w-full min-w-0 bg-transparent text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"

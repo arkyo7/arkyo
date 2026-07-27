@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { SectionLink } from "./SectionLink";
+import { whatsappUrl } from "@/data/company";
 
 export function Hero() {
   const { t } = useTranslation();
@@ -27,17 +28,21 @@ export function Hero() {
             {t("hero.subtitle")}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <SectionLink hash="contato"
-              
-              className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px">
+            <SectionLink
+              hash="contato"
+              className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-px"
+            >
               {t("nav.requestQuote")}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </SectionLink>
-            <SectionLink hash="servicos"
-              
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted">
-              {t("hero.viewServices")}
-            </SectionLink>
+            <a
+              href={whatsappUrl(t("contact.whatsappMessage"))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {t("hero.whatsappCta")}
+            </a>
           </div>
         </motion.div>
 
@@ -47,6 +52,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto mt-16 max-w-5xl"
         >
+          <p className="mb-3 text-center text-xs text-muted-foreground">
+            {t("hero.mockDisclaimer")}
+          </p>
           <div className="rounded-2xl border border-border bg-card shadow-elevated">
             <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
@@ -63,7 +71,9 @@ export function Hero() {
               <div className="md:col-span-3">
                 <div className="rounded-xl border border-border bg-surface p-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="text-xs font-medium text-muted-foreground">{t("hero.mockRange")}</span>
+                    <span className="text-xs font-medium text-muted-foreground">
+                      {t("hero.mockRange")}
+                    </span>
                     <span className="text-xs text-muted-foreground">{t("hero.mockSessions")}</span>
                   </div>
                   <ChartMock />
@@ -96,7 +106,9 @@ function ChartMock() {
   const h = 40;
   const step = w / (points.length - 1);
   const path = points
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${(i * step).toFixed(2)} ${(h - (p / max) * h).toFixed(2)}`)
+    .map(
+      (p, i) => `${i === 0 ? "M" : "L"} ${(i * step).toFixed(2)} ${(h - (p / max) * h).toFixed(2)}`,
+    )
     .join(" ");
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="h-24 w-full">
@@ -107,7 +119,13 @@ function ChartMock() {
         </linearGradient>
       </defs>
       <path d={`${path} L ${w} ${h} L 0 ${h} Z`} fill="url(#g)" className="text-foreground" />
-      <path d={path} fill="none" stroke="currentColor" strokeWidth="0.8" className="text-foreground" />
+      <path
+        d={path}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        className="text-foreground"
+      />
     </svg>
   );
 }

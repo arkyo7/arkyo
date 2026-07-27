@@ -5,16 +5,27 @@ export const company = {
   founded: 2024,
 };
 
+/** Single source of truth for every public Arkyo contact channel. */
 export const contact = {
-  whatsapp: "+32 470 74 32 58",
-  whatsappUrl: "https://wa.me/32470743258",
+  whatsapp: "+32 451 03 69 53",
+  whatsappDigits: "32451036953",
+  whatsappUrl: "https://wa.me/32451036953",
   instagram: "@arkyo.co",
   instagramUrl: "https://instagram.com/arkyo.co",
   email: "hello.arkyo@gmail.com",
   emailUrl: "mailto:hello.arkyo@gmail.com",
-  phoneE164: "+32470743258",
-  phoneUrl: "tel:+32470743258",
+  phoneE164: "+32451036953",
+  phoneUrl: "tel:+32451036953",
 };
+
+/**
+ * Builds the WhatsApp link. The optional message is pre-filled in the chat and
+ * stays editable by the visitor; nothing is sent automatically.
+ */
+export function whatsappUrl(message?: string) {
+  const base = `https://wa.me/${contact.whatsappDigits}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
 
 /**
  * Canonical public URL of the site. Set VITE_SITE_URL once the final domain is
@@ -49,7 +60,6 @@ export function legalUpdatedLabel(language?: string) {
   });
 }
 
-
 export const navItems = [
   { key: "services", hash: "servicos" },
   { key: "process", hash: "processo" },
@@ -57,4 +67,3 @@ export const navItems = [
   { key: "plans", hash: "planos" },
   { key: "faq", hash: "faq" },
 ] as const;
-

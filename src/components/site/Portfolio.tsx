@@ -37,6 +37,9 @@ export function Portfolio() {
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-foreground">
                   <div aria-hidden className="absolute inset-0 grid-lines opacity-30" />
+                  <span className="absolute left-4 top-4 z-10 rounded-full border border-background/20 bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground">
+                    {t("portfolio.status")}
+                  </span>
                   <div className="absolute inset-0 flex items-center justify-center p-8">
                     <div className="w-full max-w-sm rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur">
                       <div className="flex items-center gap-1.5">
@@ -65,8 +68,12 @@ export function Portfolio() {
                       </span>
                     ))}
                   </div>
-                  <h3 className="mt-4 text-xl font-semibold tracking-tight">{t(`${base}.title`)}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(`${base}.summary`)}</p>
+                  <h3 className="mt-4 text-xl font-semibold tracking-tight">
+                    {t(`${base}.title`)}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {t(`${base}.summary`)}
+                  </p>
                   <div className="mt-6 grid gap-4 sm:grid-cols-2">
                     <div>
                       <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
@@ -74,8 +81,14 @@ export function Portfolio() {
                       </p>
                       <ul className="mt-2 space-y-2">
                         {challenges.map((c) => (
-                          <li key={c} className="flex items-start gap-2 text-xs text-muted-foreground">
-                            <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                          <li
+                            key={c}
+                            className="flex items-start gap-2 text-xs text-muted-foreground"
+                          >
+                            <span
+                              aria-hidden
+                              className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground"
+                            />
                             <span>{c}</span>
                           </li>
                         ))}
@@ -87,8 +100,14 @@ export function Portfolio() {
                       </p>
                       <ul className="mt-2 space-y-2">
                         {solutions.map((c) => (
-                          <li key={c} className="flex items-start gap-2 text-xs text-muted-foreground">
-                            <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                          <li
+                            key={c}
+                            className="flex items-start gap-2 text-xs text-muted-foreground"
+                          >
+                            <span
+                              aria-hidden
+                              className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground"
+                            />
                             <span>{c}</span>
                           </li>
                         ))}
@@ -106,10 +125,13 @@ export function Portfolio() {
           <div className="flex items-center justify-center rounded-2xl border border-dashed border-border p-10 text-center">
             <div>
               <p className="text-sm font-medium text-foreground">{t("portfolio.openSlot.title")}</p>
-              <p className="mt-2 max-w-xs text-sm text-muted-foreground">{t("portfolio.openSlot.desc")}</p>
-              <SectionLink hash="contato"
-                
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground">
+              <p className="mt-2 max-w-xs text-sm text-muted-foreground">
+                {t("portfolio.openSlot.desc")}
+              </p>
+              <SectionLink
+                hash="contato"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground"
+              >
                 {t("portfolio.cta")} <ArrowUpRight className="h-4 w-4" />
               </SectionLink>
             </div>

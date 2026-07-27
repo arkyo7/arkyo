@@ -10,9 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { contact } from "@/data/company";
+import { contact, whatsappUrl } from "@/data/company";
 import {
   BUDGET_IDS,
   DEADLINE_IDS,
@@ -24,6 +30,7 @@ import {
   type ProjectTypeId,
 } from "@/data/contact";
 import { submitLead } from "@/lib/leads.functions";
+import { onProjectTypeRequest } from "@/lib/prefill";
 
 export function Contact() {
   const { t, i18n } = useTranslation();
@@ -50,6 +57,15 @@ export function Contact() {
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
+
+  useEffect(
+    () =>
+      onProjectTypeRequest((projectType) => {
+        setSent(false);
+        setValue("projectType", projectType, { shouldValidate: false });
+      }),
+    [setValue],
+  );
 
   const lang = (["pt", "en", "fr"] as const).includes(
     (i18n.resolvedLanguage ?? "pt") as "pt" | "en" | "fr",
@@ -88,16 +104,7 @@ export function Contact() {
   const onInvalid = () => {
     setSubmitError(t("contact.errors.fixFields"));
     const first = (
-      [
-        "name",
-        "phone",
-        "email",
-        "projectType",
-        "budget",
-        "deadline",
-        "message",
-        "consent",
-      ] as const
+      ["name", "phone", "email", "projectType", "budget", "deadline", "message", "consent"] as const
     ).find((key) => errors[key]);
     if (first) setFocus(first as keyof ContactInput);
   };
@@ -116,13 +123,17 @@ export function Contact() {
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             {t("contact.eyebrow")}
           </p>
-          <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+          <h2
+            data-section-focus
+            tabIndex={-1}
+            className="mt-4 text-balance text-3xl font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-surface md:text-4xl"
+          >
             {t("contact.title")}
           </h2>
           <p className="mt-4 text-muted-foreground">{t("contact.subtitle")}</p>
           <div className="mt-8 space-y-3">
             <a
-              href={contact.whatsappUrl}
+              href={whatsappUrl(t("contact.whatsappMessage"))}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:bg-muted"
@@ -178,8 +189,12 @@ export function Contact() {
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background">
                 <Check className="h-5 w-5" />
               </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">{t("contact.successTitle")}</h3>
-              <p className="mt-2 max-w-sm text-sm text-muted-foreground">{t("contact.successBody")}</p>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight">
+                {t("contact.successTitle")}
+              </h3>
+              <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+                {t("contact.successBody")}
+              </p>
               <button
                 type="button"
                 onClick={() => setSent(false)}
@@ -202,7 +217,11 @@ export function Contact() {
                 />
               </div>
 
-              <Field id="contact-name" label={t("contact.fields.name")} error={errors.name?.message}>
+              <Field
+                id="contact-name"
+                label={t("contact.fields.name")}
+                error={errors.name?.message}
+              >
                 {(a11y) => (
                   <Input
                     {...a11y}
@@ -226,7 +245,11 @@ export function Contact() {
                   />
                 )}
               </Field>
-              <Field id="contact-phone" label={t("contact.fields.phone")} error={errors.phone?.message}>
+              <Field
+                id="contact-phone"
+                label={t("contact.fields.phone")}
+                error={errors.phone?.message}
+              >
                 {(a11y) => (
                   <PhoneInput
                     id={a11y.id}
@@ -239,7 +262,11 @@ export function Contact() {
                   />
                 )}
               </Field>
-              <Field id="contact-email" label={t("contact.fields.email")} error={errors.email?.message}>
+              <Field
+                id="contact-email"
+                label={t("contact.fields.email")}
+                error={errors.email?.message}
+              >
                 {(a11y) => (
                   <Input
                     {...a11y}
@@ -276,7 +303,11 @@ export function Contact() {
                       setValue("projectType", v as ProjectTypeId, { shouldValidate: true })
                     }
                   >
-                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                    <SelectTrigger
+                      id={a11y.id}
+                      aria-invalid={a11y["aria-invalid"]}
+                      aria-describedby={a11y["aria-describedby"]}
+                    >
                       <SelectValue placeholder={t("contact.fields.select")} />
                     </SelectTrigger>
                     <SelectContent>
@@ -289,13 +320,23 @@ export function Contact() {
                   </Select>
                 )}
               </Field>
-              <Field id="contact-budget" label={t("contact.fields.budget")} error={errors.budget?.message}>
+              <Field
+                id="contact-budget"
+                label={t("contact.fields.budget")}
+                error={errors.budget?.message}
+              >
                 {(a11y) => (
                   <Select
                     value={values.budget}
-                    onValueChange={(v) => setValue("budget", v as BudgetId, { shouldValidate: true })}
+                    onValueChange={(v) =>
+                      setValue("budget", v as BudgetId, { shouldValidate: true })
+                    }
                   >
-                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                    <SelectTrigger
+                      id={a11y.id}
+                      aria-invalid={a11y["aria-invalid"]}
+                      aria-describedby={a11y["aria-describedby"]}
+                    >
                       <SelectValue placeholder={t("contact.fields.select")} />
                     </SelectTrigger>
                     <SelectContent>
@@ -316,9 +357,15 @@ export function Contact() {
                 {(a11y) => (
                   <Select
                     value={values.deadline}
-                    onValueChange={(v) => setValue("deadline", v as DeadlineId, { shouldValidate: true })}
+                    onValueChange={(v) =>
+                      setValue("deadline", v as DeadlineId, { shouldValidate: true })
+                    }
                   >
-                    <SelectTrigger id={a11y.id} aria-invalid={a11y["aria-invalid"]} aria-describedby={a11y["aria-describedby"]}>
+                    <SelectTrigger
+                      id={a11y.id}
+                      aria-invalid={a11y["aria-invalid"]}
+                      aria-describedby={a11y["aria-describedby"]}
+                    >
                       <SelectValue placeholder={t("contact.fields.select")} />
                     </SelectTrigger>
                     <SelectContent>

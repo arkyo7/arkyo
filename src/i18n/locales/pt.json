@@ -22,21 +22,23 @@
     "change": "Alterar idioma"
   },
   "hero": {
-    "badge": "Estúdio digital sob medida — Bélgica",
+    "badge": "Estúdio digital sob medida",
     "titleA": "Sites que simplificam",
     "titleB": "negócios reais.",
-    "subtitle": "Identificamos o que trava a comunicação, o atendimento e a presença digital do seu negócio — e resolvemos com design, tecnologia e clareza.",
+    "subtitle": "Identificamos o que trava a comunicação, o atendimento e a presença digital do seu negócio. Resolvemos isso com design, tecnologia e clareza.",
     "viewServices": "Ver serviços",
     "mockScheduling": "Agendamentos hoje",
     "mockLeads": "Leads no site",
     "mockTime": "Tempo médio página",
     "mockRange": "Últimos 30 dias",
-    "mockSessions": "Sessões"
+    "mockSessions": "Sessões",
+    "whatsappCta": "Falar no WhatsApp",
+    "mockDisclaimer": "Exemplo de painel personalizado"
   },
   "valueProp": {
     "eyebrow": "Nossa proposta",
     "title": "A Arkyo não vende apenas sites.",
-    "body": "Escutamos os problemas reais do seu dia a dia — mensagens desorganizadas, agendamentos perdidos, presença digital fraca — e desenhamos soluções simples que devolvem tempo, organização e confiança ao seu negócio."
+    "body": "Escutamos os problemas reais do seu dia a dia: mensagens desorganizadas, agendamentos perdidos e presença digital fraca. A partir disso, desenhamos soluções simples que devolvem tempo, organização e confiança ao seu negócio."
   },
   "problems": {
     "eyebrow": "Problemas reais",
@@ -48,7 +50,7 @@
       },
       {
         "title": "Agendamentos confusos",
-        "desc": "Marca, remarca e às vezes esquece — sem um sistema que organize sua agenda."
+        "desc": "Marca, remarca e às vezes esquece compromissos. Falta um sistema que organize sua agenda."
       },
       {
         "title": "Informação espalhada",
@@ -87,7 +89,7 @@
       },
       "site-agendamento": {
         "name": "Site com Agendamento",
-        "description": "Sistema próprio de reservas online — sem depender de plataformas externas.",
+        "description": "Sistema próprio de reservas online, sem depender de plataformas externas.",
         "features": [
           "Agenda integrada",
           "Confirmações automáticas",
@@ -114,7 +116,7 @@
       },
       "personalizado": {
         "name": "Projeto Personalizado",
-        "description": "Soluções específicas que fogem do padrão — desenvolvidas sob medida.",
+        "description": "Soluções específicas, desenvolvidas sob medida para o seu negócio.",
         "features": [
           "Escopo customizado",
           "Consultoria dedicada",
@@ -184,7 +186,8 @@
           "Institucional"
         ]
       }
-    }
+    },
+    "status": "Projeto em desenvolvimento"
   },
   "differentials": {
     "eyebrow": "Diferenciais",
@@ -252,7 +255,7 @@
   "faq": {
     "eyebrow": "Perguntas frequentes",
     "title": "Tudo o que você precisa saber antes de começar.",
-    "subtitle": "Não encontrou sua dúvida? Fale conosco pelo WhatsApp — respondemos em minutos no horário comercial.",
+    "subtitle": "Não encontrou sua dúvida? Fale conosco pelo WhatsApp. Respondemos durante o horário comercial.",
     "items": [
       {
         "q": "Quanto tempo leva para desenvolver o meu site?",
@@ -286,7 +289,8 @@
         "q": "E se eu precisar de algo que não está listado?",
         "a": "Todo projeto pode ser personalizado. Descreva sua necessidade no formulário e enviamos um orçamento sob medida."
       }
-    ]
+    ],
+    "whatsappCta": "Falar no WhatsApp"
   },
   "contact": {
     "eyebrow": "Contato",
@@ -366,7 +370,8 @@
       "noResults": "Nenhum país encontrado",
       "help": "Selecione o país e digite seu número."
     },
-    "sendingA11y": "Enviando sua mensagem, aguarde."
+    "sendingA11y": "Enviando sua mensagem, aguarde.",
+    "whatsappMessage": "Olá! Quero criar um site para o meu negócio e gostaria de saber mais sobre os serviços da Arkyo."
   },
   "footer": {
     "description": "Desenvolvemos sites e soluções digitais para pequenos negócios, profissionais autônomos e empresas em crescimento.",
@@ -490,5 +495,10 @@
       "description": "Termos e condições de uso dos serviços da Arkyo.",
       "ogDescription": "Termos e condições de uso dos serviços."
     }
+  },
+  "about": {
+    "eyebrow": "Sobre",
+    "title": "Sobre a Arkyo",
+    "body": "A Arkyo nasceu para ajudar pequenos negócios a construir uma presença digital mais clara, profissional e funcional. Cada projeto é desenvolvido com proximidade, desde a definição da ideia até a publicação e o suporte."
   }
 }

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./Logo";
-import { contact, company, navItems } from "@/data/company";
+import { contact, company, navItems, whatsappUrl } from "@/data/company";
 import { SectionLink } from "./SectionLink";
 
 export function Footer() {
@@ -38,7 +38,7 @@ export function Footer() {
               {t("footer.contact")}
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground">WhatsApp</a></li>
+              <li><a href={whatsappUrl(t("contact.whatsappMessage"))} target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground">WhatsApp</a></li>
               <li><a href={contact.emailUrl} className="hover:text-muted-foreground">{contact.email}</a></li>
               <li><a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-muted-foreground">{contact.instagram}</a></li>
               <li className="text-muted-foreground">{t("footer.country")}</li>

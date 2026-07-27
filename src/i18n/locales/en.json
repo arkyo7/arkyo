@@ -22,21 +22,23 @@
     "change": "Change language"
   },
   "hero": {
-    "badge": "Bespoke digital studio — Belgium",
+    "badge": "Tailor-made digital studio",
     "titleA": "Websites that simplify",
     "titleB": "real businesses.",
-    "subtitle": "We identify what blocks your communication, customer service and digital presence — and solve it with design, technology and clarity.",
+    "subtitle": "We identify what blocks your communication, customer service and digital presence. Then we solve it with design, technology and clarity.",
     "viewServices": "See services",
     "mockScheduling": "Bookings today",
     "mockLeads": "Site leads",
     "mockTime": "Avg. time on page",
     "mockRange": "Last 30 days",
-    "mockSessions": "Sessions"
+    "mockSessions": "Sessions",
+    "whatsappCta": "Chat on WhatsApp",
+    "mockDisclaimer": "Example of a custom dashboard"
   },
   "valueProp": {
     "eyebrow": "Our approach",
     "title": "Arkyo doesn't just sell websites.",
-    "body": "We listen to the real day-to-day problems — messy inboxes, missed appointments, weak digital presence — and design simple solutions that give back time, structure and trust to your business."
+    "body": "We listen to the real day-to-day problems: messy inboxes, missed appointments and a weak digital presence. From there, we design simple solutions that give back time, structure and trust to your business."
   },
   "problems": {
     "eyebrow": "Real problems",
@@ -48,7 +50,7 @@
       },
       {
         "title": "Messy scheduling",
-        "desc": "Booking, rebooking and sometimes forgetting — with no system organising your agenda."
+        "desc": "Booking, rebooking and sometimes forgetting appointments. There is no system organising your agenda."
       },
       {
         "title": "Scattered information",
@@ -87,7 +89,7 @@
       },
       "site-agendamento": {
         "name": "Website with Booking",
-        "description": "Your own online reservation system — no dependency on third-party platforms.",
+        "description": "Your own online reservation system, with no dependency on third-party platforms.",
         "features": [
           "Integrated calendar",
           "Automatic confirmations",
@@ -114,7 +116,7 @@
       },
       "personalizado": {
         "name": "Custom Project",
-        "description": "Specific solutions outside the standard — built to measure.",
+        "description": "Specific solutions, built to measure for your business.",
         "features": [
           "Custom scope",
           "Dedicated consulting",
@@ -184,7 +186,8 @@
           "Corporate"
         ]
       }
-    }
+    },
+    "status": "Project in development"
   },
   "differentials": {
     "eyebrow": "Differentiators",
@@ -252,7 +255,7 @@
   "faq": {
     "eyebrow": "Frequently asked",
     "title": "Everything you need to know before starting.",
-    "subtitle": "Didn't find your question? Reach us on WhatsApp — we usually reply within minutes during business hours.",
+    "subtitle": "Didn't find your question? Reach us on WhatsApp. We reply during business hours.",
     "items": [
       {
         "q": "How long does it take to build my site?",
@@ -286,7 +289,8 @@
         "q": "What if I need something not listed here?",
         "a": "Every project can be customised. Describe your need in the form and we'll send a tailored quote."
       }
-    ]
+    ],
+    "whatsappCta": "Chat on WhatsApp"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -366,7 +370,8 @@
       "noResults": "No country found",
       "help": "Select your country and type your number."
     },
-    "sendingA11y": "Sending your message, please wait."
+    "sendingA11y": "Sending your message, please wait.",
+    "whatsappMessage": "Hello! I’d like to create a website for my business and learn more about Arkyo’s services."
   },
   "footer": {
     "description": "We build websites and digital solutions for small businesses, freelancers and growing companies.",
@@ -490,5 +495,10 @@
       "description": "Terms and conditions for using Arkyo's services.",
       "ogDescription": "Terms and conditions for using the services."
     }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "About Arkyo",
+    "body": "Arkyo was created to help small businesses build a clearer, more professional and more functional digital presence. Every project is developed closely with you, from shaping the idea to publishing and ongoing support."
   }
 }
