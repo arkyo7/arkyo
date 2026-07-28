@@ -30,32 +30,42 @@ export type DeadlineId = (typeof DEADLINE_IDS)[number];
 /** Minimum time (ms) a real human needs to fill the form. */
 export const MIN_FILL_MS = 2500;
 
+/** Max characters accepted for the whole serialized payload (defense in depth). */
+export const MAX_PAYLOAD_CHARS = 8000;
+
 /**
  * Shared payload contract between the browser form and the server function.
  * Kept free of translations so it can be validated on the server too.
+ * `.strict()` rejects unknown fields sent by a tampered client.
  */
-export const leadPayloadSchema = z.object({
-  name: z.string().trim().min(2).max(80),
-  company: z.string().trim().max(80).optional().or(z.literal("")),
-  phone: z
-    .string()
-    .trim()
-    .min(1)
-    .refine((v) => isValidPhoneNumber(v), "invalid_phone"),
-  email: z.string().trim().email().max(120),
-  instagram: z.string().trim().max(60).optional().or(z.literal("")),
-  message: z.string().trim().min(10).max(1000),
-  projectType: z.enum(PROJECT_TYPE_IDS),
-  budget: z.enum(BUDGET_IDS),
-  deadline: z.enum(DEADLINE_IDS),
-  consent: z.literal(true),
-  language: z.enum(LANGUAGE_IDS),
-  // Anti-spam
-  honeypot: z.string().max(0).optional().or(z.literal("")),
-  elapsedMs: z.number().int().nonnegative(),
-});
+export const leadPayloadSchema = z
+  .object({
+    name: z.string().trim().min(2).max(80),
+    company: z.string().trim().max(80).optional().or(z.literal("")),
+    phone: z
+      .string()
+      .trim()
+      .min(1)
+      .refine((v) => isValidPhoneNumber(v), "invalid_phone"),
+    email: z.string().trim().email().max(120),
+    instagram: z.string().trim().max(60).optional().or(z.literal("")),
+    message: z.string().trim().min(10).max(1000),
+    projectType: z.enum(PROJECT_TYPE_IDS),
+    package: z.string().trim().max(60).optional().or(z.literal("")),
+    budget: z.enum(BUDGET_IDS),
+    deadline: z.enum(DEADLINE_IDS),
+    consent: z.literal(true),
+    language: z.enum(LANGUAGE_IDS),
+    /** Client-generated idempotency key for this form session. */
+    submissionId: z.string().uuid(),
+    // Anti-spam
+    honeypot: z.string().max(0).optional().or(z.literal("")),
+    elapsedMs: z.number().int().nonnegative(),
+  })
+  .strict();
 
 export type LeadPayload = z.infer<typeof leadPayloadSchema>;
+
 
 /** Localized schema used by react-hook-form (front-end messages). */
 export function makeContactSchema(t: TFunction) {
