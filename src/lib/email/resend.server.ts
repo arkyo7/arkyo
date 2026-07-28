@@ -25,6 +25,22 @@ export function isEmailConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY && sender());
 }
 
+/**
+ * Resend's shared sandbox sender can only deliver to the account owner, so
+ * while it is configured we must not attempt customer confirmations.
+ * Switching LEAD_NOTIFICATION_FROM to a verified domain re-enables them
+ * automatically — no code change required.
+ */
+export function isTestSender(): boolean {
+  return (sender() ?? "").toLowerCase().includes("onboarding@resend.dev");
+}
+
+/** Explicit, configurable timeout so a submission never hangs. */
+function timeoutMs(): number {
+  const raw = Number(process.env.RESEND_TIMEOUT_MS);
+  return Number.isFinite(raw) && raw > 0 ? raw : 10_000;
+}
+
 export async function sendEmail(message: EmailMessage): Promise<EmailSendResult> {
   const apiKey = process.env.RESEND_API_KEY;
   const from = sender();
@@ -33,10 +49,14 @@ export async function sendEmail(message: EmailMessage): Promise<EmailSendResult>
     return { status: "skipped", error: "email_provider_not_configured" };
   }
 
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs());
+
   let response: Response;
   try {
     response = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      signal: controller.signal,
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
@@ -50,10 +70,14 @@ export async function sendEmail(message: EmailMessage): Promise<EmailSendResult>
         text: message.text,
       }),
     });
-  } catch {
-    // Network-level problem: temporary, safe to retry later.
-    return { status: "failed", error: "network_error", permanent: false };
+  } catch (error) {
+    // Timeout and network problems are both temporary: safe to retry later.
+    const aborted = error instanceof Error && error.name === "AbortError";
+    return { status: "failed", error: aborted ? "timeout" : "network_error", permanent: false };
+  } finally {
+    clearTimeout(timer);
   }
+
 
   if (!response.ok) {
     // 403 is what Resend returns for an unverified sending domain — permanent
