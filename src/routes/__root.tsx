@@ -126,8 +126,9 @@ function RootShell({ children }: { children: ReactNode }) {
 function HtmlLangSync() {
   const { i18n: instance } = useTranslation();
   useEffect(() => {
-    // Runs only on the client, after hydration.
-    syncDetectedLanguage();
+    // Deferred one frame so the whole tree finishes hydrating in the SSR
+    // language before we switch to the visitor's stored/browser language.
+    const langTimer = window.setTimeout(syncDetectedLanguage, 0);
     const apply = () => {
       if (typeof document !== "undefined") {
         document.documentElement.lang = instance.resolvedLanguage || "pt";
