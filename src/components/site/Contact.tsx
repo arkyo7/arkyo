@@ -144,6 +144,11 @@ export function Contact() {
       trigger.focus();
       return;
     }
+    if (first === "phone") {
+      // Controlled component, not a registered input: focus it by id.
+      document.getElementById("contact-phone")?.focus();
+      return;
+    }
     setFocus(first as keyof ContactInput);
   };
 
