@@ -18,10 +18,27 @@ export function Header() {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
+    let frame = 0;
+    let last = window.scrollY > 8;
+    setScrolled(last);
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const next = window.scrollY > 8;
+        // Only commit when the boolean actually flips: avoids a state update
+        // (and a header re-render) on every scroll tick.
+        if (next !== last) {
+          last = next;
+          setScrolled(next);
+        }
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
