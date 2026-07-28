@@ -167,6 +167,7 @@
     },
     "items": {
       "clinica-massoterapia": {
+        "imageAlt": "Página inicial do site da JR Massoterapeuta, com apresentação dos serviços de massoterapia e botão de agendamento.",
         "title": "Sistema para clínica de massoterapia",
         "category": "Site com Agendamento",
         "summary": "Plataforma que substituiu o agendamento manual por WhatsApp por um sistema próprio de reservas online, com confirmação automática e painel administrativo.",

@@ -167,6 +167,7 @@
     },
     "items": {
       "clinica-massoterapia": {
+        "imageAlt": "Page d’accueil du site de JR Massoterapeuta, présentant les services de massothérapie et le bouton de réservation.",
         "title": "Système pour clinique de massothérapie",
         "category": "Site avec réservation",
         "summary": "Plateforme qui a remplacé la prise de rendez-vous manuelle par WhatsApp par un système de réservation propre, avec confirmation automatique et tableau de bord admin.",
