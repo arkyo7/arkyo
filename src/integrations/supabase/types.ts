@@ -14,54 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
+      lead_throttle: {
+        Row: {
+          created_at: string
+          id: string
+          ip_hash: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_hash: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_hash?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           budget: string
           company: string | null
           consent: boolean
           created_at: string
+          customer_email_attempts: number
+          customer_email_error: string | null
+          customer_email_provider_id: string | null
+          customer_email_sent_at: string | null
+          customer_email_status: string
           deadline: string
           email: string
           id: string
           instagram: string | null
+          internal_email_attempts: number
+          internal_email_error: string | null
+          internal_email_provider_id: string | null
+          internal_email_sent_at: string | null
+          internal_email_status: string
           language: string
           message: string
           name: string
+          package: string | null
           phone: string
           project_type: string
           status: string
+          submission_id: string | null
         }
         Insert: {
           budget: string
           company?: string | null
           consent?: boolean
           created_at?: string
+          customer_email_attempts?: number
+          customer_email_error?: string | null
+          customer_email_provider_id?: string | null
+          customer_email_sent_at?: string | null
+          customer_email_status?: string
           deadline: string
           email: string
           id?: string
           instagram?: string | null
+          internal_email_attempts?: number
+          internal_email_error?: string | null
+          internal_email_provider_id?: string | null
+          internal_email_sent_at?: string | null
+          internal_email_status?: string
           language?: string
           message: string
           name: string
+          package?: string | null
           phone: string
           project_type: string
           status?: string
+          submission_id?: string | null
         }
         Update: {
           budget?: string
           company?: string | null
           consent?: boolean
           created_at?: string
+          customer_email_attempts?: number
+          customer_email_error?: string | null
+          customer_email_provider_id?: string | null
+          customer_email_sent_at?: string | null
+          customer_email_status?: string
           deadline?: string
           email?: string
           id?: string
           instagram?: string | null
+          internal_email_attempts?: number
+          internal_email_error?: string | null
+          internal_email_provider_id?: string | null
+          internal_email_sent_at?: string | null
+          internal_email_status?: string
           language?: string
           message?: string
           name?: string
+          package?: string | null
           phone?: string
           project_type?: string
           status?: string
+          submission_id?: string | null
         }
         Relationships: []
       }
