@@ -32,11 +32,18 @@ import {
 import { submitLead } from "@/lib/leads.functions";
 import { onProjectTypeRequest } from "@/lib/prefill";
 
+function newSubmissionId() {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(16).slice(2)}-4000-8000-000000000000`;
+}
+
 export function Contact() {
   const { t, i18n } = useTranslation();
   const [sent, setSent] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const startedAt = useRef(Date.now());
+  const submissionId = useRef<string>(newSubmissionId());
   const send = useServerFn(submitLead);
 
   const schema = useMemo(() => makeContactSchema(t), [t]);
@@ -56,6 +63,7 @@ export function Contact() {
 
   useEffect(() => {
     startedAt.current = Date.now();
+    submissionId.current = newSubmissionId();
   }, []);
 
   useEffect(
@@ -74,6 +82,7 @@ export function Contact() {
     : "pt";
 
   const onSubmit = async (data: ContactInput) => {
+    if (isSubmitting) return;
     setSubmitError(null);
     try {
       const result = await send({
@@ -81,13 +90,19 @@ export function Contact() {
           ...data,
           consent: true as const,
           language: lang,
+          submissionId: submissionId.current,
           elapsedMs: Date.now() - startedAt.current,
         },
       });
 
       if (!result.ok) {
+        // Form values are intentionally preserved so the visitor can retry.
         setSubmitError(
-          result.reason === "spam" ? t("contact.errors.tooFast") : t("contact.errors.submitFailed"),
+          result.reason === "spam"
+            ? t("contact.errors.tooFast")
+            : result.reason === "rate_limited"
+              ? t("contact.errors.rateLimited")
+              : t("contact.errors.submitFailed"),
         );
         return;
       }
@@ -96,6 +111,7 @@ export function Contact() {
       setSent(true);
       reset({ consent: false as unknown as true, phone: "", honeypot: "" });
       startedAt.current = Date.now();
+      submissionId.current = newSubmissionId();
     } catch {
       setSubmitError(t("contact.errors.submitFailed"));
     }

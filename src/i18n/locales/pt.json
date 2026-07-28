@@ -338,7 +338,8 @@
       "submitFailed": "Não foi possível enviar sua mensagem. Tente novamente em alguns instantes.",
       "tooFast": "Envio bloqueado. Aguarde alguns segundos e tente novamente.",
       "duplicate": "Você já enviou esta mensagem. Aguarde nosso contato.",
-      "fixFields": "Revise os campos destacados antes de enviar."
+      "fixFields": "Revise os campos destacados antes de enviar.",
+      "rateLimited": "Muitas tentativas de envio. Tente novamente mais tarde."
     },
     "options": {
       "projectType": {
