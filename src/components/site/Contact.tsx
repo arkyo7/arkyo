@@ -341,6 +341,7 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => { selectRefs.current.projectType = el; }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -370,6 +371,7 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => { selectRefs.current.budget = el; }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -399,6 +401,7 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => { selectRefs.current.deadline = el; }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -436,6 +439,7 @@ export function Contact() {
               <div className="sm:col-span-2">
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Checkbox
+                    ref={(el) => { selectRefs.current.consent = el; }}
                     checked={consent === true}
                     onCheckedChange={(v) =>
                       setValue("consent", (v === true) as true, { shouldValidate: true })
