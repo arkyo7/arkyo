@@ -73,14 +73,27 @@ async function isRateLimited(db: Admin, ip: string | null): Promise<boolean> {
 }
 
 function statusPatch(prefix: "internal" | "customer", result: EmailSendResult, attempts: number) {
-  return {
-    [`${prefix}_email_status`]: result.status,
-    [`${prefix}_email_attempts`]: attempts,
-    [`${prefix}_email_sent_at`]: result.status === "sent" ? new Date().toISOString() : null,
-    [`${prefix}_email_provider_id`]: result.status === "sent" ? result.providerId : null,
-    [`${prefix}_email_error`]: result.status === "sent" ? null : result.error,
-  } as Record<string, unknown>;
+  const sentAt = result.status === "sent" ? new Date().toISOString() : null;
+  const providerId = result.status === "sent" ? result.providerId : null;
+  const errorText = result.status === "sent" ? null : result.error;
+
+  return prefix === "internal"
+    ? {
+        internal_email_status: result.status,
+        internal_email_attempts: attempts,
+        internal_email_sent_at: sentAt,
+        internal_email_provider_id: providerId,
+        internal_email_error: errorText,
+      }
+    : {
+        customer_email_status: result.status,
+        customer_email_attempts: attempts,
+        customer_email_sent_at: sentAt,
+        customer_email_provider_id: providerId,
+        customer_email_error: errorText,
+      };
 }
+
 
 async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
   // Emails must never undo a successfully stored lead: each result is recorded
