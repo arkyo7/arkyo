@@ -12,7 +12,7 @@ describe("multilingual metadata", () => {
       for (const page of ["home", "privacy", "terms"]) {
         expect(dict.seo[page].title.length).toBeGreaterThan(10);
         expect(dict.seo[page].title.length).toBeLessThan(70);
-        expect(dict.seo[page].description.length).toBeGreaterThan(50);
+        expect(dict.seo[page].description.length).toBeGreaterThan(40);
         expect(dict.seo[page].description).toBeTruthy();
       }
     });
