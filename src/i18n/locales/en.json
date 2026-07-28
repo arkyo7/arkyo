@@ -167,6 +167,7 @@
     },
     "items": {
       "clinica-massoterapia": {
+        "imageAlt": "Homepage of the JR Massoterapeuta website, presenting massage therapy services and a booking button.",
         "title": "System for a massage therapy clinic",
         "category": "Website with Booking",
         "summary": "Platform that replaced manual WhatsApp booking with an in-house reservation system, automatic confirmations and an admin dashboard.",
