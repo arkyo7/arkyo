@@ -14,22 +14,21 @@ export const languageMeta: Record<Lang, { label: string; flag: string }> = {
 };
 
 if (!i18n.isInitialized) {
-  i18n.use(initReactI18next)
-    .init({
-      resources: {
-        pt: { translation: pt },
-        en: { translation: en },
-        fr: { translation: fr },
-      },
-      // SSR and the first client render must agree, so boot is always "pt".
-      // The visitor's stored/browser language is applied after hydration by
-      // syncDetectedLanguage() to avoid a hydration text mismatch.
-      lng: "pt",
-      fallbackLng: "pt",
-      supportedLngs: LANGS as unknown as string[],
-      interpolation: { escapeValue: false },
-      returnObjects: true,
-    });
+  i18n.use(initReactI18next).init({
+    resources: {
+      pt: { translation: pt },
+      en: { translation: en },
+      fr: { translation: fr },
+    },
+    // SSR and the first client render must agree, so boot is always "pt".
+    // The visitor's stored/browser language is applied after hydration by
+    // syncDetectedLanguage() to avoid a hydration text mismatch.
+    lng: "pt",
+    fallbackLng: "pt",
+    supportedLngs: LANGS as unknown as string[],
+    interpolation: { escapeValue: false },
+    returnObjects: true,
+  });
 }
 
 export default i18n;
