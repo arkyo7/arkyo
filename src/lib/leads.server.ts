@@ -6,7 +6,7 @@ import {
   type LeadEmailData,
   type Locale,
 } from "./email/lead-emails.server";
-import { sendEmail, type EmailSendResult } from "./email/resend.server";
+import { isTestSender, sendEmail, type EmailSendResult } from "./email/resend.server";
 
 export type SaveLeadResult =
   | { ok: true; duplicate?: boolean }
