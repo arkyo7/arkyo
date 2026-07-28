@@ -94,7 +94,6 @@ function statusPatch(prefix: "internal" | "customer", result: EmailSendResult, a
       };
 }
 
-
 async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
   // Emails must never undo a successfully stored lead: each result is recorded
   // independently and failures are kept for a controlled retry.
@@ -111,7 +110,9 @@ async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
 
     console.info(
       `[leads] ${prefix} email ${result.status} submission=${lead.submissionId}` +
-        (result.status === "sent" ? ` provider=${result.providerId ?? "unknown"}` : ` reason=${result.error}`),
+        (result.status === "sent"
+          ? ` provider=${result.providerId ?? "unknown"}`
+          : ` reason=${result.error}`),
     );
 
     const { error } = await db

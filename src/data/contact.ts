@@ -11,13 +11,7 @@ export const PROJECT_TYPE_IDS = [
   "custom",
 ] as const;
 
-export const BUDGET_IDS = [
-  "upTo300",
-  "r300to600",
-  "r600to1000",
-  "above1000",
-  "unknown",
-] as const;
+export const BUDGET_IDS = ["upTo300", "r300to600", "r600to1000", "above1000", "unknown"] as const;
 
 export const DEADLINE_IDS = ["asap", "weeks2to4", "months1to2", "noRush"] as const;
 
@@ -65,7 +59,6 @@ export const leadPayloadSchema = z
   .strict();
 
 export type LeadPayload = z.infer<typeof leadPayloadSchema>;
-
 
 /** Localized schema used by react-hook-form (front-end messages). */
 export function makeContactSchema(t: TFunction) {

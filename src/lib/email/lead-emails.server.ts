@@ -31,10 +31,9 @@ const LOCALES: Record<Locale, Record<string, unknown>> = {
 };
 
 function optionLabel(locale: Locale, group: string, id: string): string {
-  const options = (
-    (LOCALES[locale] as { contact?: { options?: Record<string, Record<string, string>> } }).contact
-      ?.options ?? {}
-  )[group];
+  const options = ((
+    LOCALES[locale] as { contact?: { options?: Record<string, Record<string, string>> } }
+  ).contact?.options ?? {})[group];
   return options?.[id] ?? id;
 }
 

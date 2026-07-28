@@ -117,7 +117,6 @@ export function Contact() {
     }
   };
 
-
   const onInvalid = () => {
     setSubmitError(t("contact.errors.fixFields"));
     const first = (

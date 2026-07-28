@@ -338,7 +338,8 @@
       "submitFailed": "Impossible d'envoyer votre message. Réessayez dans un instant.",
       "tooFast": "Envoi bloqué. Attendez quelques secondes et réessayez.",
       "duplicate": "Vous avez déjà envoyé ce message. Nous vous répondrons bientôt.",
-      "fixFields": "Veuillez vérifier les champs en surbrillance avant l’envoi."
+      "fixFields": "Veuillez vérifier les champs en surbrillance avant l’envoi.",
+      "rateLimited": "Trop de tentatives d’envoi. Réessayez plus tard."
     },
     "options": {
       "projectType": {

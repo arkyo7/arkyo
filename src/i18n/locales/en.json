@@ -338,7 +338,8 @@
       "submitFailed": "We couldn't send your message. Please try again in a moment.",
       "tooFast": "Submission blocked. Wait a few seconds and try again.",
       "duplicate": "You already sent this message. We will get back to you.",
-      "fixFields": "Please review the highlighted fields before sending."
+      "fixFields": "Please review the highlighted fields before sending.",
+      "rateLimited": "Too many submission attempts. Please try again later."
     },
     "options": {
       "projectType": {
