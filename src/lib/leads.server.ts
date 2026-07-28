@@ -6,7 +6,7 @@ import {
   type LeadEmailData,
   type Locale,
 } from "./email/lead-emails.server";
-import { sendEmail, type EmailSendResult } from "./email/resend.server";
+import { isTestSender, sendEmail, type EmailSendResult } from "./email/resend.server";
 
 export type SaveLeadResult =
   | { ok: true; duplicate?: boolean }
@@ -102,10 +102,16 @@ async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
     ["customer", buildCustomerEmail(lead)],
   ] as const) {
     let result: EmailSendResult;
-    try {
-      result = await sendEmail(message);
-    } catch {
-      result = { status: "failed", error: "unexpected_error", permanent: false };
+    // The sandbox sender only delivers to the account owner, so customer
+    // confirmations are skipped (not failed) until a verified domain is set.
+    if (prefix === "customer" && isTestSender()) {
+      result = { status: "skipped", error: "test_sender_external_recipient_not_supported" };
+    } else {
+      try {
+        result = await sendEmail(message);
+      } catch {
+        result = { status: "failed", error: "unexpected_error", permanent: false };
+      }
     }
 
     console.info(

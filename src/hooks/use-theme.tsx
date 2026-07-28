@@ -35,11 +35,21 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => readInitialTheme());
+  // Server and first client render must agree, so state starts at the SSR
+  // default and only adopts the real theme after hydration. The inline
+  // themeInitScript has already painted the correct theme, so there is no flash.
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    setThemeState(readInitialTheme());
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
     applyTheme(theme);
-  }, [theme]);
+  }, [theme, hydrated]);
 
   // React to OS changes only when user hasn't chosen manually.
   useEffect(() => {
@@ -79,7 +89,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 }
 
