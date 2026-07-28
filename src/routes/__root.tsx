@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { MotionConfig } from "framer-motion";
 import { useEffect, type ReactNode } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
