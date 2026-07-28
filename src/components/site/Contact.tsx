@@ -59,6 +59,8 @@ export function Contact() {
     reset,
   } = useForm<ContactInput>({
     resolver: zodResolver(schema) as never,
+    // Focus is handled in onInvalid so Radix triggers are reachable too.
+    shouldFocusError: false,
     defaultValues: { consent: false as unknown as true, phone: "", honeypot: "" },
   });
 

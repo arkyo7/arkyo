@@ -40,18 +40,23 @@ export default i18n;
  */
 export const LANG_STORAGE_KEY = "arkyo-lang";
 
+let persistBound = false;
+
 export function syncDetectedLanguage() {
   if (typeof window === "undefined") return;
   const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
   const candidate = (stored ?? window.navigator.language ?? "pt").slice(0, 2).toLowerCase();
   const next = (LANGS as readonly string[]).includes(candidate) ? candidate : "pt";
+  if (!persistBound) {
+    persistBound = true;
+    // Persist the visitor's choice (detection caching used to do this).
+    i18n.on("languageChanged", (lng) => {
+      try {
+        window.localStorage.setItem(LANG_STORAGE_KEY, lng);
+      } catch {
+        /* storage unavailable: language still applies for this session */
+      }
+    });
+  }
   if (i18n.resolvedLanguage !== next) void i18n.changeLanguage(next);
-  // Persist the visitor's choice (detection caching used to do this).
-  i18n.on("languageChanged", (lng) => {
-    try {
-      window.localStorage.setItem(LANG_STORAGE_KEY, lng);
-    } catch {
-      /* storage unavailable: language still applies for this session */
-    }
-  });
 }
