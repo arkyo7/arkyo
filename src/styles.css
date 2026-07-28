@@ -111,19 +111,22 @@
   }
   ::selection { background: var(--color-foreground); color: var(--color-background); }
 
-  /* Smooth theme transitions */
-  html, body, header, section, footer, article, aside, nav,
-  button, a, input, textarea, select,
-  [class*="bg-"], [class*="border"], [class*="text-"], [class*="shadow"] {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-    transition-duration: 300ms;
+  /* Theme swap: only the two elements that paint the page-wide surface.
+     Component-level transitions stay declared in the components themselves. */
+  html, body {
+    transition-property: background-color, color;
+    transition-duration: 250ms;
     transition-timing-function: ease;
   }
   @media (prefers-reduced-motion: reduce) {
-    html, body, header, section, footer, article, aside, nav,
-    button, a, input, textarea, select,
-    [class*="bg-"], [class*="border"], [class*="text-"], [class*="shadow"] {
-      transition-duration: 0ms !important;
+    html, body {
+      transition-duration: 0ms;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
