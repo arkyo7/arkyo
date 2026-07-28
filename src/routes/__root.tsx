@@ -136,7 +136,10 @@ function HtmlLangSync() {
     };
     apply();
     instance.on("languageChanged", apply);
-    return () => instance.off("languageChanged", apply);
+    return () => {
+      window.clearTimeout(langTimer);
+      instance.off("languageChanged", apply);
+    };
   }, [instance]);
   return null;
 }
