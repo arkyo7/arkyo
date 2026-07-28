@@ -291,9 +291,9 @@ export function Contact() {
                   <PhoneInput
                     id={a11y.id}
                     name="phone"
-                    value={values.phone}
+                    value={phone ?? ""}
                     onChange={(v) => setValue("phone", v, { shouldValidate: !!errors.phone })}
-                    onBlur={() => setValue("phone", values.phone ?? "", { shouldValidate: true })}
+                    onBlur={() => setValue("phone", getValues("phone") ?? "", { shouldValidate: true })}
                     aria-invalid={a11y["aria-invalid"]}
                     aria-describedby={a11y["aria-describedby"]}
                   />
@@ -335,7 +335,7 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.projectType}
+                    value={projectType}
                     onValueChange={(v) =>
                       setValue("projectType", v as ProjectTypeId, { shouldValidate: true })
                     }
@@ -364,7 +364,7 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.budget}
+                    value={budget}
                     onValueChange={(v) =>
                       setValue("budget", v as BudgetId, { shouldValidate: true })
                     }
@@ -393,7 +393,7 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.deadline}
+                    value={deadline}
                     onValueChange={(v) =>
                       setValue("deadline", v as DeadlineId, { shouldValidate: true })
                     }
@@ -436,7 +436,7 @@ export function Contact() {
               <div className="sm:col-span-2">
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Checkbox
-                    checked={values.consent === true}
+                    checked={consent === true}
                     onCheckedChange={(v) =>
                       setValue("consent", (v === true) as true, { shouldValidate: true })
                     }
