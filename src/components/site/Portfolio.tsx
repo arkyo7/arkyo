@@ -35,27 +35,41 @@ export function Portfolio() {
                 transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="group overflow-hidden rounded-2xl border border-border bg-card"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-foreground">
-                  <div aria-hidden className="absolute inset-0 grid-lines opacity-30" />
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-foreground">
                   <span className="absolute left-4 top-4 z-10 rounded-full border border-background/20 bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground">
                     {t("portfolio.status")}
                   </span>
-                  <div className="absolute inset-0 flex items-center justify-center p-8">
-                    <div className="w-full max-w-sm rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-white/20" />
-                        <span className="h-2 w-2 rounded-full bg-white/20" />
-                        <span className="h-2 w-2 rounded-full bg-white/20" />
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={t(`${base}.imageAlt`)}
+                      width={1600}
+                      height={1000}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover object-left-top"
+                    />
+                  ) : (
+                    <>
+                      <div aria-hidden className="absolute inset-0 grid-lines opacity-30" />
+                      <div className="absolute inset-0 flex items-center justify-center p-8">
+                        <div className="w-full max-w-sm rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                          <div className="flex items-center gap-1.5">
+                            <span className="h-2 w-2 rounded-full bg-white/20" />
+                            <span className="h-2 w-2 rounded-full bg-white/20" />
+                            <span className="h-2 w-2 rounded-full bg-white/20" />
+                          </div>
+                          <div className="mt-4 h-2 w-2/3 rounded bg-white/20" />
+                          <div className="mt-2 h-2 w-1/2 rounded bg-white/10" />
+                          <div className="mt-5 grid grid-cols-3 gap-2">
+                            <div className="h-8 rounded bg-white/10" />
+                            <div className="h-8 rounded bg-white/10" />
+                            <div className="h-8 rounded bg-white/20" />
+                          </div>
+                        </div>
                       </div>
-                      <div className="mt-4 h-2 w-2/3 rounded bg-white/20" />
-                      <div className="mt-2 h-2 w-1/2 rounded bg-white/10" />
-                      <div className="mt-5 grid grid-cols-3 gap-2">
-                        <div className="h-8 rounded bg-white/10" />
-                        <div className="h-8 rounded bg-white/10" />
-                        <div className="h-8 rounded bg-white/20" />
-                      </div>
-                    </div>
-                  </div>
+                    </>
+                  )}
                 </div>
                 <div className="p-7">
                   <div className="flex flex-wrap items-center gap-2">
