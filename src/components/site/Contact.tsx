@@ -131,15 +131,22 @@ export function Contact() {
     }
   };
 
-  const onInvalid = () => {
+  const onInvalid = (invalid: Record<string, unknown>) => {
     setSubmitError(t("contact.errors.fixFields"));
     const first = (
       ["name", "phone", "email", "projectType", "budget", "deadline", "message", "consent"] as const
-    ).find((key) => errors[key]);
-    if (first) setFocus(first as keyof ContactInput);
+    ).find((key) => invalid[key]);
+    if (!first) return;
+    // Radix triggers (selects + consent checkbox) only receive focus, never
+    // an automatic open, so keyboard and screen-reader flow stays predictable.
+    const trigger = selectRefs.current[first];
+    if (trigger) {
+      trigger.focus();
+      return;
+    }
+    setFocus(first as keyof ContactInput);
   };
 
-  const values = watch();
 
   return (
     <section id="contato" className="border-y border-border bg-surface py-24 md:py-32">
