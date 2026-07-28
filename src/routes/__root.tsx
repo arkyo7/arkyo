@@ -105,7 +105,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt">
+    // The inline theme script mutates <html> class/style before hydration.
+    <html lang="pt" suppressHydrationWarning>
+
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
