@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { siteUrl } from "@/data/company";
+import { SITE_HOST, siteUrl } from "@/data/company";
 
 type SeoLocalizedProps = {
   /** i18n namespace under "seo" (home | privacy | terms). */
@@ -42,7 +42,9 @@ export function SeoLocalized({ page, path }: SeoLocalizedProps) {
     const title = t(`seo.${page}.title`);
     const description = t(`seo.${page}.description`);
     const ogDescription = t(`seo.${page}.ogDescription`, { defaultValue: description });
-    const url = typeof window !== "undefined" ? new URL(path, window.location.origin).href : siteUrl(path);
+    // Canonical / og:url always point at the planned production domain, never
+    // at a temporary preview host.
+    const url = siteUrl(path);
 
     document.title = title;
     setMeta('meta[name="description"]', "name", "description", description);
@@ -53,7 +55,17 @@ export function SeoLocalized({ page, path }: SeoLocalizedProps) {
     setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMeta('meta[name="twitter:description"]', "name", "twitter:description", ogDescription);
     setLink("canonical", url);
+
+    // Preview / development hosts must never be indexed.
+    const host = typeof window !== "undefined" ? window.location.host : "";
+    const isProductionHost = host === SITE_HOST;
+    if (!isProductionHost) {
+      setMeta('meta[name="robots"]', "name", "robots", "noindex, nofollow");
+    } else {
+      document.head.querySelector('meta[name="robots"]')?.remove();
+    }
   }, [t, lang, page, path]);
+
 
   return null;
 }

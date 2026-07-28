@@ -28,17 +28,21 @@ export function whatsappUrl(message?: string) {
 }
 
 /**
- * Canonical public URL of the site. Set VITE_SITE_URL once the final domain is
- * live (e.g. https://arkyo.com). While it is empty the project falls back to
- * relative URLs, which crawlers resolve against the current host.
+ * Canonical public URL of the site (single source of truth).
+ * Planned production domain — not purchased/connected yet.
+ * Override with VITE_SITE_URL when the real domain goes live.
  */
-export const SITE_URL = (import.meta.env.VITE_SITE_URL ?? "").replace(/\/+$/, "");
+export const SITE_URL = (import.meta.env.VITE_SITE_URL ?? "https://arkyo.co").replace(/\/+$/, "");
 
-/** Absolute URL when SITE_URL is configured, relative path otherwise. */
+/** Host of the production domain, used to decide indexability. */
+export const SITE_HOST = SITE_URL.replace(/^https?:\/\//, "");
+
+/** Absolute canonical URL for a given route path. */
 export function siteUrl(path = "/") {
   const clean = path.startsWith("/") ? path : `/${path}`;
-  return SITE_URL ? `${SITE_URL}${clean}` : clean;
+  return `${SITE_URL}${clean === "/" ? "/" : clean}`;
 }
+
 
 /**
  * Fixed revision date of the legal documents (Terms / Privacy Policy).

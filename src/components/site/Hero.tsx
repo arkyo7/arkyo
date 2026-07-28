@@ -61,7 +61,7 @@ export function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
               <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
               <div className="mx-auto flex items-center gap-2 rounded-md bg-muted px-3 py-1 text-[11px] text-muted-foreground">
-                arkyo.com
+                arkyo.co
               </div>
             </div>
             <div className="grid gap-4 p-6 md:grid-cols-3 md:p-8">
