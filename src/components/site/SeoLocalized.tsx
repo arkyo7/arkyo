@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { siteUrl } from "@/data/company";
+import { SITE_HOST, siteUrl } from "@/data/company";
 
 type SeoLocalizedProps = {
   /** i18n namespace under "seo" (home | privacy | terms). */
