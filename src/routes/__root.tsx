@@ -144,9 +144,13 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
-          <HtmlLangSync />
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          {/* reducedMotion="user" makes every Framer Motion animation honour
+              prefers-reduced-motion: transforms are dropped, opacity kept. */}
+          <MotionConfig reducedMotion="user">
+            <HtmlLangSync />
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </MotionConfig>
         </ThemeProvider>
       </I18nextProvider>
     </QueryClientProvider>
