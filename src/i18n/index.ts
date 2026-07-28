@@ -24,6 +24,10 @@ if (!i18n.isInitialized) {
         en: { translation: en },
         fr: { translation: fr },
       },
+      // SSR and the first client render must agree, so boot is always "pt".
+      // The visitor's stored/browser language is applied after hydration by
+      // syncDetectedLanguage() to avoid a hydration text mismatch.
+      lng: "pt",
       fallbackLng: "pt",
       supportedLngs: LANGS as unknown as string[],
       interpolation: { escapeValue: false },
@@ -37,3 +41,15 @@ if (!i18n.isInitialized) {
 }
 
 export default i18n;
+
+/**
+ * Applies the stored (or browser) language after hydration. Safe to call
+ * multiple times: it is a no-op when the language already matches.
+ */
+export function syncDetectedLanguage() {
+  if (typeof window === "undefined") return;
+  const stored = window.localStorage.getItem("arkyo-lang");
+  const candidate = (stored ?? window.navigator.language ?? "pt").slice(0, 2).toLowerCase();
+  const next = (LANGS as readonly string[]).includes(candidate) ? candidate : "pt";
+  if (i18n.resolvedLanguage !== next) void i18n.changeLanguage(next);
+}

@@ -14,7 +14,7 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider, themeInitScript } from "../hooks/use-theme";
-import i18n from "../i18n";
+import i18n, { syncDetectedLanguage } from "../i18n";
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -126,6 +126,8 @@ function RootShell({ children }: { children: ReactNode }) {
 function HtmlLangSync() {
   const { i18n: instance } = useTranslation();
   useEffect(() => {
+    // Runs only on the client, after hydration.
+    syncDetectedLanguage();
     const apply = () => {
       if (typeof document !== "undefined") {
         document.documentElement.lang = instance.resolvedLanguage || "pt";
