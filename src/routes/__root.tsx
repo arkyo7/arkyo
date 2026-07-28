@@ -7,13 +7,14 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { MotionConfig } from "framer-motion";
 import { useEffect, type ReactNode } from "react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider, themeInitScript } from "../hooks/use-theme";
-import i18n from "../i18n";
+import i18n, { syncDetectedLanguage } from "../i18n";
 
 function NotFoundComponent() {
   const { t } = useTranslation();
@@ -125,6 +126,9 @@ function RootShell({ children }: { children: ReactNode }) {
 function HtmlLangSync() {
   const { i18n: instance } = useTranslation();
   useEffect(() => {
+    // Deferred one frame so the whole tree finishes hydrating in the SSR
+    // language before we switch to the visitor's stored/browser language.
+    const langTimer = window.setTimeout(syncDetectedLanguage, 0);
     const apply = () => {
       if (typeof document !== "undefined") {
         document.documentElement.lang = instance.resolvedLanguage || "pt";
@@ -132,7 +136,10 @@ function HtmlLangSync() {
     };
     apply();
     instance.on("languageChanged", apply);
-    return () => instance.off("languageChanged", apply);
+    return () => {
+      window.clearTimeout(langTimer);
+      instance.off("languageChanged", apply);
+    };
   }, [instance]);
   return null;
 }
@@ -144,9 +151,13 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
-          <HtmlLangSync />
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          {/* reducedMotion="user" makes every Framer Motion animation honour
+              prefers-reduced-motion: transforms are dropped, opacity kept. */}
+          <MotionConfig reducedMotion="user">
+            <HtmlLangSync />
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </MotionConfig>
         </ThemeProvider>
       </I18nextProvider>
     </QueryClientProvider>

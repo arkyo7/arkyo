@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -53,13 +53,29 @@ export function Contact() {
     handleSubmit,
     setValue,
     setFocus,
-    watch,
+    getValues,
+    control,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactInput>({
     resolver: zodResolver(schema) as never,
+    // Focus is handled in onInvalid so Radix triggers are reachable too.
+    shouldFocusError: false,
     defaultValues: { consent: false as unknown as true, phone: "", honeypot: "" },
   });
+
+  // Only the fields whose UI is driven by their value are observed. Text
+  // inputs stay uncontrolled through register(), so typing in name, company,
+  // email, instagram or message no longer re-renders the whole form.
+  const phone = useWatch({ control, name: "phone" });
+  const projectType = useWatch({ control, name: "projectType" });
+  const budget = useWatch({ control, name: "budget" });
+  const deadline = useWatch({ control, name: "deadline" });
+  const consent = useWatch({ control, name: "consent" });
+
+  // Radix Select triggers are not registered inputs, so setFocus() cannot
+  // reach them. Keep an explicit ref map for those three fields.
+  const selectRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -117,15 +133,26 @@ export function Contact() {
     }
   };
 
-  const onInvalid = () => {
+  const onInvalid = (invalid: Record<string, unknown>) => {
     setSubmitError(t("contact.errors.fixFields"));
     const first = (
       ["name", "phone", "email", "projectType", "budget", "deadline", "message", "consent"] as const
-    ).find((key) => errors[key]);
-    if (first) setFocus(first as keyof ContactInput);
+    ).find((key) => invalid[key]);
+    if (!first) return;
+    // Radix triggers (selects + consent checkbox) only receive focus, never
+    // an automatic open, so keyboard and screen-reader flow stays predictable.
+    const trigger = selectRefs.current[first];
+    if (trigger) {
+      trigger.focus();
+      return;
+    }
+    if (first === "phone") {
+      // Controlled component, not a registered input: focus it by id.
+      document.getElementById("contact-phone")?.focus();
+      return;
+    }
+    setFocus(first as keyof ContactInput);
   };
-
-  const values = watch();
 
   return (
     <section id="contato" className="border-y border-border bg-surface py-24 md:py-32">
@@ -270,9 +297,11 @@ export function Contact() {
                   <PhoneInput
                     id={a11y.id}
                     name="phone"
-                    value={values.phone}
+                    value={phone ?? ""}
                     onChange={(v) => setValue("phone", v, { shouldValidate: !!errors.phone })}
-                    onBlur={() => setValue("phone", values.phone ?? "", { shouldValidate: true })}
+                    onBlur={() =>
+                      setValue("phone", getValues("phone") ?? "", { shouldValidate: true })
+                    }
                     aria-invalid={a11y["aria-invalid"]}
                     aria-describedby={a11y["aria-describedby"]}
                   />
@@ -314,12 +343,15 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.projectType}
+                    value={projectType}
                     onValueChange={(v) =>
                       setValue("projectType", v as ProjectTypeId, { shouldValidate: true })
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => {
+                        selectRefs.current.projectType = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -343,12 +375,15 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.budget}
+                    value={budget}
                     onValueChange={(v) =>
                       setValue("budget", v as BudgetId, { shouldValidate: true })
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => {
+                        selectRefs.current.budget = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -372,12 +407,15 @@ export function Contact() {
               >
                 {(a11y) => (
                   <Select
-                    value={values.deadline}
+                    value={deadline}
                     onValueChange={(v) =>
                       setValue("deadline", v as DeadlineId, { shouldValidate: true })
                     }
                   >
                     <SelectTrigger
+                      ref={(el) => {
+                        selectRefs.current.deadline = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -415,7 +453,10 @@ export function Contact() {
               <div className="sm:col-span-2">
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Checkbox
-                    checked={values.consent === true}
+                    ref={(el) => {
+                      selectRefs.current.consent = el;
+                    }}
+                    checked={consent === true}
                     onCheckedChange={(v) =>
                       setValue("consent", (v === true) as true, { shouldValidate: true })
                     }

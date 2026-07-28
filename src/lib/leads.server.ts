@@ -97,22 +97,35 @@ function statusPatch(prefix: "internal" | "customer", result: EmailSendResult, a
 async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
   // Emails must never undo a successfully stored lead: each result is recorded
   // independently and failures are kept for a controlled retry.
-  for (const [prefix, message] of [
+  // Both messages are sent concurrently (allSettled) so the visitor's response
+  // waits for one provider round-trip instead of two. Each has its own status,
+  // its own timeout and its own retry; neither can fail the other.
+  const steps = [
     ["internal", buildInternalEmail(lead)],
     ["customer", buildCustomerEmail(lead)],
-  ] as const) {
-    let result: EmailSendResult;
-    // The sandbox sender only delivers to the account owner, so customer
-    // confirmations are skipped (not failed) until a verified domain is set.
-    if (prefix === "customer" && isTestSender()) {
-      result = { status: "skipped", error: "test_sender_external_recipient_not_supported" };
-    } else {
-      try {
-        result = await sendEmail(message);
-      } catch {
-        result = { status: "failed", error: "unexpected_error", permanent: false };
+  ] as const;
+
+  const results = await Promise.allSettled(
+    steps.map(async ([prefix, message]) => {
+      // The sandbox sender only delivers to the account owner, so customer
+      // confirmations are skipped (not failed) until a verified domain is set.
+      if (prefix === "customer" && isTestSender()) {
+        return {
+          status: "skipped",
+          error: "test_sender_external_recipient_not_supported",
+        } satisfies EmailSendResult;
       }
-    }
+      return await sendEmail(message);
+    }),
+  );
+
+  for (let i = 0; i < steps.length; i++) {
+    const prefix = steps[i][0];
+    const settled = results[i];
+    const result: EmailSendResult =
+      settled.status === "fulfilled"
+        ? settled.value
+        : { status: "failed", error: "unexpected_error", permanent: false };
 
     console.info(
       `[leads] ${prefix} email ${result.status} submission=${lead.submissionId}` +
