@@ -53,13 +53,27 @@ export function Contact() {
     handleSubmit,
     setValue,
     setFocus,
-    watch,
+    getValues,
+    control,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactInput>({
     resolver: zodResolver(schema) as never,
     defaultValues: { consent: false as unknown as true, phone: "", honeypot: "" },
   });
+
+  // Only the fields whose UI is driven by their value are observed. Text
+  // inputs stay uncontrolled through register(), so typing in name, company,
+  // email, instagram or message no longer re-renders the whole form.
+  const phone = useWatch({ control, name: "phone" });
+  const projectType = useWatch({ control, name: "projectType" });
+  const budget = useWatch({ control, name: "budget" });
+  const deadline = useWatch({ control, name: "deadline" });
+  const consent = useWatch({ control, name: "consent" });
+
+  // Radix Select triggers are not registered inputs, so setFocus() cannot
+  // reach them. Keep an explicit ref map for those three fields.
+  const selectRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
     startedAt.current = Date.now();
