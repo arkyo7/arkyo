@@ -78,7 +78,6 @@ export async function sendEmail(message: EmailMessage): Promise<EmailSendResult>
     clearTimeout(timer);
   }
 
-
   if (!response.ok) {
     // 403 is what Resend returns for an unverified sending domain — permanent
     // until DNS is configured, so it must never be recorded as "sent".

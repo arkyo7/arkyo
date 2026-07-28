@@ -114,7 +114,6 @@ async function dispatchEmails(db: Admin, leadId: string, lead: LeadEmailData) {
       }
     }
 
-
     console.info(
       `[leads] ${prefix} email ${result.status} submission=${lead.submissionId}` +
         (result.status === "sent"

@@ -46,7 +46,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">{t("errorPage.loadFail")}</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          {t("errorPage.loadFail")}
+        </h1>
         <p className="mt-2 text-sm text-muted-foreground">{t("errorPage.loadFailBody")}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -78,7 +80,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Arkyo — Sites que simplificam negócios" },
       {
         name: "description",
-        content: "Estúdio digital que desenvolve sites, landing pages e sistemas de agendamento para pequenos negócios. Bélgica.",
+        content:
+          "Estúdio digital que desenvolve sites, landing pages e sistemas de agendamento para pequenos negócios. Bélgica.",
       },
       { name: "author", content: "Arkyo" },
       { name: "theme-color", content: "#090909" },
@@ -107,7 +110,6 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     // The inline theme script mutates <html> class/style before hydration.
     <html lang="pt" suppressHydrationWarning>
-
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
