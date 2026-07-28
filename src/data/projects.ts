@@ -6,7 +6,10 @@ export type ProjectMeta = {
 };
 
 export const projects: ProjectMeta[] = [
-  { id: "clinica-massoterapia", year: 2025, image: "/jr-massoterapeuta-home.png",
+  {
+    id: "clinica-massoterapia",
+    year: 2025,
+    image: "/jr-massoterapeuta-home.png",
     imageWebp: "/jr-massoterapeuta-home.webp",
   },
 ];

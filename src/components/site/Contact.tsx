@@ -152,7 +152,6 @@ export function Contact() {
     setFocus(first as keyof ContactInput);
   };
 
-
   return (
     <section id="contato" className="border-y border-border bg-surface py-24 md:py-32">
       <div className="container-arkyo grid gap-12 lg:grid-cols-[1fr_1.5fr]">
@@ -298,7 +297,9 @@ export function Contact() {
                     name="phone"
                     value={phone ?? ""}
                     onChange={(v) => setValue("phone", v, { shouldValidate: !!errors.phone })}
-                    onBlur={() => setValue("phone", getValues("phone") ?? "", { shouldValidate: true })}
+                    onBlur={() =>
+                      setValue("phone", getValues("phone") ?? "", { shouldValidate: true })
+                    }
                     aria-invalid={a11y["aria-invalid"]}
                     aria-describedby={a11y["aria-describedby"]}
                   />
@@ -346,7 +347,9 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
-                      ref={(el) => { selectRefs.current.projectType = el; }}
+                      ref={(el) => {
+                        selectRefs.current.projectType = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -376,7 +379,9 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
-                      ref={(el) => { selectRefs.current.budget = el; }}
+                      ref={(el) => {
+                        selectRefs.current.budget = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -406,7 +411,9 @@ export function Contact() {
                     }
                   >
                     <SelectTrigger
-                      ref={(el) => { selectRefs.current.deadline = el; }}
+                      ref={(el) => {
+                        selectRefs.current.deadline = el;
+                      }}
                       id={a11y.id}
                       aria-invalid={a11y["aria-invalid"]}
                       aria-describedby={a11y["aria-describedby"]}
@@ -444,7 +451,9 @@ export function Contact() {
               <div className="sm:col-span-2">
                 <label className="flex items-start gap-3 text-sm text-muted-foreground">
                   <Checkbox
-                    ref={(el) => { selectRefs.current.consent = el; }}
+                    ref={(el) => {
+                      selectRefs.current.consent = el;
+                    }}
                     checked={consent === true}
                     onCheckedChange={(v) =>
                       setValue("consent", (v === true) as true, { shouldValidate: true })

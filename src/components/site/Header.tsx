@@ -87,7 +87,7 @@ export function Header() {
       )}
     >
       <div className="container-arkyo flex h-16 items-center justify-between">
-        <SectionLink hash="top"  aria-label={t("nav.arkyoStart")} className="shrink-0">
+        <SectionLink hash="top" aria-label={t("nav.arkyoStart")} className="shrink-0">
           <Logo />
         </SectionLink>
         <nav className="hidden items-center gap-1 md:flex" aria-label={t("nav.primary")}>
@@ -104,9 +104,10 @@ export function Header() {
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher />
           <ThemeToggle />
-          <SectionLink hash="contato"
-            
-            className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-px">
+          <SectionLink
+            hash="contato"
+            className="group inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-px"
+          >
             {t("nav.requestQuote")}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </SectionLink>
@@ -164,7 +165,10 @@ export function Header() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <nav className="container-arkyo mt-2 flex flex-col gap-1 pb-8" aria-label={t("nav.mobile")}>
+              <nav
+                className="container-arkyo mt-2 flex flex-col gap-1 pb-8"
+                aria-label={t("nav.mobile")}
+              >
                 {navItems.map((item) => (
                   <SectionLink
                     key={item.hash}
@@ -175,8 +179,8 @@ export function Header() {
                     {t(`nav.${item.key}`)}
                   </SectionLink>
                 ))}
-                <SectionLink hash="contato"
-                  
+                <SectionLink
+                  hash="contato"
                   onClick={() => setOpen(false)}
                   className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background"
                 >
