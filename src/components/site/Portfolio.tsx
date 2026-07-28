@@ -40,15 +40,18 @@ export function Portfolio() {
                     {t("portfolio.status")}
                   </span>
                   {p.image ? (
-                    <img
-                      src={p.image}
-                      alt={t(`${base}.imageAlt`)}
-                      width={1600}
-                      height={1000}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover object-left-top"
-                    />
+                    <picture>
+                      {p.imageWebp && <source srcSet={p.imageWebp} type="image/webp" />}
+                      <img
+                        src={p.image}
+                        alt={t(`${base}.imageAlt`)}
+                        width={1600}
+                        height={1000}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-left-top"
+                      />
+                    </picture>
                   ) : (
                     <>
                       <div aria-hidden className="absolute inset-0 grid-lines opacity-30" />
