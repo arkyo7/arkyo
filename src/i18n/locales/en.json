@@ -25,7 +25,7 @@
     "badge": "Tailor-made digital studio",
     "titleA": "Websites that simplify",
     "titleB": "real businesses.",
-    "subtitle": "We identify what blocks your communication, customer service and digital presence. Then we solve it with design, technology and clarity.",
+    "subtitle": "For small businesses in Belgium and beyond, we turn unclear communication, manual service and a weak digital presence into clear, professional and easy-to-use websites.",
     "viewServices": "See services",
     "mockScheduling": "Bookings today",
     "mockLeads": "Site leads",
@@ -33,7 +33,7 @@
     "mockRange": "Last 30 days",
     "mockSessions": "Sessions",
     "whatsappCta": "Chat on WhatsApp",
-    "mockDisclaimer": "Example of a custom dashboard"
+    "mockDisclaimer": "Visual demonstration — illustrative data"
   },
   "valueProp": {
     "eyebrow": "Our approach",
@@ -157,7 +157,7 @@
   },
   "portfolio": {
     "eyebrow": "Portfolio",
-    "title": "Projects that solved real problems.",
+    "title": "One project built to solve a real business problem.",
     "challenges": "Challenges",
     "solutions": "Solutions",
     "cta": "Start now",
@@ -204,15 +204,15 @@
       },
       {
         "title": "Performance",
-        "desc": "Core Web Vitals optimised from commit one."
+        "desc": "Core Web Vitals best practices applied and checked before launch."
       },
       {
         "title": "Technical SEO",
-        "desc": "Structure ready for Google to understand and rank."
+        "desc": "Technical structure prepared for indexing, crawling and content Google can clearly understand."
       },
       {
         "title": "Fast sites",
-        "desc": "Loading in under 2 seconds."
+        "desc": "Images, fonts and code optimised to reduce loading time."
       },
       {
         "title": "Clean code",
@@ -296,7 +296,7 @@
   "contact": {
     "eyebrow": "Contact",
     "title": "Let's talk about your project.",
-    "subtitle": "Fill in the form or reach us through the channel you prefer. We reply within 24 business hours.",
+    "subtitle": "Tell us briefly what you need on WhatsApp. We reply within 24 business hours.",
     "channels": {
       "whatsapp": "WhatsApp",
       "email": "Email",
@@ -373,7 +373,10 @@
       "help": "Select your country and type your number."
     },
     "sendingA11y": "Sending your message, please wait.",
-    "whatsappMessage": "Hello! I’d like to create a website for my business and learn more about Arkyo’s services."
+    "whatsappMessage": "Hello! I found Arkyo’s website and would like to discuss a project for my business. Could you explain how the process works and what the next steps are?",
+    "whatsappHint": "A simple conversation to understand your situation and suggest the next step.",
+    "whatsappCta": "Start a WhatsApp conversation",
+    "whatsappNote": "The message is already filled in and can be edited before sending."
   },
   "footer": {
     "description": "We build websites and digital solutions for small businesses, freelancers and growing companies.",
@@ -484,8 +487,8 @@
   "seo": {
     "home": {
       "title": "Arkyo — Websites that simplify business",
-      "description": "Development of websites, landing pages and booking systems for small businesses. Professional design, performance and technical SEO. Belgium.",
-      "ogDescription": "Bespoke digital studio for small businesses. Websites, booking and solutions that work."
+      "description": "Bespoke websites, landing pages and booking systems for small businesses in Belgium and beyond. Professional design, performance and technical SEO.",
+      "ogDescription": "Clear websites and bespoke digital solutions for small businesses in Belgium and beyond."
     },
     "privacy": {
       "title": "Privacy Policy — Arkyo",
@@ -501,6 +504,6 @@
   "about": {
     "eyebrow": "About",
     "title": "About Arkyo",
-    "body": "Arkyo was created to help small businesses build a clearer, more professional and more functional digital presence. Every project is developed closely with you, from shaping the idea to publishing and ongoing support."
+    "body": "Arkyo is a Belgium-based digital studio created to help small businesses build a clear, professional and functional online presence. You work directly with the person planning, designing and developing your project, from the first conversation to launch and support."
   }
 }
