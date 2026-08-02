@@ -25,7 +25,7 @@
     "badge": "Estúdio digital sob medida",
     "titleA": "Sites que simplificam",
     "titleB": "negócios reais.",
-    "subtitle": "Identificamos o que trava a comunicação, o atendimento e a presença digital do seu negócio. Resolvemos isso com design, tecnologia e clareza.",
+    "subtitle": "Para pequenos negócios na Bélgica e além, transformamos comunicação confusa, atendimento manual e presença digital fraca em sites claros, profissionais e fáceis de usar.",
     "viewServices": "Ver serviços",
     "mockScheduling": "Agendamentos hoje",
     "mockLeads": "Leads no site",
@@ -33,7 +33,7 @@
     "mockRange": "Últimos 30 dias",
     "mockSessions": "Sessões",
     "whatsappCta": "Falar no WhatsApp",
-    "mockDisclaimer": "Exemplo de painel personalizado"
+    "mockDisclaimer": "Demonstração visual — dados ilustrativos"
   },
   "valueProp": {
     "eyebrow": "Nossa proposta",
@@ -157,7 +157,7 @@
   },
   "portfolio": {
     "eyebrow": "Portfólio",
-    "title": "Projetos que resolveram problemas reais.",
+    "title": "Um projeto construído para resolver um problema real.",
     "challenges": "Desafios",
     "solutions": "Soluções",
     "cta": "Começar agora",
@@ -204,15 +204,15 @@
       },
       {
         "title": "Performance",
-        "desc": "Core Web Vitals otimizados desde o primeiro commit."
+        "desc": "Boas práticas de Core Web Vitals aplicadas e verificadas antes da publicação."
       },
       {
         "title": "SEO técnico",
-        "desc": "Estrutura pronta para o Google entender e ranquear."
+        "desc": "Estrutura técnica preparada para indexação, rastreamento e conteúdo bem compreendido pelo Google."
       },
       {
         "title": "Sites rápidos",
-        "desc": "Carregamento em menos de 2 segundos."
+        "desc": "Imagens, fontes e código otimizados para reduzir o tempo de carregamento."
       },
       {
         "title": "Código limpo",
@@ -296,7 +296,7 @@
   "contact": {
     "eyebrow": "Contato",
     "title": "Vamos conversar sobre o seu projeto.",
-    "subtitle": "Preencha o formulário ou entre em contato pelo canal que preferir. Respondemos em até 24 horas úteis.",
+    "subtitle": "Conte brevemente o que você precisa pelo WhatsApp. Respondemos em até 24 horas úteis.",
     "channels": {
       "whatsapp": "WhatsApp",
       "email": "Email",
@@ -373,7 +373,10 @@
       "help": "Selecione o país e digite seu número."
     },
     "sendingA11y": "Enviando sua mensagem, aguarde.",
-    "whatsappMessage": "Olá! Quero criar um site para o meu negócio e gostaria de saber mais sobre os serviços da Arkyo."
+    "whatsappMessage": "Olá! Vi o site da Arkyo e gostaria de conversar sobre um projeto para o meu negócio. Pode me explicar como funciona o processo e quais são os próximos passos?",
+    "whatsappHint": "Uma conversa simples para entender seu momento e indicar o próximo passo.",
+    "whatsappCta": "Iniciar conversa no WhatsApp",
+    "whatsappNote": "A mensagem já vai preenchida e pode ser editada antes do envio."
   },
   "footer": {
     "description": "Desenvolvemos sites e soluções digitais para pequenos negócios, profissionais autônomos e empresas em crescimento.",
@@ -484,8 +487,8 @@
   "seo": {
     "home": {
       "title": "Arkyo — Sites que simplificam negócios",
-      "description": "Desenvolvimento de sites, landing pages e sistemas de agendamento para pequenos negócios. Design profissional, performance e SEO técnico. Bélgica.",
-      "ogDescription": "Estúdio digital sob medida para pequenos negócios. Sites, agendamento e soluções que funcionam."
+      "description": "Sites, landing pages e sistemas de agendamento sob medida para pequenos negócios na Bélgica e além. Design profissional, performance e SEO técnico.",
+      "ogDescription": "Sites claros e soluções digitais sob medida para pequenos negócios na Bélgica e além."
     },
     "privacy": {
       "title": "Política de Privacidade — Arkyo",
@@ -501,6 +504,6 @@
   "about": {
     "eyebrow": "Sobre",
     "title": "Sobre a Arkyo",
-    "body": "A Arkyo nasceu para ajudar pequenos negócios a construir uma presença digital mais clara, profissional e funcional. Cada projeto é desenvolvido com proximidade, desde a definição da ideia até a publicação e o suporte."
+    "body": "A Arkyo é um estúdio digital na Bélgica criado para ajudar pequenos negócios a construir uma presença online clara, profissional e funcional. Você fala diretamente com quem planeja, desenha e desenvolve o projeto, da primeira conversa à publicação e ao suporte."
   }
 }

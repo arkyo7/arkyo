@@ -9,6 +9,12 @@ type SeoLocalizedProps = {
   path: string;
 };
 
+const OG_LOCALES: Record<string, string> = {
+  pt: "pt_BR",
+  en: "en_GB",
+  fr: "fr_BE",
+};
+
 function setMeta(selector: string, attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(selector);
   if (!el) {
@@ -29,31 +35,52 @@ function setLink(rel: string, href: string) {
   el.href = href;
 }
 
+function setOgLocaleAlternates(activeLocale: string) {
+  document.head
+    .querySelectorAll('meta[property="og:locale:alternate"]')
+    .forEach((element) => element.remove());
+
+  Object.values(OG_LOCALES)
+    .filter((locale) => locale !== activeLocale)
+    .forEach((locale) => {
+      const element = document.createElement("meta");
+      element.setAttribute("property", "og:locale:alternate");
+      element.setAttribute("content", locale);
+      document.head.appendChild(element);
+    });
+}
+
 /**
- * Keeps title, description and Open Graph tags in sync with the active
+ * Keeps title, description and social metadata in sync with the active
  * language. The route head() still ships the default (PT) tags for crawlers.
  */
 export function SeoLocalized({ page, path }: SeoLocalizedProps) {
   const { t, i18n } = useTranslation();
-  const lang = i18n.resolvedLanguage ?? "pt";
+  const lang = (i18n.resolvedLanguage ?? "pt").slice(0, 2);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
+
     const title = t(`seo.${page}.title`);
     const description = t(`seo.${page}.description`);
     const ogDescription = t(`seo.${page}.ogDescription`, { defaultValue: description });
-    // Canonical / og:url always point at the planned production domain, never
-    // at a temporary preview host.
+    const imageAlt = t("portfolio.items.clinica-massoterapia.imageAlt");
     const url = siteUrl(path);
+    const socialImage = siteUrl("/jr-massoterapeuta-home.webp");
+    const ogLocale = OG_LOCALES[lang] ?? OG_LOCALES.pt;
 
     document.title = title;
     setMeta('meta[name="description"]', "name", "description", description);
     setMeta('meta[property="og:title"]', "property", "og:title", title);
     setMeta('meta[property="og:description"]', "property", "og:description", ogDescription);
     setMeta('meta[property="og:url"]', "property", "og:url", url);
-    setMeta('meta[property="og:locale"]', "property", "og:locale", lang);
+    setMeta('meta[property="og:locale"]', "property", "og:locale", ogLocale);
+    setMeta('meta[property="og:image"]', "property", "og:image", socialImage);
+    setMeta('meta[property="og:image:alt"]', "property", "og:image:alt", imageAlt);
     setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMeta('meta[name="twitter:description"]', "name", "twitter:description", ogDescription);
+    setMeta('meta[name="twitter:image"]', "name", "twitter:image", socialImage);
+    setOgLocaleAlternates(ogLocale);
     setLink("canonical", url);
 
     // Preview / development hosts must never be indexed.
@@ -65,7 +92,6 @@ export function SeoLocalized({ page, path }: SeoLocalizedProps) {
       document.head.querySelector('meta[name="robots"]')?.remove();
     }
   }, [t, lang, page, path]);
-
 
   return null;
 }
